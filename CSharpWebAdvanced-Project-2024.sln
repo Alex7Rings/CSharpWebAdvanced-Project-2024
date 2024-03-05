@@ -5,6 +5,8 @@ VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoonGameRev.Web", "MoonGameRev.Web\MoonGameRev.Web.csproj", "{58560FC3-0E02-4C8E-A691-078D80E4AACF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoonGameRev.Common", "MoonGameRev.Common\MoonGameRev.Common.csproj", "{83B1F598-DD3B-4061-A7FE-D0881131AF96}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{58560FC3-0E02-4C8E-A691-078D80E4AACF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{58560FC3-0E02-4C8E-A691-078D80E4AACF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{58560FC3-0E02-4C8E-A691-078D80E4AACF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{83B1F598-DD3B-4061-A7FE-D0881131AF96}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{83B1F598-DD3B-4061-A7FE-D0881131AF96}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{83B1F598-DD3B-4061-A7FE-D0881131AF96}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{83B1F598-DD3B-4061-A7FE-D0881131AF96}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
