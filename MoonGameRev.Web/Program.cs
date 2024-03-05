@@ -2,7 +2,7 @@ namespace MoonGameRev.Web
 {
     using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
-    using MoonGameRev.Web.Data;
+    using MoonGameRev.Data;
 
     public class Program
     {

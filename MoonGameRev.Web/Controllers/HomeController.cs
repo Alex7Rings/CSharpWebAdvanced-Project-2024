@@ -1,7 +1,7 @@
 ﻿namespace MoonGameRev.Web.Controllers
 {
     using Microsoft.AspNetCore.Mvc;
-    using MoonGameRev.Web.Models;
+    using MoonGameRev.Web.ViewModels.Home;
     using System.Diagnostics;
 
     public class HomeController : Controller

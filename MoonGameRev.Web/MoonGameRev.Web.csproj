@@ -17,6 +17,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\MoonGameRev.Common\MoonGameRev.Common.csproj" />
+    <ProjectReference Include="..\MoonGameRev.Data\MoonGameRev.Data.csproj" />
+    <ProjectReference Include="..\MoonGameRev.Web.ViewModels\MoonGameRev.Web.ViewModels.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,4 +1,4 @@
-namespace MoonGameRev.Web.Models
+namespace MoonGameRev.Web.ViewModels.Home
 {
     public class ErrorViewModel
     {
