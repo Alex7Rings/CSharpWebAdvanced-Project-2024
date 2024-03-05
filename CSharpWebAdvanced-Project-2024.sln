@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34330.188
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoonGameRev.Web", "MoonGameRev.Web\MoonGameRev.Web.csproj", "{58560FC3-0E02-4C8E-A691-078D80E4AACF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{58560FC3-0E02-4C8E-A691-078D80E4AACF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{58560FC3-0E02-4C8E-A691-078D80E4AACF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{58560FC3-0E02-4C8E-A691-078D80E4AACF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{58560FC3-0E02-4C8E-A691-078D80E4AACF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C71E0B8F-89BC-4120-AA16-D123957D15E1}
+	EndGlobalSection
+EndGlobal
