@@ -1,8 +1,29 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿@model MoonGameRev.Web.ViewModels.Home.IndexViewModel
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<!-- Display upcoming games -->
+<div>
+    <h2>Last 5 Added Upcoming Games</h2>
+    @foreach (var game in ViewData["UpcomingGames"] as IEnumerable<MoonGameRev.Web.ViewModels.Home.IndexViewModel>)
+    {
+            <div>
+                <h3>@game.Title</h3>
+                <img src="@game.ImageUrl" alt="@game.Title" />
+                <!-- Other game details -->
+            </div>
+    }
+    <a href="/upcoming-games" class="btn">See all</a>
+</div>
+
+<!-- Display trending games -->
+<div>
+    <h2>5 Trending Games</h2>
+    @foreach (var game in ViewData["TrendingGames"] as IEnumerable<MoonGameRev.Web.ViewModels.Home.IndexViewModel>)
+    {
+            <div>
+                <h3>@game.Title</h3>
+                <img src="@game.ImageUrl" alt="@game.Title" />
+                <!-- Other game details -->
+            </div>
+    }
+    <a href="/games" class="btn">See all</a>
 </div>

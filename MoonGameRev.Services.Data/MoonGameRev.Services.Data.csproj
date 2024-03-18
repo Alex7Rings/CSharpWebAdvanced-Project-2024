@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MoonGameRev.Common\MoonGameRev.Common.csproj" />
+    <ProjectReference Include="..\MoonGameRev.Data.Models\MoonGameRev.Data.Models.csproj" />
+    <ProjectReference Include="..\MoonGameRev.Data\MoonGameRev.Data.csproj" />
+    <ProjectReference Include="..\MoonGameRev.Web.ViewModels\MoonGameRev.Web.ViewModels.csproj" />
+  </ItemGroup>
+
+</Project>

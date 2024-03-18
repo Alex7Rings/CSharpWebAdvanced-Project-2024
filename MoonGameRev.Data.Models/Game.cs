@@ -50,6 +50,10 @@
         [MaxLength(ImageUrlMaxLength)]
         public string CoverImage { get; set; } = null!;
 
+        [Required]
+        [Comment("Specifies whether the game is released or upcoming.")]
+        public bool IsReleased { get; set; }
+
         public virtual ICollection<Review> Reviews { get; set; }
         public virtual ICollection<GameGenre> GameGenres { get; set; }
     }
