@@ -3,6 +3,8 @@ namespace MoonGameRev.Web
     using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
     using MoonGameRev.Data;
+    using MoonGameRev.Services.Data.Interfaces;
+    using MoonGameRev.Web.Infrastructure.Extensions;
 
     public class Program
     {
@@ -33,6 +35,8 @@ namespace MoonGameRev.Web
                     builder.Configuration.GetValue<int>("Identity:Password:RequiredLength");
             })
                 .AddEntityFrameworkStores<MoonGameRevDbContext>();
+
+            builder.Services.AddApplicationServices(typeof(IGameService));
 
             builder.Services.AddControllersWithViews();
 

@@ -21,6 +21,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{01
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoonGameRev.Services.Data", "MoonGameRev.Services.Data\MoonGameRev.Services.Data.csproj", "{26E5C55C-553B-4D89-A849-93B466311DD1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoonGameRev.Web.Infrastructure", "MoonGameRev.Web.Infrastructure\MoonGameRev.Web.Infrastructure.csproj", "{21A48CDB-311D-4686-B30A-65F0CAF6EE7B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{26E5C55C-553B-4D89-A849-93B466311DD1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{26E5C55C-553B-4D89-A849-93B466311DD1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{26E5C55C-553B-4D89-A849-93B466311DD1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{21A48CDB-311D-4686-B30A-65F0CAF6EE7B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{21A48CDB-311D-4686-B30A-65F0CAF6EE7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{21A48CDB-311D-4686-B30A-65F0CAF6EE7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{21A48CDB-311D-4686-B30A-65F0CAF6EE7B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -61,6 +67,7 @@ Global
 		{D27F861C-7EC3-460D-A981-ED44B0C5EE3F} = {A4105314-FDE4-4695-8490-D0D6CD250537}
 		{AC33B376-E8B2-4ABD-B6BE-D93FD9517BE0} = {4E0E389F-F56E-420E-8848-6E155207E81D}
 		{26E5C55C-553B-4D89-A849-93B466311DD1} = {0117B982-955B-4EAA-8598-9954F9BC7A0B}
+		{21A48CDB-311D-4686-B30A-65F0CAF6EE7B} = {4E0E389F-F56E-420E-8848-6E155207E81D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C71E0B8F-89BC-4120-AA16-D123957D15E1}
