@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MoonGameRev.Data;
 
@@ -11,9 +12,10 @@ using MoonGameRev.Data;
 namespace MoonGameRev.Data.Migrations
 {
     [DbContext(typeof(MoonGameRevDbContext))]
-    partial class MoonGameRevDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240318110403_SeedingGenreDb")]
+    partial class SeedingGenreDb
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
