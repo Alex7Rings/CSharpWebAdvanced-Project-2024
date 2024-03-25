@@ -1,0 +1,15 @@
+﻿@model GameFormModel
+@{
+	ViewData["Title"] = "Add Game";
+}
+
+<h2 class="text-cente">@ViewData["Title"]</h2>
+<hr />
+
+<partial name="_GameFormPartial" model="@Model" />
+
+@section Scripts
+{
+		<partial name="_ValidationScriptsPartial" />
+}
+
