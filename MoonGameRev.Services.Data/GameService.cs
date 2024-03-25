@@ -35,6 +35,7 @@ namespace MoonGameRev.Services.Data
         {
             IEnumerable<IndexViewModel> lastUpcomingFiveGames = await this.dbContext
                 .Games
+                .Where(g=>g.IsReleased== false)
                 .OrderByDescending(x => x.Id)
                 .Take(5)
                 .Select(g => new IndexViewModel
@@ -42,7 +43,7 @@ namespace MoonGameRev.Services.Data
                     Id = g.Id,
                     Title = g.Title,
                     ImageUrl = g.CoverImage,
-                    IsReleased = g.IsReleased == false,
+                    IsReleased = g.IsReleased,
                 })
                 .ToArrayAsync();
             return lastUpcomingFiveGames;
