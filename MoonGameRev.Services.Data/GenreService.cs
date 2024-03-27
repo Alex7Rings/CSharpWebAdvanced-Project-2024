@@ -29,6 +29,16 @@ namespace MoonGameRev.Services.Data
             return allGenres;
         }
 
+        public async Task<IEnumerable<string>> AllGenresNamesAsync()
+        {
+            IEnumerable<string> allNames = await this.dbContext
+                .Genres
+                .Select(g=> g.Name)
+                .ToArrayAsync ();
+
+            return allNames;
+        }
+
         public async Task<bool> ExistsByIdAsync(int id)
         {
             bool result = await this.dbContext

@@ -1,4 +1,5 @@
-﻿using MoonGameRev.Web.ViewModels.Game;
+﻿using MoonGameRev.Services.Data.Models.Game;
+using MoonGameRev.Web.ViewModels.Game;
 using MoonGameRev.Web.ViewModels.Home;
 
 namespace MoonGameRev.Services.Data.Interfaces
@@ -10,5 +11,7 @@ namespace MoonGameRev.Services.Data.Interfaces
         Task<IEnumerable<IndexViewModel>> LastFiveGamesAsync();
 
         Task CreateAsync(GameFormModel formModel);
+
+        Task<AllGamesFilteredAndPagedServiceModel> AllAsync(AllGamesQueryModel queryModel);
     }
 }

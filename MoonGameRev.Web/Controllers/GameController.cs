@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MoonGameRev.Services.Data.Interfaces;
+using MoonGameRev.Services.Data.Models.Game;
 using MoonGameRev.Web.ViewModels.Game;
 
 namespace MoonGameRev.Web.Controllers
@@ -17,10 +18,18 @@ namespace MoonGameRev.Web.Controllers
             this.gameService = gameService;
         }
 
+        [HttpGet]
         [AllowAnonymous]
-        public async Task<IActionResult> Games()
+        public async Task<IActionResult> All([FromQuery]AllGamesQueryModel queryModel)
         {
-            return View();
+            AllGamesFilteredAndPagedServiceModel serviceModel =
+                await this.gameService.AllAsync(queryModel);
+
+            queryModel.Games = serviceModel.Games;
+            queryModel.TotalGames = serviceModel.TotalGamesCount;
+            queryModel.Genres = await this.genreService.AllGenresNamesAsync();
+
+            return View(queryModel);
         }
 
         [HttpGet]

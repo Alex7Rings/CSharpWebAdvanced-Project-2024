@@ -7,5 +7,7 @@ namespace MoonGameRev.Services.Data.Interfaces
         Task<IEnumerable<GameSelectGenreFormModel>> AllGenresAsync();
 
         Task<bool> ExistsByIdAsync(int id);
+
+        Task<IEnumerable<string>> AllGenresNamesAsync();
     }
 }

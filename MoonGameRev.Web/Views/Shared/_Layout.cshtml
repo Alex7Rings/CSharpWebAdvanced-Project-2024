@@ -26,7 +26,7 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Game" asp-action="Games">Games</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Game" asp-action="All">Games</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Game" asp-action="Upcoming">Upcoming Games</a>
@@ -64,5 +64,20 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
+       
+    <script>
+        // JavaScript for image hover effect
+        $(document).ready(function () {
+            $(".card-img-top").hover(
+                function () {
+                    $(this).css("transform", "scale(1.1)"); // Enlarge the image on hover
+                },
+                function () {
+                    $(this).css("transform", "scale(1)"); // Reset to normal size when mouse is removed
+                }
+            );
+        });
+    </script>
+
 </body>
 </html>

@@ -2,7 +2,9 @@
 using MoonGameRev.Data;
 using MoonGameRev.Data.Models;
 using MoonGameRev.Services.Data.Interfaces;
+using MoonGameRev.Services.Data.Models.Game;
 using MoonGameRev.Web.ViewModels.Game;
+using MoonGameRev.Web.ViewModels.Game.Enums;
 using MoonGameRev.Web.ViewModels.Home;
 using System.Globalization;
 
@@ -15,6 +17,61 @@ namespace MoonGameRev.Services.Data
         public GameService(MoonGameRevDbContext dbContext)
         {
             this.dbContext = dbContext;
+        }
+
+        public async Task<AllGamesFilteredAndPagedServiceModel> AllAsync(AllGamesQueryModel queryModel)
+        {
+            IQueryable<Game> gamesQuery = this.dbContext
+                .Games
+                .Include(g => g.GameGenres)
+                .ThenInclude(gg => gg.Genre) // Include Genre navigation property
+                .AsQueryable();
+
+            if (!string.IsNullOrWhiteSpace(queryModel.Genre))
+            {
+                gamesQuery = gamesQuery
+                    .Where(g => g.GameGenres.Any(gg => gg.Genre.Name == queryModel.Genre));
+            }
+
+            if (!string.IsNullOrWhiteSpace(queryModel.SearchString))
+            {
+                string wildCard = $"%{queryModel.SearchString.ToLower()}%";
+
+                gamesQuery = gamesQuery
+                    .Where(g => EF.Functions.Like(g.Title, wildCard) ||
+                                EF.Functions.Like(g.Description, wildCard));
+            }
+
+            gamesQuery = queryModel.GameSorting switch
+            {
+                GameSorting.Newest => gamesQuery
+                    .OrderByDescending(g => g.ReleaseDate),
+                GameSorting.Oldest => gamesQuery
+                    .OrderBy(g => g.ReleaseDate),
+                GameSorting.Rating => gamesQuery
+                    .OrderBy(g => g.Reviews.Average(r => r.Rating)),
+                _ => gamesQuery.OrderByDescending(g => g.Id)
+            };
+
+            IEnumerable<GameAllViewModel> allGames = await gamesQuery
+                .Skip((queryModel.CurrentPage - 1) * queryModel.GamesPerPage)
+                .Take(queryModel.GamesPerPage)
+                .Select(g => new GameAllViewModel
+                {
+                    Id = g.Id,
+                    Title = g.Title,
+                    ImageUrl = g.CoverImage,
+                    Rating = g.Reviews.Any() ? g.Reviews.Average(r => r.Rating) : 0, // Calculate average rating if there are reviews
+                })
+                .ToArrayAsync();
+
+            int totalGames = gamesQuery.Count();
+
+            return new AllGamesFilteredAndPagedServiceModel()
+            {
+                TotalGamesCount = totalGames,
+                Games = allGames
+            };
         }
 
         public async Task CreateAsync(GameFormModel formModel)
