@@ -6,6 +6,7 @@ using MoonGameRev.Services.Data.Models.Game;
 using MoonGameRev.Web.ViewModels.Game;
 using MoonGameRev.Web.ViewModels.Game.Enums;
 using MoonGameRev.Web.ViewModels.Home;
+using MoonGameRev.Web.ViewModels.Review;
 using System.Globalization;
 
 namespace MoonGameRev.Services.Data
@@ -110,6 +111,45 @@ namespace MoonGameRev.Services.Data
             }
             // Save changes to persist the new GameGenre entries
             await this.dbContext.SaveChangesAsync();
+        }
+
+        public async Task<GameDetailsViewModel?> GetDetailsByIdAsync(string gameId)
+        {
+            Game? game = await this.dbContext
+                .Games
+                .Include(g=>g.GameGenres)
+                    .ThenInclude(gg=>gg.Genre)
+                .Include(g=>g.Reviews)
+                    .ThenInclude(r=>r.User)
+                .FirstOrDefaultAsync(g => g.Id.ToString() == gameId);
+
+            if (game == null)
+            {
+                return null;
+            }
+            var viewModel = new GameDetailsViewModel()
+            {
+                Id = game.Id,
+                Title = game.Title,
+                Description = game.Description,
+                Developer = game.Developer,
+                Publisher = game.Publisher,
+                GameSite = game.GameSite,
+                ReleaseDate = game.ReleaseDate.ToShortDateString(),
+                ImageUrl = game.CoverImage,
+                Genres = game.GameGenres.Select(gg => gg.Genre.Name).ToList()
+            };
+
+            viewModel.Reviews = game.Reviews.Select(r => new ReviewDetailsViewModel
+            {
+                Rating = r.Rating,
+                Comment = r.Comment,
+                ReviewDate = r.ReviewDate,
+                UserName = r.User.UserName
+            }).ToList(); 
+
+            return viewModel;
+
         }
 
         public async Task<IEnumerable<IndexViewModel>> LastFiveGamesAsync()

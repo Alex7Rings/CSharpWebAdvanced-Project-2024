@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using MoonGameRev.Services.Data.Interfaces;
 using MoonGameRev.Services.Data.Models.Game;
 using MoonGameRev.Web.ViewModels.Game;
+using static MoonGameRev.Common.NotificationMessagesConstants;
 
 namespace MoonGameRev.Web.Controllers
 {
@@ -80,6 +81,22 @@ namespace MoonGameRev.Web.Controllers
             // If the model state is not valid, retrieve the genres again
             model.Genres = await this.genreService.AllGenresAsync();
             return View(model);
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<IActionResult> Details(string id)
+        {
+            GameDetailsViewModel? viewModel = await this.gameService
+                .GetDetailsByIdAsync(id);
+
+            if (viewModel == null)
+            {
+                this.TempData[ErrorMessage] = "Game with the provided ID does not exists!";
+                return this.RedirectToAction("All", "Game");
+            }
+
+            return View(viewModel);
         }
     }
 }
