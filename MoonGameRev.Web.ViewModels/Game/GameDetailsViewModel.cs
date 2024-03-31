@@ -18,5 +18,9 @@ namespace MoonGameRev.Web.ViewModels.Game
         public List<string> Genres { get; set; } = new List<string>();
 
         public List<ReviewDetailsViewModel> Reviews { get; set; } = new List<ReviewDetailsViewModel>();
+
+        public double AverageRating { get; set; }
+
+        public string RatingCategory { get; set; }
     }
 }

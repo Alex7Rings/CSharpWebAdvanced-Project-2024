@@ -14,10 +14,13 @@ namespace MoonGameRev.Services.Data
     public class GameService : IGameService
     {
         private readonly MoonGameRevDbContext dbContext;
+        private readonly IReviewService reviewService;
 
-        public GameService(MoonGameRevDbContext dbContext)
+
+        public GameService(MoonGameRevDbContext dbContext, IReviewService reviewService)
         {
             this.dbContext = dbContext;
+            this.reviewService = reviewService;
         }
 
         public async Task<AllGamesFilteredAndPagedServiceModel> AllAsync(AllGamesQueryModel queryModel)
@@ -122,11 +125,16 @@ namespace MoonGameRev.Services.Data
                 .Include(g=>g.Reviews)
                     .ThenInclude(r=>r.User)
                 .FirstOrDefaultAsync(g => g.Id.ToString() == gameId);
-
+            
             if (game == null)
             {
                 return null;
             }
+
+            double averageRating = game.Reviews.Any() ? game.Reviews.Average(r => r.Rating) : 0;
+
+            string ratingCategory = this.reviewService.GetRatingCategory(averageRating);
+
             var viewModel = new GameDetailsViewModel()
             {
                 Id = game.Id,
@@ -137,7 +145,9 @@ namespace MoonGameRev.Services.Data
                 GameSite = game.GameSite,
                 ReleaseDate = game.ReleaseDate.ToShortDateString(),
                 ImageUrl = game.CoverImage,
-                Genres = game.GameGenres.Select(gg => gg.Genre.Name).ToList()
+                Genres = game.GameGenres.Select(gg => gg.Genre.Name).ToList(),
+                AverageRating = averageRating,
+                RatingCategory = ratingCategory
             };
 
             viewModel.Reviews = game.Reviews.Select(r => new ReviewDetailsViewModel

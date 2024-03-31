@@ -23,6 +23,11 @@
             <a href="@Url.Action("AddReview", "Game", new { gameId = Model.Id })" class="btn btn-primary">Add Review</a>
         </div>
     </div>
+    <div class="row">
+    <div class="col-md-12">
+        <h4>Average Rating: @Model.AverageRating - @Model.RatingCategory</h4>
+    </div>
+    </div>
     <div class="row mt-5">
         <div class="col-md-12">
             <h3>Reviews</h3>
