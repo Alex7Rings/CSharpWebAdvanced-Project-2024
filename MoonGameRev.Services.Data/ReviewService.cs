@@ -14,6 +14,10 @@ namespace MoonGameRev.Services.Data
 
         public string GetRatingCategory(double averageRating)
         {
+            if (averageRating == 0)
+            {
+                return "No reviews yet";
+            }
             if (averageRating >= 9.5)
             {
                 return "Masterpiece";

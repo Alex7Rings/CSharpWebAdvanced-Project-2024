@@ -1,56 +1,47 @@
 ﻿@model MoonGameRev.Web.ViewModels.Game.GameDetailsViewModel
 
 @{
-    ViewBag.Title = "Game Details";
+    ViewBag.Title = Model.Title;
 }
 
 <div class="container mt-5">
     <div class="row">
-        <div class="col-md-6">
-            <img src="@Model.ImageUrl" class="img-fluid" alt="@Model.Title">
+        <div class="col-md-4">
+            <img src="@Model.ImageUrl" class="img-fluid rounded" alt="@Model.Title">
         </div>
-        <div class="col-md-6">
+        <div class="col-md-8">
             <h1>@Model.Title</h1>
             <p><strong>Developer:</strong> @Model.Developer</p>
             <p><strong>Publisher:</strong> @Model.Publisher</p>
             <p><strong>Release Date:</strong> @Model.ReleaseDate</p>
             <p><strong>Game Site:</strong> <a href="@Model.GameSite" target="_blank">@Model.GameSite</a></p>
             <p><strong>Genres:</strong> @string.Join(", ", Model.Genres)</p>
-            <hr>
-            <h4>Description:</h4>
-            <p>@Model.Description</p>
-            <hr>
-            <a href="@Url.Action("AddReview", "Game", new { gameId = Model.Id })" class="btn btn-primary">Add Review</a>
+            <p><strong>Description:</strong> @Model.Description</p>
+            <a href="@Url.Action("AddReview", "Review", new { gameId = Model.Id })" class="btn btn-primary">Add Review</a>
         </div>
-    </div>
-    <div class="row">
-    <div class="col-md-12">
-        <h4>Average Rating: @Model.AverageRating - @Model.RatingCategory</h4>
-    </div>
     </div>
     <div class="row mt-5">
         <div class="col-md-12">
-            <h3>Reviews</h3>
-            <hr>
-            @if (Model.Reviews.Any())
+            <h1><strong>Rating:</strong> @Model.AverageRating - @Model.RatingCategory</h1>
+            <h2>Reviews</h2>
+            @if (!Model.Reviews.Any())
             {
-                foreach (var review in Model.Reviews)
-                {
-                            <div class="card mb-3">
-                                <div class="card-body">
-                                    <h5 class="card-title">@review.UserName</h5>
-                                    <p class="card-text">Rating: @review.Rating</p>
-                                    <p class="card-text">Comment: @review.Comment</p>
-                                    <p class="card-text"><small class="text-muted">Posted on @review.ReviewDate.ToShortDateString()</small></p>
-                                </div>
-                            </div>
-                }
+                    <p>No reviews yet</p>
             }
             else
             {
-                    <p>No reviews available for this game.</p>
+                    <div class="list-group">
+                    @foreach (var review in Model.Reviews)
+                    {
+                                <div class="list-group-item">
+                                    <h5 class="mb-1">@review.UserName</h5>
+                                    <p class="mb-1"><strong>Rating:</strong> @review.Rating</p>
+                                    <p class="mb-1"><strong>Comment:</strong> @review.Comment</p>
+                                    <small>@review.ReviewDate</small>
+                                </div>
+                    }
+                    </div>
             }
         </div>
     </div>
 </div>
-
