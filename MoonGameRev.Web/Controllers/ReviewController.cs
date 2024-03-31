@@ -10,5 +10,11 @@ namespace MoonGameRev.Web.Controllers
         {
             return View();
         }
+
+        [AllowAnonymous]
+        public async Task<IActionResult> RatingInformation()
+        {
+            return View();
+        }
     }
 }

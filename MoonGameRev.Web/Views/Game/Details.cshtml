@@ -22,7 +22,15 @@
     </div>
     <div class="row mt-5">
         <div class="col-md-12">
-            <h1><strong>Rating:</strong> @Model.AverageRating - @Model.RatingCategory</h1>
+            @if (Model.AverageRating > 0)
+            {
+                <h1><strong>Rating:</strong> <a href="@Url.Action("RatingInformation", "Game")">@Model.AverageRating</a> - @Model.RatingCategory</h1>
+            }
+            else
+            {
+                <h1>Rating:No reviews yet</h1>
+            }
+            
             <h2>Reviews</h2>
             @if (!Model.Reviews.Any())
             {
