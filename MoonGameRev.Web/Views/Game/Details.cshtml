@@ -17,7 +17,7 @@
             <p><strong>Game Site:</strong> <a href="@Model.GameSite" target="_blank">@Model.GameSite</a></p>
             <p><strong>Genres:</strong> @string.Join(", ", Model.Genres)</p>
             <p><strong>Description:</strong> @Model.Description</p>
-            <a href="@Url.Action("AddReview", "Review", new { gameId = Model.Id })" class="btn btn-primary">Add Review</a>
+            <a href="@Url.Action("Add", "Review", new { gameId = Model.Id })" class="btn btn-primary">Add Review</a>
         </div>
     </div>
     <div class="row mt-5">

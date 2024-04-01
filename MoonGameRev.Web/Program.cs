@@ -37,6 +37,7 @@ namespace MoonGameRev.Web
                 .AddEntityFrameworkStores<MoonGameRevDbContext>();
 
             builder.Services.AddApplicationServices(typeof(IGameService));
+            builder.Services.AddApplicationServices(typeof(IReviewService));
 
             builder.Services.AddControllersWithViews();
 

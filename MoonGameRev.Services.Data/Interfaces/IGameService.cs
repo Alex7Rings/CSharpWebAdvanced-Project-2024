@@ -6,6 +6,8 @@ namespace MoonGameRev.Services.Data.Interfaces
 {
     public interface IGameService
     {
+        string GetRatingCategory(double averageRating);
+
         Task<IEnumerable<IndexViewModel>> LastFiveUpcomingGamesAsync();
 
         Task<IEnumerable<IndexViewModel>> LastFiveGamesAsync();

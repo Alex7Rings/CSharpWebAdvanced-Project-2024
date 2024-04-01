@@ -1,5 +1,8 @@
-﻿using MoonGameRev.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using MoonGameRev.Data;
+using MoonGameRev.Data.Models;
 using MoonGameRev.Services.Data.Interfaces;
+using MoonGameRev.Web.ViewModels.Review;
 
 namespace MoonGameRev.Services.Data
 {
@@ -12,52 +15,25 @@ namespace MoonGameRev.Services.Data
             this.dbContext = dbContext;
         }
 
-        public string GetRatingCategory(double averageRating)
+        public async Task AddReviewAsync(ReviewFormModel reviewModel, string userId, int gameId)
         {
-            if (averageRating == 0)
+            Review newReview = new Review
             {
-                return "No reviews yet";
-            }
-            if (averageRating >= 9.5)
-            {
-                return "Masterpiece";
-            }
-            else if (averageRating >= 9.0)
-            {
-                return "Outstanding";
-            }
-            else if (averageRating >= 8.0)
-            {
-                return "Great";
-            }
-            else if (averageRating >= 7.0)
-            {
-                return "Good";
-            }
-            else if (averageRating >= 6.0)
-            {
-                return "Decent";
-            }
-            else if (averageRating >= 5.0)
-            {
-                return "Average";
-            }
-            else if (averageRating >= 4.0)
-            {
-                return "Mediocre";
-            }
-            else if (averageRating >= 3.0)
-            {
-                return "Poor";
-            }
-            else if (averageRating >= 2.0)
-            {
-                return "Bad";
-            }
-            else
-            {
-                return "Awful";
-            }
+                Rating = reviewModel.Rating,
+                Pros = reviewModel.Pros,
+                Cons = reviewModel.Cons,
+                Comment = reviewModel.Comment,
+                UserId = userId, // Set the user ID
+                GameID = gameId // Set the game ID
+            };
+
+            await dbContext.Reviews.AddAsync(newReview);
+            await dbContext.SaveChangesAsync();
+        }
+
+        public async Task<bool> HasReviewedGameAsync(string userId, int gameId)
+        {
+            return await dbContext.Reviews.AnyAsync(r => r.UserId == userId && r.GameID == gameId);
         }
     }
 }

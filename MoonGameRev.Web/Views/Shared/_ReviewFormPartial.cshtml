@@ -1,0 +1,37 @@
+﻿@model ReviewFormModel
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-6">
+            <form method="post">
+                <div class="form-group">
+                    <label asp-for="Rating" class="font-weight-bold">Rating</label>
+                    <input asp-for="Rating" class="form-control" placeholder="?/10" style="max-width: 100px;">
+                    <span asp-validation-for="Rating" class="small text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Pros" class="font-weight-bold">Pros</label>
+                    <textarea asp-for="Pros" rows="4" class="form-control" placeholder="Pros of the game..."></textarea>
+                    <span asp-validation-for="Pros" class="small text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Cons" class="font-weight-bold">Cons</label>
+                    <textarea asp-for="Cons" rows="4" class="form-control" placeholder="Cons of the game..."></textarea>
+                    <span asp-validation-for="Cons" class="small text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Comment" class="font-weight-bold">Commentary</label>
+                    <textarea asp-for="Comment" rows="4" class="form-control" placeholder="Comment for the game..."></textarea>
+                    <span asp-validation-for="Comment" class="small text-danger"></span>
+                </div>
+
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary mt-3">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
