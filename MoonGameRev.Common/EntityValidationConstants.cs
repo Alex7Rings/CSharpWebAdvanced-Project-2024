@@ -9,6 +9,7 @@
 
             public const int CommentMaxLength = 500;
             public const int CommentMinLength = 20;
+            public const int ProsAndConsMinLength = 3;
         }
 
         public static class Game

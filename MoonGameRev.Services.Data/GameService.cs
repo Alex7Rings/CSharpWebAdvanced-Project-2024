@@ -153,6 +153,8 @@ namespace MoonGameRev.Services.Data
             viewModel.Reviews = game.Reviews.Select(r => new ReviewDetailsViewModel
             {
                 Rating = r.Rating,
+                Pros = r.Pros,
+                Cons = r.Cons,
                 Comment = r.Comment,
                 ReviewDate = r.ReviewDate,
                 UserName = r.User.UserName

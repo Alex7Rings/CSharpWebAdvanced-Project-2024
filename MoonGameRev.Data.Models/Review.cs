@@ -15,7 +15,7 @@
 
         [Required]
         [Comment("Rating given by the user for the game")]
-        public int Rating { get; set; }
+        public double Rating { get; set; }
 
         [Required]
         [Comment("The Pros of the game")]
