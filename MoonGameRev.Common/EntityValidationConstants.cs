@@ -4,8 +4,8 @@
     {
         public static class Review
         {
-            public const string ReviewMaxRange = "10.00";
-            public const string ReviewMinRange = "1.00";
+            public const double ReviewMaxRange = 10.00;
+            public const double ReviewMinRange = 1.00;
 
             public const int CommentMaxLength = 500;
             public const int CommentMinLength = 20;

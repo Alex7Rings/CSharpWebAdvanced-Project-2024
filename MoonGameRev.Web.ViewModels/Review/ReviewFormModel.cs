@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using MoonGameRev.Common.Attributes;
+using System.ComponentModel.DataAnnotations;
 using static MoonGameRev.Common.EntityValidationConstants.Review;
 
 namespace MoonGameRev.Web.ViewModels.Review
@@ -6,8 +7,8 @@ namespace MoonGameRev.Web.ViewModels.Review
     public class ReviewFormModel
     {
         [Required]
-        [Range(typeof(double), ReviewMinRange, ReviewMaxRange)]
-        public string Rating { get; set; } = null!;
+        [CustomDecimalRange(ReviewMinRange, ReviewMaxRange)]
+        public double Rating { get; set; } 
 
         [Required]
         [StringLength(CommentMaxLength, MinimumLength = ProsAndConsMinLength)]
