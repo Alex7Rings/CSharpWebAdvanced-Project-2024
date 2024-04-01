@@ -18,9 +18,19 @@
         public int Rating { get; set; }
 
         [Required]
+        [Comment("The Pros of the game")]
+        [MaxLength(CommentMaxLength)]
+        public string Pros { get; set; } = null!;
+
+        [Required]
+        [Comment("The Cons of the game")]
+        [MaxLength(CommentMaxLength)]
+        public string Cons { get; set; } = null!;
+
+
         [Comment("Comment provided by the user for the review.")]
         [MaxLength(CommentMaxLength)]
-        public string Comment { get; set; } = null!;
+        public string Comment { get; set; } 
 
         [Required]
         [Comment("Date and time when the review was submitted.")]

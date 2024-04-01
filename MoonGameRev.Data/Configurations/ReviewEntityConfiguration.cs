@@ -11,6 +11,10 @@
                 .HasOne(r => r.Game)
                 .WithMany(g => g.Reviews)
                 .HasForeignKey(r => r.GameID);
+
+            builder
+                .Property(r => r.ReviewDate)
+                .HasDefaultValueSql("GETDATE()");
         }
     }
 }
