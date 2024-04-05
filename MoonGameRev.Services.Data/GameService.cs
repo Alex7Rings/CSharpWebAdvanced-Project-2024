@@ -51,7 +51,7 @@ namespace MoonGameRev.Services.Data
                 GameSorting.Oldest => gamesQuery
                     .OrderBy(g => g.ReleaseDate),
                 GameSorting.Rating => gamesQuery
-                    .OrderBy(g => g.Reviews.Average(r => r.Rating)),
+                    .OrderByDescending(g => g.Reviews.Average(r => r.Rating)),
                 _ => gamesQuery.OrderByDescending(g => g.Id)
             };
 
