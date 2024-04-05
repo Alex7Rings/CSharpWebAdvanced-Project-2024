@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using MoonGameRev.Data.Models;
 using MoonGameRev.Services.Data;
 using MoonGameRev.Services.Data.Interfaces;
+using MoonGameRev.Services.Data.Models.Review;
 using MoonGameRev.Web.ViewModels.Review;
 using System.Security.Claims;
 
@@ -19,6 +20,18 @@ namespace MoonGameRev.Web.Controllers
         {
             this.reviewService = reviewService;
             this.userManager = userManager;
+        }
+
+        [AllowAnonymous]
+        public async Task<IActionResult> All(int gameId, [FromQuery]AllReviewsQueryModel queryModel)
+        {
+            AllReviewsFilteredAndPagedServiceModel serviceModel =
+                await this.reviewService.AllAsync(gameId, queryModel);
+
+            queryModel.Reviews = serviceModel.Reviews;
+            queryModel.TotalReviews = serviceModel.TotalReviewsCount;
+
+            return this.View(queryModel);
         }
 
         [HttpGet]

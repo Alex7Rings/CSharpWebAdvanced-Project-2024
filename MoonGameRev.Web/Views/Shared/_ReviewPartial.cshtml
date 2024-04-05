@@ -1,0 +1,31 @@
+﻿@model ReviewAllViewModel
+
+<div class="col-md-4 mb-4">
+    <div class="card h-100">
+        <div class="card-body">
+            <h5 class="card-title">Review</h5>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">User: @Model.UserName</li> <!-- Add this line for the user's name -->
+                <li class="list-group-item">Rating: @Model.Rating/10</li>
+                <li class="list-group-item">Pros:
+                    <ul>
+                        @foreach (var pro in Model.Pros.Split(';'))
+                        {
+                                    <li>@pro</li>
+                        }
+                    </ul>
+                </li>
+                <li class="list-group-item">Cons:
+                    <ul>
+                        @foreach (var con in Model.Cons.Split(';'))
+                        {
+                                    <li>@con</li>
+                        }
+                    </ul>
+                </li>
+                <li class="list-group-item">Comment: @Model.Comment</li>
+                <li class="list-group-item">Date: @Model.Date</li>
+            </ul>
+        </div>
+    </div>
+</div>

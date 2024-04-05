@@ -2,7 +2,9 @@
 using MoonGameRev.Data;
 using MoonGameRev.Data.Models;
 using MoonGameRev.Services.Data.Interfaces;
+using MoonGameRev.Services.Data.Models.Review;
 using MoonGameRev.Web.ViewModels.Review;
+using MoonGameRev.Web.ViewModels.Review.Enums;
 
 namespace MoonGameRev.Services.Data
 {
@@ -30,6 +32,46 @@ namespace MoonGameRev.Services.Data
             await dbContext.Reviews.AddAsync(newReview);
             await dbContext.SaveChangesAsync();
         }
+
+        public async Task<AllReviewsFilteredAndPagedServiceModel> AllAsync(int gameId, AllReviewsQueryModel queryModel)
+        {
+            IQueryable<Review> reviewsQuery = this.dbContext
+                .Reviews
+                .Where(r => r.GameID == gameId)
+                .AsQueryable();
+
+            reviewsQuery = queryModel.ReviewSorting switch
+            {
+                ReviewSorting.Newest => reviewsQuery.OrderBy(r => r.ReviewDate),
+                ReviewSorting.RatingHighToLow => reviewsQuery.OrderByDescending(r => r.Rating),
+                ReviewSorting.RatingLowToHigh => reviewsQuery.OrderBy(r => r.Rating),
+                _ => reviewsQuery.OrderByDescending(r => r.ReviewDate)
+            };
+
+            IEnumerable<ReviewAllViewModel> allReviews = await reviewsQuery
+                .Skip((queryModel.CurrentPage - 1) * queryModel.ReviewsPerPage)
+                .Take(queryModel.ReviewsPerPage)
+                .Select(r => new ReviewAllViewModel
+                {
+                    Id = r.Id.ToString(),
+                    UserName = r.User.ToString(),
+                    Pros = r.Pros,
+                    Cons = r.Cons,
+                    Comment = r.Comment,
+                    Rating = r.Rating,
+                    Date = r.ReviewDate.ToString()
+                })
+                .ToArrayAsync();
+
+            int totalReviews = reviewsQuery.Count();
+
+            return new AllReviewsFilteredAndPagedServiceModel()
+            {
+                TotalReviewsCount = totalReviews,
+                Reviews = allReviews
+            };
+        }
+
 
         public async Task<bool> HasReviewedGameAsync(string userId, int gameId)
         {
