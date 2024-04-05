@@ -42,7 +42,7 @@ namespace MoonGameRev.Services.Data
 
             reviewsQuery = queryModel.ReviewSorting switch
             {
-                ReviewSorting.Newest => reviewsQuery.OrderBy(r => r.ReviewDate),
+                ReviewSorting.Newest => reviewsQuery.OrderByDescending(r => r.ReviewDate),
                 ReviewSorting.RatingHighToLow => reviewsQuery.OrderByDescending(r => r.Rating),
                 ReviewSorting.RatingLowToHigh => reviewsQuery.OrderBy(r => r.Rating),
                 _ => reviewsQuery.OrderByDescending(r => r.ReviewDate)

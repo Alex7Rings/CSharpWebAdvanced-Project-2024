@@ -24,35 +24,59 @@
         <div class="col-md-12">
             @if (Model.AverageRating > 0)
             {
-                    <h1><strong>Rating:</strong> <a href="@Url.Action("RatingInformation", "Game")">@Model.AverageRating</a> - @Model.RatingCategory</h1>
+                <h1><strong>Rating:</strong> <a href="@Url.Action("RatingInformation", "Game")">@Model.AverageRating</a> - @Model.RatingCategory</h1>
             }
             else
             {
-                    <h1>Rating:No reviews yet</h1>
+                <h1>Rating:No reviews yet</h1>
             }
 
             <h2>Reviews</h2>
             @if (!Model.Reviews.Any())
             {
-                        <p>No reviews yet</p>
+                <p>No reviews yet</p>
             }
             else
             {
-                    <div class="list-group">
-                    @foreach (var review in Model.Reviews)
+                <div class="list-group">
+                    @foreach (var review in Model.Reviews.TakeLast(3)) 
                     {
-                                <div class="list-group-item">
-                                    <h5 class="mb-1">@review.UserName</h5>
-                                    <p class="mb-1"><strong>Rating:</strong> @review.Rating</p>
-                                    <p class="mb-1"><strong>Pros:</strong> @review.Pros</p>
-                                    <p class="mb-1"><strong>Cons:</strong> @review.Cons</p>
-                                    <p class="mb-1"><strong>Comment:</strong> @review.Comment</p>
-                                    <small>@review.ReviewDate</small>
+                        <div class="col-md-4 mb-4">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <h5 class="card-title">Review</h5>
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item">User: @review.UserName</li>
+                                        <li class="list-group-item">Rating: @review.Rating/10</li>
+                                        <li class="list-group-item">Pros:
+                                            <ul>
+                                                @foreach (var pro in review.Pros.Split(';'))
+                                                {
+                                                    <li>@pro</li>
+                                                }
+                                            </ul>
+                                        </li>
+                                        <li class="list-group-item">Cons:
+                                            <ul>
+                                                @foreach (var con in review.Cons.Split(';'))
+                                                {
+                                                    <li>@con</li>
+                                                }
+                                            </ul>
+                                        </li>
+                                        <li class="list-group-item">Comment: @review.Comment</li>
+                                        <li class="list-group-item">Date: @review.ReviewDate</li>
+                                    </ul>
                                 </div>
+                            </div>
+                        </div>
                     }
-                    </div>
+                </div>
+                @if (Model.Reviews.Count() > 3) 
+                {
+                    <a href="@Url.Action("All", "Review", new { gameId = Model.Id })" class="btn btn-primary mt-3">All Reviews</a>
+                }
             }
-            <a href="@Url.Action("All", "Review", new { gameId = Model.Id })" class="btn btn-primary mt-3">All Reviews</a>
         </div>
     </div>
 </div>
