@@ -6,6 +6,12 @@
 
         public string UserName { get; set; } = null!;
 
+        public int GameId { get; set; } 
+
+        public string GameName { get; set; } = null!;
+
+        public string CoverImage { get; set; } = null!;
+
         public string Date { get; set; } = null!;
 
         public double Rating { get; set; }

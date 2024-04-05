@@ -1,0 +1,22 @@
+﻿@model List<ReviewAllViewModel>
+
+@{
+    ViewData["Title"] = "My Reviews";
+}
+
+<h2 class="text-center">@ViewData["Title"]</h2>
+<hr/>
+
+@if (!Model.Any())
+{
+        <h2 class="text-center">You do not have any reviews yet!</h2>
+}
+else
+{
+        <div class="row">
+        @foreach (ReviewAllViewModel review in Model)
+        {
+                 <partial name="_MineReviewPartial" model="review"/>
+        }
+        </div>
+}

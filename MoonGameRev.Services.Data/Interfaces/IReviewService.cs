@@ -10,5 +10,7 @@ namespace MoonGameRev.Services.Data.Interfaces
         Task AddReviewAsync(ReviewFormModel reviewModel, string userId, int gameId);
 
         Task<AllReviewsFilteredAndPagedServiceModel> AllAsync(int gameId, AllReviewsQueryModel queryModel);
+
+        Task<IEnumerable<ReviewAllViewModel>> AllByUserIdAsync(string userId);
     }
 }

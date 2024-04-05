@@ -5,6 +5,7 @@ using MoonGameRev.Data.Models;
 using MoonGameRev.Services.Data;
 using MoonGameRev.Services.Data.Interfaces;
 using MoonGameRev.Services.Data.Models.Review;
+using MoonGameRev.Web.Infrastructure.Extensions;
 using MoonGameRev.Web.ViewModels.Review;
 using System.Security.Claims;
 
@@ -75,6 +76,19 @@ namespace MoonGameRev.Web.Controllers
 
             // Redirect back to the game details page with the same gameId
             return RedirectToAction("Details", "Game", new { gameId = gameId });
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Mine()
+        {
+            List<ReviewAllViewModel> myReviews =
+                new List<ReviewAllViewModel>();
+
+            string userId = this.User.GetId()!;
+
+            myReviews.AddRange(await this.reviewService.AllByUserIdAsync(userId));
+
+            return View(myReviews);
         }
 
         [AllowAnonymous]

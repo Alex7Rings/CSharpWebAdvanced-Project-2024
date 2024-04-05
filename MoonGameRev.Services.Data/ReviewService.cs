@@ -72,6 +72,28 @@ namespace MoonGameRev.Services.Data
             };
         }
 
+        public async Task<IEnumerable<ReviewAllViewModel>> AllByUserIdAsync(string userId)
+        {
+            IEnumerable<ReviewAllViewModel> allUserReviews = await this.dbContext
+                 .Reviews
+                 .Where(r => r.UserId == userId)
+                 .Select(r => new ReviewAllViewModel
+                 {
+                     Id= r.Id.ToString(),
+                     UserName = r.User.ToString(),
+                     Pros = r.Pros,
+                     Cons = r.Cons,
+                     Comment = r.Comment,
+                     Rating = r.Rating,
+                     Date = r.ReviewDate.ToString(),
+                     GameName = r.Game.Title,
+                     CoverImage = r.Game.CoverImage,
+                     GameId = r.GameID
+                 })
+                 .ToArrayAsync();
+
+            return allUserReviews;
+        }
 
         public async Task<bool> HasReviewedGameAsync(string userId, int gameId)
         {
