@@ -16,6 +16,10 @@ namespace MoonGameRev.Services.Data.Interfaces
 
         Task<AllGamesFilteredAndPagedServiceModel> AllAsync(AllGamesQueryModel queryModel);
 
-        Task<GameDetailsViewModel?> GetDetailsByIdAsync(string gameId);
+        Task<GameDetailsViewModel> GetDetailsByIdAsync(string gameId);
+
+        Task<bool> ExistsByIdAsync(string gameId);
+
+        Task<GameFormModel> GetGameForEditByIdAsync(string gameId);
     }
 }

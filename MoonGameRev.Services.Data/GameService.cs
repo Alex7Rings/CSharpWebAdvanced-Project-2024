@@ -114,7 +114,16 @@ namespace MoonGameRev.Services.Data
             await this.dbContext.SaveChangesAsync();
         }
 
-        public async Task<GameDetailsViewModel?> GetDetailsByIdAsync(string gameId)
+        public async Task<bool> ExistsByIdAsync(string gameId)
+        {
+            bool result = await this.dbContext
+                .Games
+                .AnyAsync(g=>g.Id.ToString() == gameId);
+
+            return result;
+        }
+
+        public async Task<GameDetailsViewModel> GetDetailsByIdAsync(string gameId)
         {
             Game? game = await this.dbContext
                 .Games
@@ -122,12 +131,8 @@ namespace MoonGameRev.Services.Data
                     .ThenInclude(gg=>gg.Genre)
                 .Include(g=>g.Reviews)
                     .ThenInclude(r=>r.User)
-                .FirstOrDefaultAsync(g => g.Id.ToString() == gameId);
+                .FirstAsync(g => g.Id.ToString() == gameId);
             
-            if (game == null)
-            {
-                return null;
-            }
 
             double averageRating = game.Reviews.Any() ? game.Reviews.Average(r => r.Rating) : 0;
 
@@ -160,6 +165,27 @@ namespace MoonGameRev.Services.Data
 
             return viewModel;
 
+        }
+
+        public async Task<GameFormModel> GetGameForEditByIdAsync(string gameId)
+        {
+            Game? game = await this.dbContext
+                    .Games
+                    .Include(g => g.GameGenres)
+                        .ThenInclude(gg => gg.Genre)
+                    .FirstAsync(g => g.Id.ToString() == gameId);
+
+            return new GameFormModel
+            {
+                Title = game.Title,
+                Description = game.Description,
+                Developer = game.Developer,
+                Publisher = game.Publisher,
+                GameSite = game.GameSite,
+                ReleaseDate = game.ReleaseDate.ToShortDateString(),
+                CoverImage = game.CoverImage,
+                IsReleased = game.IsReleased,
+            };
         }
 
         public string GetRatingCategory(double averageRating)

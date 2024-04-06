@@ -87,16 +87,25 @@ namespace MoonGameRev.Web.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Details(string id)
         {
-            GameDetailsViewModel? viewModel = await this.gameService
-                .GetDetailsByIdAsync(id);
+            bool gameExists = await this.gameService
+                .ExistsByIdAsync(id);
 
-            if (viewModel == null)
+            if (!gameExists)
             {
                 this.TempData[ErrorMessage] = "Game with the provided ID does not exists!";
                 return this.RedirectToAction("All", "Game");
             }
 
+            GameDetailsViewModel viewModel = await this.gameService
+                .GetDetailsByIdAsync(id);
+
             return View(viewModel);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Edit(string id)
+        {
+
         }
     }
 }
