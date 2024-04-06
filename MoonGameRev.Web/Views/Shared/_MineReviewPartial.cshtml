@@ -29,6 +29,10 @@
                 <li class="list-group-item">Comment: @Model.Comment</li>
                 <li class="list-group-item">Date: @Model.Date</li>
             </ul>
+                <a class="btn btn-warning" asp-controller="Review" asp-action="Edit"
+                           asp-route-id="@Model.Id">Edit</a>
+                <a class="ml-2 btn btn-danger" asp-controller="Review" asp-action="Delete"
+                           asp-route-id="@Model.Id">Delete</a>
         </div>
     </div>
 </div>

@@ -5,6 +5,7 @@ using MoonGameRev.Services.Data.Interfaces;
 using MoonGameRev.Services.Data.Models.Game;
 using MoonGameRev.Web.ViewModels.Game;
 using MoonGameRev.Web.ViewModels.Game.Enums;
+using MoonGameRev.Web.ViewModels.Genre;
 using MoonGameRev.Web.ViewModels.Home;
 using MoonGameRev.Web.ViewModels.Review;
 using System.Globalization;
@@ -114,6 +115,29 @@ namespace MoonGameRev.Services.Data
             await this.dbContext.SaveChangesAsync();
         }
 
+        public async Task EditGameByIdAndFormModel(string gameId, GameFormModel formModel)
+        {
+            Game game = await this.dbContext
+                .Games
+                .Include(g => g.GameGenres)
+                .FirstAsync(g => g.Id.ToString() == gameId);
+
+            game.Title = formModel.Title;
+            game.Description = formModel.Description;
+            game.Developer = formModel.Developer;
+            game.Publisher = formModel.Publisher;
+            game.GameSite = formModel.GameSite;
+            game.CoverImage = formModel.CoverImage;
+            game.ReleaseDate = DateTime.ParseExact(formModel.ReleaseDate, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+            game.IsReleased = formModel.IsReleased;
+
+            // Update game genres
+            List<int> selectedGenreIds = formModel.GenreIds.ToList();
+            UpdateGameGenres(game, selectedGenreIds);
+
+            await dbContext.SaveChangesAsync();
+        }
+
         public async Task<bool> ExistsByIdAsync(string gameId)
         {
             bool result = await this.dbContext
@@ -169,24 +193,29 @@ namespace MoonGameRev.Services.Data
 
         public async Task<GameFormModel> GetGameForEditByIdAsync(string gameId)
         {
-            Game? game = await this.dbContext
-                    .Games
-                    .Include(g => g.GameGenres)
-                        .ThenInclude(gg => gg.Genre)
-                    .FirstAsync(g => g.Id.ToString() == gameId);
+			Game? game = await this.dbContext
+	                .Games
+	                .Include(g => g.GameGenres)
+	                .ThenInclude(gg => gg.Genre)
+	                .FirstOrDefaultAsync(g => g.Id.ToString() == gameId);
 
-            return new GameFormModel
-            {
-                Title = game.Title,
-                Description = game.Description,
-                Developer = game.Developer,
-                Publisher = game.Publisher,
-                GameSite = game.GameSite,
-                ReleaseDate = game.ReleaseDate.ToShortDateString(),
-                CoverImage = game.CoverImage,
-                IsReleased = game.IsReleased,
-            };
-        }
+            List<int> genreIds = game.GameGenres.Select(gg => gg.GenreID).ToList();
+
+			GameFormModel formModel = new GameFormModel
+			{
+				Title = game.Title,
+				Description = game.Description,
+				Developer = game.Developer,
+				Publisher = game.Publisher,
+				GameSite = game.GameSite,
+				ReleaseDate = game.ReleaseDate.ToShortDateString(),
+				CoverImage = game.CoverImage,
+				IsReleased = game.IsReleased,
+				GenreIds = new HashSet<int>(genreIds),
+			};
+
+			return formModel;
+		}
 
         public string GetRatingCategory(double averageRating)
         {
@@ -269,6 +298,25 @@ namespace MoonGameRev.Services.Data
                 })
                 .ToArrayAsync();
             return lastUpcomingFiveGames;
+        }
+
+        private void UpdateGameGenres(Game game, IEnumerable<int> selectedGenreIds)
+        {
+            List<int> existingGenreIds = game.GameGenres.Select(gg => gg.GenreID).ToList();
+
+            // Remove genres that are not selected anymore
+            List<GameGenre> genresToRemove = game.GameGenres.Where(gg => !selectedGenreIds.Contains(gg.GenreID)).ToList();
+            foreach (GameGenre genreToRemove in genresToRemove)
+            {
+                game.GameGenres.Remove(genreToRemove);
+            }
+
+            // Add genres that are newly selected
+            List<int> genresToAdd = selectedGenreIds.Where(id => !existingGenreIds.Contains(id)).ToList();
+            foreach (int genreIdToAdd in genresToAdd)
+            {
+                game.GameGenres.Add(new GameGenre { GenreID = genreIdToAdd });
+            }
         }
     }
 }

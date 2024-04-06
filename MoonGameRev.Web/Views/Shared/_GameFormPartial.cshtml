@@ -63,8 +63,8 @@
                         @foreach (var genre in Model.Genres)
                      {
                        <div class="form-check">
-                              <input class="form-check-input" type="checkbox" id="@($"genre-{genre.Id}")" name="GenreIds" value="@genre.Id">
-                              <label class="form-check-label" for="@($"genre-{genre.Id}")">@genre.Name</label>
+                                <input class="form-check-input" type="checkbox" id="@($"genre-{genre.Id}")" name="GenreIds" value="@genre.Id" @(Model.GenreIds.Contains(genre.Id) ? "checked" : "")>
+                                <label class="form-check-label" for="@($"genre-{genre.Id}")">@genre.Name</label>
                        </div>
                      }
                       <span asp-validation-for="GenreIds" class="small text-danger"></span>

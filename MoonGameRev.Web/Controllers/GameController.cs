@@ -105,6 +105,54 @@ namespace MoonGameRev.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> Edit(string id)
         {
+            bool gameExists = await this.gameService
+                .ExistsByIdAsync(id);
+
+            if (!gameExists)
+            {
+                this.TempData[ErrorMessage] = "Game with the provided ID does not exists!";
+                return this.RedirectToAction("All", "Game");
+            }
+
+            GameFormModel formModel = await this.gameService
+                .GetGameForEditByIdAsync(id);
+
+            formModel.Genres = await this.genreService.AllGenresAsync();
+
+            return this.View(formModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(string id, GameFormModel model)
+        {
+            if(!this.ModelState.IsValid)
+            {
+                model.Genres = await this.genreService.AllGenresAsync();
+                return this.View(model);
+            }
+
+            bool gameExists = await this.gameService
+                .ExistsByIdAsync(id);
+
+            if (!gameExists)
+            {
+                this.TempData[ErrorMessage] = "Game with the provided ID does not exists!";
+                return this.RedirectToAction("All", "Game");
+            }
+
+            try
+            {
+                await this.gameService.EditGameByIdAndFormModel(id, model);
+            }
+            catch (Exception)
+            {
+                this.ModelState.AddModelError(string.Empty, "Unexpected error occurred while trying to update the game!");
+                model.Genres = await this.genreService.AllGenresAsync();
+
+                return this.View(model);
+            }
+
+            return this.RedirectToAction("Details", "Game", new { id });
 
         }
     }
