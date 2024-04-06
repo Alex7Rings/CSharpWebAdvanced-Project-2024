@@ -271,6 +271,7 @@ namespace MoonGameRev.Services.Data
         {
             IEnumerable<IndexViewModel> lastFiveGames = await this.dbContext
                 .Games
+                .Where(g => g.IsReleased == true)
                 .OrderByDescending(x => x.Id)
                 .Take(5)
                 .Select(g=> new IndexViewModel

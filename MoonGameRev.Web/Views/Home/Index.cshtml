@@ -1,29 +1,40 @@
 ﻿@model MoonGameRev.Web.ViewModels.Home.IndexViewModel
 
 <!-- Display upcoming games -->
-<div>
-    <h2>Last 5 Added Upcoming Games</h2>
-    @foreach (var game in ViewData["UpcomingGames"] as IEnumerable<MoonGameRev.Web.ViewModels.Home.IndexViewModel>)
-    {
-            <div>
-                <h3>@game.Title</h3>
-                <img src="@game.ImageUrl" alt="@game.Title" />
-                <!-- Other game details -->
-            </div>
-    }
-    <a href="/upcoming-games" class="btn">See all</a>
+<div class="container mt-5">
+    <h2>5 Upcoming Games</h2>
+    <div class="row">
+        @foreach (var game in ViewData["UpcomingGames"] as IEnumerable<MoonGameRev.Web.ViewModels.Home.IndexViewModel>)
+        {
+                    <div class="col-md-2">
+                        <a href="@Url.Action("Details", "Game", new { id = game.Id })">
+                            <img class="d-block w-100 game-image" src="@game.ImageUrl" alt="@game.Title">
+                            <div class="text-center">
+                                <h5>@game.Title</h5>
+                            </div>
+                        </a>
+                    </div>
+        }
+    </div>
+    <a href="/Game/All" class="btn btn-primary mt-3">See all</a>
 </div>
 
+
 <!-- Display trending games -->
-<div>
+<div class="container mt-5">
     <h2>5 Trending Games</h2>
-    @foreach (var game in ViewData["TrendingGames"] as IEnumerable<MoonGameRev.Web.ViewModels.Home.IndexViewModel>)
-    {
-            <div>
-                <h3>@game.Title</h3>
-                <img src="@game.ImageUrl" alt="@game.Title" />
-                <!-- Other game details -->
-            </div>
-    }
-    <a href="/Game/Games" class="btn">See all</a>
+    <div class="row">
+        @foreach (var game in ViewData["TrendingGames"] as IEnumerable<MoonGameRev.Web.ViewModels.Home.IndexViewModel>)
+        {
+                <div class="col-md-2">
+                    <a href="@Url.Action("Details", "Game", new { id = game.Id })">
+                        <img class="d-block w-100 game-image" src="@game.ImageUrl" alt="@game.Title">
+                        <div class="text-center">
+                            <h5>@game.Title</h5>
+                        </div>
+                    </a>
+                </div>
+        }
+    </div>
+    <a href="/Game/All" class="btn btn-primary mt-3">See all</a>
 </div>
