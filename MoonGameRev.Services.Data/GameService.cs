@@ -77,7 +77,7 @@ namespace MoonGameRev.Services.Data
             };
         }
 
-        public async Task CreateAsync(GameFormModel formModel)
+        public async Task<string> CreateAsync(GameFormModel formModel)
         {
             string dateTimeString = $"{formModel.ReleaseDate}";
             if (!DateTime.TryParseExact(dateTimeString, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime persedDateTime))
@@ -113,6 +113,8 @@ namespace MoonGameRev.Services.Data
             }
             // Save changes to persist the new GameGenre entries
             await this.dbContext.SaveChangesAsync();
+
+            return newGame.Id.ToString();
         }
 
         public async Task EditGameByIdAndFormModel(string gameId, GameFormModel formModel)

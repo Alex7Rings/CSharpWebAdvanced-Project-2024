@@ -13,7 +13,7 @@ namespace MoonGameRev.Services.Data.Interfaces
 
         Task<IEnumerable<IndexViewModel>> LastFiveGamesAsync();
 
-        Task CreateAsync(GameFormModel formModel);
+        Task<string> CreateAsync(GameFormModel formModel);
 
         Task<AllGamesFilteredAndPagedServiceModel> AllAsync(AllGamesQueryModel queryModel);
 

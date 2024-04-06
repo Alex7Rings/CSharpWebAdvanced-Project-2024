@@ -75,7 +75,7 @@ namespace MoonGameRev.Web.Controllers
             await reviewService.AddReviewAsync(reviewModel, user.Id, gameId);
 
             // Redirect back to the game details page with the same gameId
-            return RedirectToAction("Details", "Game", new { gameId = gameId });
+            return RedirectToAction("Details", "Game", new { id = gameId });
         }
 
         [HttpGet]

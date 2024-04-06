@@ -69,8 +69,8 @@ namespace MoonGameRev.Web.Controllers
             {
                 try
                 {
-                    await this.gameService.CreateAsync(model);
-                    return RedirectToAction("Games", "Game");
+                    string gameId = await this.gameService.CreateAsync(model);
+                    return RedirectToAction("Details", "Game", new {id = gameId});
                 }
                 catch (Exception)
                 {
