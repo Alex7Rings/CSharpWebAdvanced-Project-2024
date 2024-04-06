@@ -1,0 +1,14 @@
+﻿@model ReviewFormModel
+@{
+	ViewData["Title"] = "Edit Review";
+}
+
+<h2 class="text-centre">@ViewData["Title"]</h2>
+<hr />
+
+<partial name="_ReviewFormPartial" model="@Model"/>
+
+@section Scripts
+{
+			<partial name="_ValidationScriptsPartial"/>
+}

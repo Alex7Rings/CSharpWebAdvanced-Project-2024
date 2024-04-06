@@ -8,6 +8,7 @@ using MoonGameRev.Services.Data.Models.Review;
 using MoonGameRev.Web.Infrastructure.Extensions;
 using MoonGameRev.Web.ViewModels.Review;
 using System.Security.Claims;
+using static MoonGameRev.Common.NotificationMessagesConstants;
 
 namespace MoonGameRev.Web.Controllers
 {
@@ -79,6 +80,91 @@ namespace MoonGameRev.Web.Controllers
         }
 
         [HttpGet]
+        public async Task<IActionResult> Edit(string id)
+        {
+            bool reviewExists = await this.reviewService
+                .ExistsReviewByIdAsync(id);
+
+            if (!reviewExists)
+            {
+                this.TempData[ErrorMessage] = "Review with the provided id does not exists!";
+
+                return this.RedirectToAction("Mine", "Review");
+            }
+
+            string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            bool isUserCreatorOfTheReview = await this.reviewService
+                .IsUserWhitIdCreatorOfReviewWhitId(id, userId);
+
+            if (!isUserCreatorOfTheReview)
+            {
+                this.TempData[ErrorMessage] = "You must be the creator to edit this review!";
+                return RedirectToAction("Mine", "Review");
+            }
+
+            try
+            {
+				ReviewFormModel formModel = await this.reviewService
+	                     .GetReviewForEditByIdAsync(id);
+
+
+				return this.View(formModel);
+			}
+            catch (Exception)
+            {
+                this.TempData[ErrorMessage] = "Unexpected error occurred. Please try again later or contact administrator.";
+
+                return this.RedirectToAction("Mine", "Review");
+			}
+        }
+
+        [HttpPost]
+		public async Task<IActionResult> Edit(string id, ReviewFormModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return this.View(model);
+            }
+
+			bool reviewExists = await this.reviewService
+				.ExistsReviewByIdAsync(id);
+
+			if (!reviewExists)
+			{
+				this.TempData[ErrorMessage] = "Review with the provided id does not exists!";
+
+				return this.RedirectToAction("Mine", "Review");
+			}
+
+			string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+			bool isUserCreatorOfTheReview = await this.reviewService
+				.IsUserWhitIdCreatorOfReviewWhitId(id, userId);
+
+			if (!isUserCreatorOfTheReview)
+			{
+				this.TempData[ErrorMessage] = "You must be the creator to edit this review!";
+				return RedirectToAction("Mine", "Review");
+			}
+
+            try
+            {
+                await this.reviewService.EditReviewByIdAndFormModel(id, model);
+            }
+            catch (Exception)
+            {
+                this.ModelState.AddModelError(string.Empty, "Unexpected error occurred while trying to update the review. Please try again later or contact administrator!");
+
+                return this.View(model);
+            }
+
+            return this.RedirectToAction("Mine", "Review");
+
+		}
+
+
+		[HttpGet]
         public async Task<IActionResult> Mine()
         {
             List<ReviewAllViewModel> myReviews =

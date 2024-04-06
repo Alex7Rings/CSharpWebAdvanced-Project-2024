@@ -36,14 +36,21 @@ namespace MoonGameRev.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> Add()
         {
-
-
-            GameFormModel formModel = new GameFormModel()
+            try
             {
-                Genres = await this.genreService.AllGenresAsync()
-            };
+				GameFormModel formModel = new GameFormModel()
+				{
+					Genres = await this.genreService.AllGenresAsync()
+				};
 
-            return View(formModel);
+				return View(formModel);
+			}
+            catch (Exception)
+            {
+				this.TempData[ErrorMessage] = "Unexpected error occurred.";
+
+				return this.RedirectToAction("All", "Games");
+			}
         }
 
         [HttpPost]
@@ -96,10 +103,20 @@ namespace MoonGameRev.Web.Controllers
                 return this.RedirectToAction("All", "Game");
             }
 
-            GameDetailsViewModel viewModel = await this.gameService
-                .GetDetailsByIdAsync(id);
+            try
+            {
+				GameDetailsViewModel viewModel = await this.gameService
+				.GetDetailsByIdAsync(id);
 
-            return View(viewModel);
+				return View(viewModel);
+			}
+            catch (Exception)
+            {
+
+				this.TempData[ErrorMessage] = "Unexpected error occurred.";
+
+				return this.RedirectToAction("All", "Games");
+			}
         }
 
         [HttpGet]
@@ -114,12 +131,20 @@ namespace MoonGameRev.Web.Controllers
                 return this.RedirectToAction("All", "Game");
             }
 
-            GameFormModel formModel = await this.gameService
-                .GetGameForEditByIdAsync(id);
+            try
+            {
+				GameFormModel formModel = await this.gameService
+				.GetGameForEditByIdAsync(id);
 
-            formModel.Genres = await this.genreService.AllGenresAsync();
+				formModel.Genres = await this.genreService.AllGenresAsync();
 
-            return this.View(formModel);
+				return this.View(formModel);
+			}
+            catch (Exception)
+            {
+				this.TempData[ErrorMessage] = "Unexpected error occurred. Please try again later or contact administrator.";
+				return this.RedirectToAction("All", "Game");
+			}
         }
 
         [HttpPost]

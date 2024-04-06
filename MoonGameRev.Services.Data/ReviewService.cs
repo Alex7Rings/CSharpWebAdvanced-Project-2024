@@ -95,9 +95,56 @@ namespace MoonGameRev.Services.Data
             return allUserReviews;
         }
 
+		public async Task EditReviewByIdAndFormModel(string reviewId, ReviewFormModel formModel)
+		{
+            Review review = await this.dbContext
+                .Reviews
+                .FirstAsync(r => r.Id.ToString() == reviewId);
+
+            review.Rating = formModel.Rating;
+            review.Pros = formModel.Pros;
+            review.Cons = formModel.Cons;
+            review.Comment = formModel.Comment;
+
+            await this.dbContext.SaveChangesAsync();
+		}
+
+		public async Task<bool> ExistsReviewByIdAsync(string reviewId)
+        {
+            bool result = await this.dbContext
+                .Reviews
+                .AnyAsync(r => r.Id.ToString() == reviewId);
+
+            return result;
+        }
+
+        public async Task<ReviewFormModel> GetReviewForEditByIdAsync(string reviewId)
+        {
+            Review review = await this.dbContext
+                .Reviews
+                .FirstAsync(r=>r.Id.ToString() == reviewId);
+
+            return new ReviewFormModel
+            {
+                Rating = review.Rating,
+                Pros = review.Pros,
+                Cons= review.Cons,
+                Comment = review.Comment,
+            };
+        }
+
         public async Task<bool> HasReviewedGameAsync(string userId, int gameId)
         {
             return await dbContext.Reviews.AnyAsync(r => r.UserId == userId && r.GameID == gameId);
+        }
+
+        public async Task<bool> IsUserWhitIdCreatorOfReviewWhitId(string reviewId, string userId)
+        {
+            Review review = await this.dbContext
+                .Reviews
+                .FirstAsync(r => r.Id.ToString() == reviewId);
+
+            return review.UserId.ToString() == userId;
         }
     }
 }

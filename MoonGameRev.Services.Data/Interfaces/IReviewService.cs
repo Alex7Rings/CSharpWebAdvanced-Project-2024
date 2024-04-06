@@ -12,5 +12,14 @@ namespace MoonGameRev.Services.Data.Interfaces
         Task<AllReviewsFilteredAndPagedServiceModel> AllAsync(int gameId, AllReviewsQueryModel queryModel);
 
         Task<IEnumerable<ReviewAllViewModel>> AllByUserIdAsync(string userId);
+
+        Task<bool> ExistsReviewByIdAsync(string reviewId);
+
+        Task<ReviewFormModel> GetReviewForEditByIdAsync(string reviewId);
+
+        Task<bool> IsUserWhitIdCreatorOfReviewWhitId(string reviewId,  string userId);
+
+        Task EditReviewByIdAndFormModel(string reviewId, ReviewFormModel formModel);
+
     }
 }
