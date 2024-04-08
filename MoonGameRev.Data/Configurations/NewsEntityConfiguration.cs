@@ -18,6 +18,10 @@ namespace MoonGameRev.Data.Configurations
                 .WithMany(j => j.NewsArticles)
                 .HasForeignKey(n => n.JournalistId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            builder
+                .Property(n => n.Date)
+                .HasDefaultValueSql("GETDATE()");
         }
     }
 }
