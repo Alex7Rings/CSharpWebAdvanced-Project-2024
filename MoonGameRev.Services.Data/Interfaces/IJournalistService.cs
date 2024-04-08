@@ -9,5 +9,7 @@ namespace MoonGameRev.Services.Data.Interfaces
         Task<bool> JournalistExistsByPhoneNumberAsync(string phoneNumber);
 
         Task CreateAsync(string userId, BecomeJournalistFormModel model);
+
+        Task<string?> GetJournalistIdByUserIdAsync(string userId);
     }
 }

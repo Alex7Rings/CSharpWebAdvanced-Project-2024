@@ -27,6 +27,20 @@ namespace MoonGameRev.Services.Data
             await this.dbContext.SaveChangesAsync();
         }
 
+        public async Task<string?> GetJournalistIdByUserIdAsync(string userId)
+        {
+            Journalist? journalist = await this.dbContext
+                .Journalists
+                .FirstOrDefaultAsync(j=>j.UserId == userId);
+
+            if (journalist == null)
+            {
+                return null;
+            }
+
+            return journalist.Id.ToString();
+        }
+
         public async Task<bool> JournalistExistsByPhoneNumberAsync(string phoneNumber)
         {
             bool result = await this.dbContext
