@@ -36,5 +36,22 @@
             public const int GenreNameMaxLength = 50;
             public const int GenreNameMinLength = 5;
         }
+
+        public static class Journalist
+        {
+            public const int PhoneNumberMinLength = 7;
+            public const int PhoneNumberMaxLength = 15;
+        }
+
+        public static class News
+        {
+            public const int TitleMaxLength = 70;
+            public const int TitleMinLength = 3;
+
+            public const int ArticleMinLength = 100;
+            public const int ArticleMaxLength = 2500;
+
+            public const int PictureUrlMaxLength = 2048;
+        }
     }
 }

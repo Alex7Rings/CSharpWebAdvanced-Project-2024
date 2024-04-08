@@ -16,6 +16,8 @@
         public DbSet<Review> Reviews { get; set; } = null!;
         public DbSet<Genre> Genres { get; set; } = null!;
         public DbSet<GameGenre> GameGenres { get; set; } = null!;
+        public DbSet<News> News { get; set; } = null!;
+        public DbSet<Journalist> Journalists { get; set; } = null!;
 
 
         protected override void OnModelCreating(ModelBuilder builder)
