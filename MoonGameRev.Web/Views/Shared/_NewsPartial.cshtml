@@ -1,0 +1,13 @@
+﻿@model MoonGameRev.Web.ViewModels.News.NewsAllViewModel
+
+<div class="col-md-2 mb-2">
+    <div class="card">
+        <a href="@Url.Action("Detail", "News", new { id = Model.Id })">
+            <img src="@Model.PictureUrl" class="card-img-top" alt="@Model.Title">
+        </a>
+        <div class="card-body">
+            <h6 class="card-title"><a href="@Url.Action("Detail", "News", new { id = Model.Id })">@Model.Title</a></h6>
+            <p class="card-text">@Model.Date</p>
+        </div>
+    </div>
+</div>

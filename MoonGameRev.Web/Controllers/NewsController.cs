@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MoonGameRev.Services.Data.Interfaces;
+using MoonGameRev.Services.Data.Models.Game;
+using MoonGameRev.Services.Data.Models.News;
 using MoonGameRev.Web.Infrastructure.Extensions;
 using MoonGameRev.Web.ViewModels.News;
 using static MoonGameRev.Common.NotificationMessagesConstants;
@@ -19,10 +21,17 @@ namespace MoonGameRev.Web.Controllers
             this.newsService = newsService;
         }
 
+        [HttpGet]
         [AllowAnonymous]
-        public async Task<IActionResult> All()
+        public async Task<IActionResult> All([FromQuery]AllNewsQueryModel queryModel)
         {
-            return View();
+            AllNewsFilteredAndPagedServiceModel serviceModel =
+                await this.newsService.AllAsync(queryModel);
+
+            queryModel.News = serviceModel.News;
+            queryModel.TotalNews = serviceModel.TotalNewsCount;
+
+            return this.View(queryModel);
         }
 
         [HttpGet]
