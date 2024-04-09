@@ -45,9 +45,17 @@ namespace MoonGameRev.Web.Controllers
                 return this.RedirectToAction("All", "News");
             }
 
-            NewsFormModel model = new NewsFormModel();
+            try
+            {
+				NewsFormModel model = new NewsFormModel();
 
-            return View(model);
+				return View(model);
+			}
+            catch (Exception)
+            {
+				this.TempData[ErrorMessage] = "Unexpected error occurred. Please try again later or contact administrator.";
+				return this.RedirectToAction("All", "News");
+			}
         }
 
         [HttpPost]
@@ -69,8 +77,10 @@ namespace MoonGameRev.Web.Controllers
             try
             {
                 string? journalistId = await this.journalistService.GetJournalistIdByUserIdAsync(this.User.GetId()!);
-                await this.newsService.CreateAsync(model, journalistId!);
-            }
+                string newsId = await this.newsService.CreateAsync(model, journalistId!);
+
+				return this.RedirectToAction("Details", "News", new { id = newsId });
+			}
             catch (Exception)
             {
                 this.TempData[ErrorMessage] = "Unexpected error occurred while trying to add your news! Please try again later or contact administrator.";
@@ -78,34 +88,147 @@ namespace MoonGameRev.Web.Controllers
                 return this.View(model);
             }
 
-            return this.RedirectToAction("All", "News");
+            
         }
 
         [HttpGet]
         [AllowAnonymous]
         public async Task<IActionResult> JournalistNews(string journalistId)
         {
-            IEnumerable<NewsAllViewModel> journalistNews = await this.newsService.AllByJournalistIdAsync(journalistId);
-            return View(journalistNews);
-        }
+            try
+            {
+				IEnumerable<NewsAllViewModel> journalistNews = await this.newsService.AllByJournalistIdAsync(journalistId);
+				return View(journalistNews);
+			}
+            catch (Exception)
+            {
+				this.TempData[ErrorMessage] = "Unexpected error occurred. Please try again later or contact administrator.";
+				return this.RedirectToAction("All", "News");
+			}
 
+        }
 
         [HttpGet]
         [AllowAnonymous]
         public async Task<IActionResult> Details(string id)
         {
-            NewsDetailsViewModel? model = await this.newsService
-                .GetDetailsByIdAsync(id);
+            bool newsExists = await this.newsService
+                .ExistsByIdAsync(id);
+            if (!newsExists)
+            {
+                this.TempData[ErrorMessage] = "Article whit the provided id does not exist!";
 
-            if (model == null)
+                return this.RedirectToAction("All", "News");
+            }
+            try
+            {
+				NewsDetailsViewModel? model = await this.newsService
+	            .GetDetailsByIdAsync(id);
+
+				return this.View(model);
+			}
+            catch (Exception)
+            {
+				this.TempData[ErrorMessage] = "Unexpected error occurred. Please try again later or contact administrator.";
+				return this.RedirectToAction("All", "News");
+			}
+
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Edit(string id)
+        {
+            bool newsExists = await this.newsService
+               .ExistsByIdAsync(id);
+            if (!newsExists)
             {
                 this.TempData[ErrorMessage] = "Article whit the provided id does not exist!";
 
                 return this.RedirectToAction("All", "News");
             }
 
-            return this.View(model);
+            bool isUserJournalist = await this.journalistService
+                .JournalistExistsByUserIdAsync(this.User.GetId()!);
+
+            if (!isUserJournalist)
+            {
+                this.TempData[ErrorMessage] = "You must be the article owner to edit!";
+
+                return this.RedirectToAction("All", "News");
+            }
+
+            string? journalistId = await this.journalistService.GetJournalistIdByUserIdAsync(this.User.GetId()!);
+            bool isJournalist = await this.newsService
+                .IsJournalistWithIdOwnerOfTheNewsIdAsync(id, journalistId!);
+            if (!isJournalist)
+            {
+                this.TempData[ErrorMessage] = "You must be the article owner to edit!";
+
+                return this.RedirectToAction("All", "News");
+            }
+            try
+            {
+				NewsFormModel model = await this.newsService
+	            .GetNewsForEditAsync(id);
+
+				return this.View(model);
+			}
+            catch (Exception)
+            {
+				this.TempData[ErrorMessage] = "Unexpected error occurred. Please try again later or contact administrator.";
+				return this.RedirectToAction("All", "News");
+			}
         }
 
+        [HttpPost]
+        public async Task<IActionResult> Edit(string id, NewsFormModel model)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                return this.View(model);
+            }
+
+			bool newsExists = await this.newsService
+			   .ExistsByIdAsync(id);
+			if (!newsExists)
+			{
+				this.TempData[ErrorMessage] = "Article whit the provided id does not exist!";
+
+				return this.RedirectToAction("All", "News");
+			}
+
+			bool isUserJournalist = await this.journalistService
+				.JournalistExistsByUserIdAsync(this.User.GetId()!);
+
+			if (!isUserJournalist)
+			{
+				this.TempData[ErrorMessage] = "You must be the article owner to edit!";
+
+				return this.RedirectToAction("All", "News");
+			}
+
+			string? journalistId = await this.journalistService.GetJournalistIdByUserIdAsync(this.User.GetId()!);
+			bool isJournalist = await this.newsService
+				.IsJournalistWithIdOwnerOfTheNewsIdAsync(id, journalistId!);
+			if (!isJournalist)
+			{
+				this.TempData[ErrorMessage] = "You must be the article owner to edit!";
+
+				return this.RedirectToAction("All", "News");
+			}
+
+            try
+            {
+                await this.newsService.EditNewsByIdAndFormModel(id, model);
+            }
+            catch (Exception)
+            {
+				this.ModelState.AddModelError(string.Empty, "Unexpected error occurred while trying to update the article. Please try again later or contact administrator!");
+
+				return this.View(model);
+			}
+
+            return this.RedirectToAction("Details", "News", new {  id });
+		}
     }
 }

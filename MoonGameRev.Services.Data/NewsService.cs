@@ -41,7 +41,7 @@ namespace MoonGameRev.Services.Data
                     PictureUrl = n.PictureUrl,
                     Date = n.Date.ToString()
                 })
-                .OrderBy(n => n.Date)
+                .OrderByDescending(n => n.Date)
                 .ToArrayAsync();
 
             int totalNews = newsQuery.Count();
@@ -67,7 +67,7 @@ namespace MoonGameRev.Services.Data
                 .ToListAsync();
         }
 
-        public async Task CreateAsync(NewsFormModel formModel, string journalistId)
+        public async Task<string> CreateAsync(NewsFormModel formModel, string journalistId)
         {
             News news = new News()
             {
@@ -79,20 +79,40 @@ namespace MoonGameRev.Services.Data
 
             await this.dbContext.News.AddAsync(news);
             await this.dbContext.SaveChangesAsync();
+
+            return news.Id.ToString();
         }
 
-        public async Task<NewsDetailsViewModel?> GetDetailsByIdAsync(string newsId)
+		public async Task EditNewsByIdAndFormModel(string newsId, NewsFormModel model)
+		{
+            News news = await this.dbContext
+                .News
+                .FirstAsync(n => n.Id.ToString() == newsId);
+
+            news.Title = model.Title;
+            news.PictureUrl = model.PictureUrl;
+            news.Article = model.Article;
+
+            await this.dbContext.SaveChangesAsync();
+		}
+
+		public async Task<bool> ExistsByIdAsync(string newsId)
         {
-            News? news = await this.dbContext
+            bool result = await this.dbContext
+                .News
+                .AnyAsync(n=>n.Id.ToString() == newsId);
+
+            return result;
+        }
+
+        public async Task<NewsDetailsViewModel> GetDetailsByIdAsync(string newsId)
+        {
+            News news = await this.dbContext
                 .News
                 .Include(n=>n.Journalist)
                 .ThenInclude(j=>j.User)
-                .FirstOrDefaultAsync(n => n.Id.ToString() == newsId);
+                .FirstAsync(n => n.Id.ToString() == newsId);
 
-            if (news == null)
-            {
-                return null;
-            }
 
             return new NewsDetailsViewModel()
             {
@@ -104,6 +124,29 @@ namespace MoonGameRev.Services.Data
                 PictureUrl= news.PictureUrl,
                 Article = news.Article
             };
+        }
+
+        public async Task<NewsFormModel> GetNewsForEditAsync(string id)
+        {
+            News news = await this.dbContext
+                .News
+                .FirstAsync(n => n.Id.ToString() == id);
+
+            return new NewsFormModel
+            {
+                Title = news.Title,
+                PictureUrl = news.PictureUrl,
+                Article = news.Article
+            };
+        }
+
+        public async Task<bool> IsJournalistWithIdOwnerOfTheNewsIdAsync(string newsId, string journalistID)
+        {
+            News news = await this.dbContext
+                .News
+                .FirstAsync(n=>n.Id.ToString() == newsId);
+
+            return news.JournalistId.ToString() == journalistID;
         }
     }
 }
