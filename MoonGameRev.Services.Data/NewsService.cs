@@ -18,38 +18,41 @@ namespace MoonGameRev.Services.Data
 
         public async Task<AllNewsFilteredAndPagedServiceModel> AllAsync(AllNewsQueryModel queryModel)
         {
-            IQueryable<News> newsQuery = this.dbContext
-                .News
-                .AsQueryable();
+            IQueryable<News> newsQuery = this.dbContext.News.AsQueryable();
 
             if (!string.IsNullOrWhiteSpace(queryModel.SearchString))
             {
                 string wildCard = $"%{queryModel.SearchString.ToLower()}%";
+                newsQuery = newsQuery.Where(n => EF.Functions.Like(n.Title, wildCard) || EF.Functions.Like(n.Article, wildCard));
+            }
 
-                newsQuery = newsQuery
-                    .Where(n => EF.Functions.Like(n.Title, wildCard) ||
-                                EF.Functions.Like(n.Article, wildCard));
+            int totalNews = await newsQuery.CountAsync(); 
+
+
+            int totalPages = (int)Math.Ceiling((double)totalNews / queryModel.NewsPerPage);
+
+            if (queryModel.CurrentPage > totalPages)
+            {
+                queryModel.CurrentPage = totalPages;
             }
 
             IEnumerable<NewsAllViewModel> allNews = await newsQuery
-                .Skip((queryModel.CurrentPage -1) * queryModel.NewsPerPage)
+                .OrderByDescending(n => n.Date)
+                .Skip((queryModel.CurrentPage - 1) * queryModel.NewsPerPage)
                 .Take(queryModel.NewsPerPage)
-                .Select(n=> new NewsAllViewModel
+                .Select(n => new NewsAllViewModel
                 {
                     Id = n.Id.ToString(),
                     Title = n.Title,
                     PictureUrl = n.PictureUrl,
                     Date = n.Date.ToString()
                 })
-                .OrderByDescending(n => n.Date)
-                .ToArrayAsync();
-
-            int totalNews = newsQuery.Count();
+                .ToListAsync();
 
             return new AllNewsFilteredAndPagedServiceModel()
             {
                 TotalNewsCount = totalNews,
-                News = allNews
+                News = allNews,
             };
         }
 
