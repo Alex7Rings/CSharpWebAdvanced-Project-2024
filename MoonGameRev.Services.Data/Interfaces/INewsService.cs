@@ -10,5 +10,7 @@ namespace MoonGameRev.Services.Data.Interfaces
         Task<AllNewsFilteredAndPagedServiceModel> AllAsync(AllNewsQueryModel queryModel);
 
         Task<IEnumerable<NewsAllViewModel>> AllByJournalistIdAsync(string journalistID);
+
+        Task<NewsDetailsViewModel?> GetDetailsByIdAsync(string newsId);
     }
 }

@@ -11,6 +11,8 @@ namespace MoonGameRev.Web.ViewModels.News
     {
         public string Id { get; set; } = null!;
 
+        public string JournalistId { get; set; } = null!;
+
         public string Title { get; set; } = null!;
 
         [Display(Name ="Image Link")]

@@ -1,10 +1,7 @@
 ﻿@model List<NewsAllViewModel>
-@{
-    ViewData["Title"] = "News";
-}
 
-<h2 class="text-center">@ViewData["Title"]</h2>
-<hr/>
+<h2 class="text-center">News by the journalist</h2>
+<hr />
 
 @if (!Model.Any())
 {
@@ -12,10 +9,10 @@
 }
 else
 {
-    <div class="row">
-        @foreach (NewsAllViewModel news in Model)
+        <div class="row">
+        @foreach (var news in Model)
         {
-            <partial name="_NewsPartial" model="news"/>
+                    <partial name="_NewsPartial" model="news" />
         }
-    </div>
+        </div>
 }

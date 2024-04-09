@@ -85,17 +85,27 @@ namespace MoonGameRev.Web.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> JournalistNews(string journalistId)
         {
+            IEnumerable<NewsAllViewModel> journalistNews = await this.newsService.AllByJournalistIdAsync(journalistId);
+            return View(journalistNews);
+        }
 
-            var journalistExists = await this.journalistService.JournalistExistsByUserIdAsync(journalistId);
-            if (!journalistExists)
+
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<IActionResult> Details(string id)
+        {
+            NewsDetailsViewModel? model = await this.newsService
+                .GetDetailsByIdAsync(id);
+
+            if (model == null)
             {
-                this.TempData[ErrorMessage] = "Journalist not found.";
-                return RedirectToAction("All", "News");
+                this.TempData[ErrorMessage] = "Article whit the provided id does not exist!";
+
+                return this.RedirectToAction("All", "News");
             }
 
-            var journalistNews = await this.newsService.AllByJournalistIdAsync(journalistId);
-            return View(journalistNews);
-
+            return this.View(model);
         }
+
     }
 }

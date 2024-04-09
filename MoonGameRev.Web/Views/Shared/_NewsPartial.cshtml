@@ -1,12 +1,12 @@
-﻿@model MoonGameRev.Web.ViewModels.News.NewsAllViewModel
+﻿@model NewsAllViewModel
 
-<div class="col-md-2 mb-2">
-    <div class="card">
-        <a href="@Url.Action("Detail", "News", new { id = Model.Id })">
+<div class="col-md-4 mb-4"> 
+    <div class="card h-100"> 
+        <a href="@Url.Action("Details", "News", new { id = Model.Id })">
             <img src="@Model.PictureUrl" class="card-img-top" alt="@Model.Title">
         </a>
         <div class="card-body">
-            <h6 class="card-title"><a href="@Url.Action("Detail", "News", new { id = Model.Id })">@Model.Title</a></h6>
+            <h5 class="card-title"><a href="@Url.Action("Details", "News", new { id = Model.Id })">@Model.Title</a></h5> <!-- Changed 'h6' to 'h5' for larger title -->
             <p class="card-text">@Model.Date</p>
         </div>
     </div>

@@ -55,19 +55,16 @@ namespace MoonGameRev.Services.Data
 
         public async Task<IEnumerable<NewsAllViewModel>> AllByJournalistIdAsync(string journalistID)
         {
-            IEnumerable<NewsAllViewModel> allJournalistNews = await this.dbContext
-                .News
+            return await this.dbContext.News
                 .Where(n => n.JournalistId.ToString() == journalistID)
-                .Select(h => new NewsAllViewModel
+                .Select(j => new NewsAllViewModel
                 {
-                    Id = h.Id.ToString(),
-                    Title = h.Title,
-                    PictureUrl = h.PictureUrl,
-                    Date = h.Date.ToString()
+                    Id = j.Id.ToString(),
+                    Title = j.Title,
+                    PictureUrl = j.PictureUrl,
+                    Date = j.Date.ToString()
                 })
-                .ToArrayAsync();
-
-            return allJournalistNews;
+                .ToListAsync();
         }
 
         public async Task CreateAsync(NewsFormModel formModel, string journalistId)
@@ -82,6 +79,31 @@ namespace MoonGameRev.Services.Data
 
             await this.dbContext.News.AddAsync(news);
             await this.dbContext.SaveChangesAsync();
+        }
+
+        public async Task<NewsDetailsViewModel?> GetDetailsByIdAsync(string newsId)
+        {
+            News? news = await this.dbContext
+                .News
+                .Include(n=>n.Journalist)
+                .ThenInclude(j=>j.User)
+                .FirstOrDefaultAsync(n => n.Id.ToString() == newsId);
+
+            if (news == null)
+            {
+                return null;
+            }
+
+            return new NewsDetailsViewModel()
+            {
+                Id= newsId,
+                Title = news.Title,
+                JournalistId = news.JournalistId.ToString(),
+                AuthorName = news.Journalist.User.Email,
+                Date = news.Date.ToString(),
+                PictureUrl= news.PictureUrl,
+                Article = news.Article
+            };
         }
     }
 }
