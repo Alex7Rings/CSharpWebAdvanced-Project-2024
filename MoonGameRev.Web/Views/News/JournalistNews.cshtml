@@ -1,0 +1,21 @@
+﻿@model List<NewsAllViewModel>
+@{
+    ViewData["Title"] = "News";
+}
+
+<h2 class="text-center">@ViewData["Title"]</h2>
+<hr/>
+
+@if (!Model.Any())
+{
+        <h2 class="text-center">No news found for this journalist.</h2>
+}
+else
+{
+    <div class="row">
+        @foreach (NewsAllViewModel news in Model)
+        {
+            <partial name="_NewsPartial" model="news"/>
+        }
+    </div>
+}

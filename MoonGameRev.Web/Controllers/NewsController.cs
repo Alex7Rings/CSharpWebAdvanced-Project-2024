@@ -80,5 +80,22 @@ namespace MoonGameRev.Web.Controllers
 
             return this.RedirectToAction("All", "News");
         }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<IActionResult> JournalistNews(string journalistId)
+        {
+
+            var journalistExists = await this.journalistService.JournalistExistsByUserIdAsync(journalistId);
+            if (!journalistExists)
+            {
+                this.TempData[ErrorMessage] = "Journalist not found.";
+                return RedirectToAction("All", "News");
+            }
+
+            var journalistNews = await this.newsService.AllByJournalistIdAsync(journalistId);
+            return View(journalistNews);
+
+        }
     }
 }

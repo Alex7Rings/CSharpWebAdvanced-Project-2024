@@ -53,6 +53,23 @@ namespace MoonGameRev.Services.Data
             };
         }
 
+        public async Task<IEnumerable<NewsAllViewModel>> AllByJournalistIdAsync(string journalistID)
+        {
+            IEnumerable<NewsAllViewModel> allJournalistNews = await this.dbContext
+                .News
+                .Where(n => n.JournalistId.ToString() == journalistID)
+                .Select(h => new NewsAllViewModel
+                {
+                    Id = h.Id.ToString(),
+                    Title = h.Title,
+                    PictureUrl = h.PictureUrl,
+                    Date = h.Date.ToString()
+                })
+                .ToArrayAsync();
+
+            return allJournalistNews;
+        }
+
         public async Task CreateAsync(NewsFormModel formModel, string journalistId)
         {
             News news = new News()
