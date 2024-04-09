@@ -78,8 +78,8 @@ namespace MoonGameRev.Web.Controllers
             {
                 string? journalistId = await this.journalistService.GetJournalistIdByUserIdAsync(this.User.GetId()!);
                 string newsId = await this.newsService.CreateAsync(model, journalistId!);
-
-				return this.RedirectToAction("Details", "News", new { id = newsId });
+                this.TempData[SuccessMessage] = "The article was added successfully";
+                return this.RedirectToAction("Details", "News", new { id = newsId });
 			}
             catch (Exception)
             {
@@ -228,6 +228,7 @@ namespace MoonGameRev.Web.Controllers
 				return this.View(model);
 			}
 
+            this.TempData[SuccessMessage] = "The article was edited successfully";
             return this.RedirectToAction("Details", "News", new {  id });
 		}
     }

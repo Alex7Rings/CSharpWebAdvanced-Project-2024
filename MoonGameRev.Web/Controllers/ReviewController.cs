@@ -76,6 +76,7 @@ namespace MoonGameRev.Web.Controllers
             await reviewService.AddReviewAsync(reviewModel, user.Id, gameId);
 
             // Redirect back to the game details page with the same gameId
+            this.TempData[SuccessMessage] = "The review was added successfully";
             return RedirectToAction("Details", "Game", new { id = gameId });
         }
 
@@ -159,6 +160,7 @@ namespace MoonGameRev.Web.Controllers
                 return this.View(model);
             }
 
+            this.TempData[SuccessMessage] = "The review was edited successfully";
             return this.RedirectToAction("Mine", "Review");
 
 		}

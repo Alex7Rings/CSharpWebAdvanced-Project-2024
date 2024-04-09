@@ -77,6 +77,8 @@ namespace MoonGameRev.Web.Controllers
                 try
                 {
                     string gameId = await this.gameService.CreateAsync(model);
+
+                    this.TempData[SuccessMessage] = "Game was added successfully";
                     return RedirectToAction("Details", "Game", new {id = gameId});
                 }
                 catch (Exception)
@@ -177,6 +179,7 @@ namespace MoonGameRev.Web.Controllers
                 return this.View(model);
             }
 
+            this.TempData[SuccessMessage] = "Game was edited successfully";
             return this.RedirectToAction("Details", "Game", new { id });
 
         }
