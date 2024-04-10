@@ -11,7 +11,7 @@
         {
                 <div>
                     <a href="@Url.Action("Edit", "News", new { id = Model.Id })" class="btn btn-primary">Edit</a>
-                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#confirmDelete">Delete</button>
+                    <a href="@Url.Action("Delete", "News", new { id = Model.Id })" class="btn btn-danger">Delete</a>
                 </div>
         }
     </div>

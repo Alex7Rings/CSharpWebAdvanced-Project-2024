@@ -219,7 +219,7 @@ namespace MoonGameRev.Web.Controllers
 
             try
             {
-                await this.newsService.EditNewsByIdAndFormModel(id, model);
+                await this.newsService.EditNewsByIdAndFormModelAsync(id, model);
             }
             catch (Exception)
             {
@@ -231,5 +231,97 @@ namespace MoonGameRev.Web.Controllers
             this.TempData[SuccessMessage] = "The article was edited successfully";
             return this.RedirectToAction("Details", "News", new {  id });
 		}
+
+        [HttpGet]
+        public async Task<IActionResult> Delete(string id)
+        {
+            bool newsExists = await this.newsService
+               .ExistsByIdAsync(id);
+            if (!newsExists)
+            {
+                this.TempData[ErrorMessage] = "Article whit the provided id does not exist!";
+
+                return this.RedirectToAction("All", "News");
+            }
+
+            bool isUserJournalist = await this.journalistService
+                .JournalistExistsByUserIdAsync(this.User.GetId()!);
+
+            if (!isUserJournalist)
+            {
+                this.TempData[ErrorMessage] = "You must be the article owner to edit!";
+
+                return this.RedirectToAction("All", "News");
+            }
+
+            string? journalistId = await this.journalistService.GetJournalistIdByUserIdAsync(this.User.GetId()!);
+            bool isJournalist = await this.newsService
+                .IsJournalistWithIdOwnerOfTheNewsIdAsync(id, journalistId!);
+            if (!isJournalist)
+            {
+                this.TempData[ErrorMessage] = "You must be the article owner to edit!";
+
+                return this.RedirectToAction("All", "News");
+            }
+
+            try
+            {
+                NewsPreDeleteDetailsViewModel viewModel =
+                    await this.newsService.GetNewsForDeleteByIdAsync(id);
+
+                return this.View(viewModel);
+            }
+            catch (Exception)
+            {
+                this.TempData[ErrorMessage] = "Unexpected error occurred. Please try again later or contact administrator.";
+                return this.RedirectToAction("All", "News");
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(string id, NewsPreDeleteDetailsViewModel model)
+        {
+            bool newsExists = await this.newsService
+               .ExistsByIdAsync(id);
+            if (!newsExists)
+            {
+                this.TempData[ErrorMessage] = "Article whit the provided id does not exist!";
+
+                return this.RedirectToAction("All", "News");
+            }
+
+            bool isUserJournalist = await this.journalistService
+                .JournalistExistsByUserIdAsync(this.User.GetId()!);
+
+            if (!isUserJournalist)
+            {
+                this.TempData[ErrorMessage] = "You must be the article owner to edit!";
+
+                return this.RedirectToAction("All", "News");
+            }
+
+            string? journalistId = await this.journalistService.GetJournalistIdByUserIdAsync(this.User.GetId()!);
+            bool isJournalist = await this.newsService
+                .IsJournalistWithIdOwnerOfTheNewsIdAsync(id, journalistId!);
+            if (!isJournalist)
+            {
+                this.TempData[ErrorMessage] = "You must be the article owner to edit!";
+
+                return this.RedirectToAction("All", "News");
+            }
+
+            try
+            {
+                await this.newsService.DeleteByIdAsync(id);
+
+                this.TempData[WarningMessage] = "The article was deleted successfully";
+                return this.RedirectToAction("All", "News");
+            }
+            catch (Exception)
+            {
+                this.TempData[ErrorMessage] = "An unexpected error occurred while trying to delete the article. Please try again later or contact the administrator.";
+                return this.RedirectToAction("All");
+            }
+        }
     }
 }

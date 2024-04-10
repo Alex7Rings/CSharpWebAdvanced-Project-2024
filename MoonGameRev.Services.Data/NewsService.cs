@@ -86,7 +86,20 @@ namespace MoonGameRev.Services.Data
             return news.Id.ToString();
         }
 
-		public async Task EditNewsByIdAndFormModel(string newsId, NewsFormModel model)
+        public async Task DeleteByIdAsync(string newsId)
+        {
+            News newsToDelete = await this.dbContext
+                .News
+                .FirstAsync(n => n.Id.ToString() == newsId);
+
+            this.dbContext.News.Remove(newsToDelete);
+
+            
+            await this.dbContext.SaveChangesAsync();
+
+        }
+
+        public async Task EditNewsByIdAndFormModelAsync(string newsId, NewsFormModel model)
 		{
             News news = await this.dbContext
                 .News
@@ -125,6 +138,20 @@ namespace MoonGameRev.Services.Data
                 AuthorName = news.Journalist.User.Email,
                 Date = news.Date.ToString(),
                 PictureUrl= news.PictureUrl,
+                Article = news.Article
+            };
+        }
+
+        public async Task<NewsPreDeleteDetailsViewModel> GetNewsForDeleteByIdAsync(string newsId)
+        {
+            News news = await this.dbContext
+                .News
+                .FirstAsync(n=>n.Id.ToString()==newsId);
+
+            return new NewsPreDeleteDetailsViewModel()
+            {
+                Title = news.Title,
+                ImageUrl = news.PictureUrl,
                 Article = news.Article
             };
         }

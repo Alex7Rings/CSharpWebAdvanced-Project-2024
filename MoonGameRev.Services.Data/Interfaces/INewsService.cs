@@ -19,6 +19,10 @@ namespace MoonGameRev.Services.Data.Interfaces
 
         Task<bool> IsJournalistWithIdOwnerOfTheNewsIdAsync(string newsId, string journalistID);
 
-        Task EditNewsByIdAndFormModel(string newsId, NewsFormModel model);
+        Task EditNewsByIdAndFormModelAsync(string newsId, NewsFormModel model);
+
+        Task<NewsPreDeleteDetailsViewModel> GetNewsForDeleteByIdAsync(string newsId);
+
+        Task DeleteByIdAsync(string newsId);
     }
 }
