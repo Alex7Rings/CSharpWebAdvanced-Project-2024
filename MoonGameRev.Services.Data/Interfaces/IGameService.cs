@@ -17,6 +17,8 @@ namespace MoonGameRev.Services.Data.Interfaces
 
         Task<AllGamesFilteredAndPagedServiceModel> AllAsync(AllGamesQueryModel queryModel);
 
+        Task<AllUpcomingGamesPagedServiceModel> AllUpcomingGamesAsync(UpcomingGamesQueryModel queryModel);
+
         Task<GameDetailsViewModel> GetDetailsByIdAsync(string gameId);
 
         Task<bool> ExistsByIdAsync(string gameId);

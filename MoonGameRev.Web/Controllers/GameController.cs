@@ -34,6 +34,19 @@ namespace MoonGameRev.Web.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
+        public async Task<IActionResult> UpcomingGames([FromQuery] UpcomingGamesQueryModel queryModel)
+        {
+            AllUpcomingGamesPagedServiceModel serviceModel = 
+                await this.gameService.AllUpcomingGamesAsync(queryModel);
+
+            queryModel.UpcomingGames = serviceModel.UpcomingGames;
+            queryModel.TotalGames = serviceModel.TotalUpcomingGames;
+
+            return View(queryModel);
+        }
+
+        [HttpGet]
         public async Task<IActionResult> Add()
         {
             try

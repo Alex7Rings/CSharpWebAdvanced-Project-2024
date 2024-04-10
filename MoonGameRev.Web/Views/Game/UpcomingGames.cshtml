@@ -1,0 +1,79 @@
+﻿@model UpcomingGamesQueryModel
+
+@{
+    ViewBag.Title = "Upcoming Games";
+}
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+
+<form method="get">
+    <div class="row">
+        <div class="form-group col-md-4">
+            <label asp-for="GamesPerPage" class="form-label">Games Per Page</label>
+            <select asp-for="GamesPerPage" class="form-select">
+                <option value="3">3</option>
+                <option value="6">6</option>
+                <option value="9">9</option>
+            </select>
+        </div>
+
+
+        <div class="col-md-4 d-grid gap-2 d-md-flex align-items-end">
+            <input type="submit" value="Search" class="btn btn-primary" />
+        </div>
+    </div>
+</form>
+
+<hr /> 
+
+@if (!Model.UpcomingGames.Any())
+{
+            <div class="text-center mt-5">
+                <h3>No games found by the given criteria!</h3>
+            </div>
+}
+else
+{
+            <div class="row row-cols-1 row-cols-md-3 g-4">
+        @foreach (var games in Model.UpcomingGames)
+        {
+                                    <partial name="_UpcomingGamesPartial" model="@games" />
+        }
+            </div>
+}
+
+@{
+    int totalPages = (int)Math.Ceiling((double)Model.TotalGames / Model.GamesPerPage);
+    int currentPage = Model.CurrentPage;
+
+    if (currentPage > totalPages)
+    {
+        currentPage = totalPages;
+    }
+}
+
+@if (Model.TotalGames > Model.GamesPerPage)
+{
+            <div class="row mt-5">
+                <div class="col text-center">
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination justify-content-center">
+                            <li class="page-item @(currentPage == 1 ? "disabled" : "")">
+                                    <a class="page-link" href="@Url.Action("UpcomingGames", "Game", new { GamesPerPage = Model.GamesPerPage, CurrentPage = currentPage - 1})">Previous</a>
+                            </li>
+                    @for (int i = 1; i <= totalPages; i++)
+                    {
+                                        <li class="page-item @(i == currentPage ? "active" : "")">
+                                                    <a class="page-link" href="@Url.Action("UpcomingGames", "Game", new { GamesPerPage = Model.GamesPerPage, CurrentPage = i })">@i</a>
+                                        </li>
+                    }
+                            <li class="page-item @(currentPage == totalPages ? "disabled" : "")">
+                                    <a class="page-link" href="@Url.Action("UpcomingGames", "Game", new { GamesPerPage = Model.GamesPerPage, CurrentPage = currentPage + 1})">Next</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+}
+

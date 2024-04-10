@@ -6,7 +6,7 @@
             <img src="@Model.PictureUrl" class="card-img-top" alt="@Model.Title">
         </a>
         <div class="card-body">
-            <h5 class="card-title"><a href="@Url.Action("Details", "News", new { id = Model.Id })">@Model.Title</a></h5> <!-- Changed 'h6' to 'h5' for larger title -->
+            <h5 class="card-title"><a href="@Url.Action("Details", "News", new { id = Model.Id })">@Model.Title</a></h5> 
             <p class="card-text">@Model.Date</p>
         </div>
     </div>

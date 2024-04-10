@@ -26,8 +26,9 @@ namespace MoonGameRev.Services.Data
         {
             IQueryable<Game> gamesQuery = this.dbContext
                 .Games
+                .Where(g=>g.IsReleased == true)
                 .Include(g => g.GameGenres)
-                .ThenInclude(gg => gg.Genre) // Include Genre navigation property
+                .ThenInclude(gg => gg.Genre) 
                 .AsQueryable();
 
             if (!string.IsNullOrWhiteSpace(queryModel.Genre))
@@ -74,6 +75,34 @@ namespace MoonGameRev.Services.Data
             {
                 TotalGamesCount = totalGames,
                 Games = allGames
+            };
+        }
+
+        public async Task<AllUpcomingGamesPagedServiceModel> AllUpcomingGamesAsync(UpcomingGamesQueryModel queryModel)
+        {
+            IQueryable<Game> upcomingGamesQuery = this.dbContext
+                .Games
+                .Where(g => g.IsReleased == false)
+                .AsQueryable();
+
+            IEnumerable<UpcomingGamesViewModel> allUpcomingGames = await upcomingGamesQuery
+                .Skip((queryModel.CurrentPage - 1) * queryModel.GamesPerPage)
+                .Take(queryModel.GamesPerPage)
+                .Select(g => new UpcomingGamesViewModel
+                {
+                    Id = g.Id,
+                    Title = g.Title,
+                    PictureUrl = g.CoverImage,
+                    ReleasDate = g.ReleaseDate,
+                })
+                .ToArrayAsync();
+
+            int totalGames = upcomingGamesQuery.Count();
+
+            return new AllUpcomingGamesPagedServiceModel()
+            {
+                TotalUpcomingGames = totalGames,
+                UpcomingGames = allUpcomingGames
             };
         }
 
