@@ -203,6 +203,7 @@ namespace MoonGameRev.Services.Data
                 GameSite = game.GameSite,
                 ReleaseDate = game.ReleaseDate.ToShortDateString(),
                 ImageUrl = game.CoverImage,
+                IsReleased = game.IsReleased,
                 Genres = game.GameGenres.Select(gg => gg.Genre.Name).ToList(),
                 AverageRating = averageRating,
                 RatingCategory = ratingCategory

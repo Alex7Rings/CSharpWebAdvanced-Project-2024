@@ -15,6 +15,8 @@ namespace MoonGameRev.Web.ViewModels.Game
 
         public string ReleaseDate { get; set; } = null!;
 
+        public bool IsReleased { get; set; }
+
         public List<string> Genres { get; set; } = new List<string>();
 
         public List<ReviewDetailsViewModel> Reviews { get; set; } = new List<ReviewDetailsViewModel>();
