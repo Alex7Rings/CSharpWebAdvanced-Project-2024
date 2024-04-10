@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>419052f1-db33-45b3-b6c4-5a165c3e14da</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MoonGameRev.Common\MoonGameRev.Common.csproj" />
+    <ProjectReference Include="..\MoonGameRev.Services.Data.Models\MoonGameRev.Services.Data.Models.csproj" />
+    <ProjectReference Include="..\MoonGameRev.Services.Data\MoonGameRev.Services.Data.csproj" />
+    <ProjectReference Include="..\MoonGameRev.Web.Infrastructure\MoonGameRev.Web.Infrastructure.csproj" />
+  </ItemGroup>
+
+</Project>

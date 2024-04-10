@@ -38,3 +38,45 @@
     </div>
     <a href="/Game/All" class="btn btn-primary mt-3">See all</a>
 </div>
+
+
+
+<!---------------->
+<div class="mb-5"></div>
+
+<div class="row">
+    <div class="col-md-12">
+        <h2 class="text-center">Top 10 Users by Reviews</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>User Name</th>
+                    <th>Total Reviews</th>
+                </tr>
+            </thead>
+            <tbody id="ranking_table_body">
+                <!-- User ranking rows will be dynamically added here -->
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section Scripts
+{
+        <script>
+            $(document).ready(function () {
+                // Fetch and display ranking data on page load
+                $.get('https://localhost:7027/api/ranking', function (data) {
+                    $('#ranking_table_body').empty(); // Clear existing table rows
+                    data.forEach(function(user) {
+                        $('#ranking_table_body').append(
+                            '<tr>' +
+                                '<td>' + user.userName + '</td>' +
+                                '<td>' + user.totalReviews + '</td>' +
+                            '</tr>'
+                        );
+                    });
+                });
+            });
+        </script>
+}

@@ -23,6 +23,7 @@
     <ProjectReference Include="..\MoonGameRev.Services.Data\MoonGameRev.Services.Data.csproj" />
     <ProjectReference Include="..\MoonGameRev.Web.Infrastructure\MoonGameRev.Web.Infrastructure.csproj" />
     <ProjectReference Include="..\MoonGameRev.Web.ViewModels\MoonGameRev.Web.ViewModels.csproj" />
+    <ProjectReference Include="..\MoonGameRev.WebAPI\MoonGameRev.WebAPI.csproj" />
   </ItemGroup>
 
 </Project>

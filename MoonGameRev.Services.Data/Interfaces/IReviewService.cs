@@ -1,5 +1,7 @@
-﻿using MoonGameRev.Services.Data.Models.Review;
+﻿using MoonGameRev.Services.Data.Models.Ranking;
+using MoonGameRev.Services.Data.Models.Review;
 using MoonGameRev.Web.ViewModels.Review;
+using static MoonGameRev.Services.Data.Models.Ranking.RankingServiceModel;
 
 namespace MoonGameRev.Services.Data.Interfaces
 {
@@ -24,6 +26,10 @@ namespace MoonGameRev.Services.Data.Interfaces
         Task<ReviewPreDeleteDetailsViewModel> GetReviewForDeleteByIdAsync(string reviewId);
 
         Task DeleteReviewByIdAsync(string reviewId);
+
+        Task<IEnumerable<RankingServiceModel>> GetRankingAsync();
+
+        Task<IEnumerable<RankingServiceModel>> GetTopUsersAsync(int count);
 
     }
 }

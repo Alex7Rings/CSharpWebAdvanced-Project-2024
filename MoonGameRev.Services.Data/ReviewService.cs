@@ -2,9 +2,11 @@
 using MoonGameRev.Data;
 using MoonGameRev.Data.Models;
 using MoonGameRev.Services.Data.Interfaces;
+using MoonGameRev.Services.Data.Models.Ranking;
 using MoonGameRev.Services.Data.Models.Review;
 using MoonGameRev.Web.ViewModels.Review;
 using MoonGameRev.Web.ViewModels.Review.Enums;
+using static MoonGameRev.Services.Data.Models.Ranking.RankingServiceModel;
 
 namespace MoonGameRev.Services.Data
 {
@@ -128,6 +130,31 @@ namespace MoonGameRev.Services.Data
 
             return result;
         }
+
+        public async Task<IEnumerable<RankingServiceModel>> GetRankingAsync()
+        {
+            IEnumerable<RankingServiceModel> topUsers = await GetTopUsersAsync(10);
+            return topUsers;
+        }
+
+        public async Task<IEnumerable<RankingServiceModel>> GetTopUsersAsync(int count)
+        {
+            IQueryable<RankingServiceModel> query = dbContext.Reviews
+                .GroupBy(r => r.UserId)
+                .Select(g => new RankingServiceModel
+                {
+                    UserId = g.Key,
+                    UserName = g.FirstOrDefault().User.UserName,
+                    TotalReviews = g.Count()
+                })
+                .OrderByDescending(r => r.TotalReviews)
+                .Take(count);
+
+            List<RankingServiceModel> topUsers = await query.ToListAsync();
+
+            return topUsers;
+        }
+
 
         public async Task<ReviewPreDeleteDetailsViewModel> GetReviewForDeleteByIdAsync(string reviewId)
         {

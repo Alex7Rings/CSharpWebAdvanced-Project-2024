@@ -23,7 +23,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MoonGameRev.Services.Data",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MoonGameRev.Web.Infrastructure", "MoonGameRev.Web.Infrastructure\MoonGameRev.Web.Infrastructure.csproj", "{21A48CDB-311D-4686-B30A-65F0CAF6EE7B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoonGameRev.Services.Data.Models", "MoonGameRev.Services.Data.Models\MoonGameRev.Services.Data.Models.csproj", "{559BB485-1802-43EA-9338-C2483BFE24CE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MoonGameRev.Services.Data.Models", "MoonGameRev.Services.Data.Models\MoonGameRev.Services.Data.Models.csproj", "{559BB485-1802-43EA-9338-C2483BFE24CE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoonGameRev.WebAPI", "MoonGameRev.WebAPI\MoonGameRev.WebAPI.csproj", "{502B4716-2574-436C-B4A5-C736967815D7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -63,6 +65,10 @@ Global
 		{559BB485-1802-43EA-9338-C2483BFE24CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{559BB485-1802-43EA-9338-C2483BFE24CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{559BB485-1802-43EA-9338-C2483BFE24CE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{502B4716-2574-436C-B4A5-C736967815D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{502B4716-2574-436C-B4A5-C736967815D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{502B4716-2574-436C-B4A5-C736967815D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{502B4716-2574-436C-B4A5-C736967815D7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -75,6 +81,7 @@ Global
 		{26E5C55C-553B-4D89-A849-93B466311DD1} = {0117B982-955B-4EAA-8598-9954F9BC7A0B}
 		{21A48CDB-311D-4686-B30A-65F0CAF6EE7B} = {4E0E389F-F56E-420E-8848-6E155207E81D}
 		{559BB485-1802-43EA-9338-C2483BFE24CE} = {0117B982-955B-4EAA-8598-9954F9BC7A0B}
+		{502B4716-2574-436C-B4A5-C736967815D7} = {4E0E389F-F56E-420E-8848-6E155207E81D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C71E0B8F-89BC-4120-AA16-D123957D15E1}
