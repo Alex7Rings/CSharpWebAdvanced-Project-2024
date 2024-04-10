@@ -17,9 +17,13 @@ namespace MoonGameRev.Services.Data.Interfaces
 
         Task<ReviewFormModel> GetReviewForEditByIdAsync(string reviewId);
 
-        Task<bool> IsUserWhitIdCreatorOfReviewWhitId(string reviewId,  string userId);
+        Task<bool> IsUserWhitIdCreatorOfReviewWhitIdAsync(string reviewId,  string userId);
 
-        Task EditReviewByIdAndFormModel(string reviewId, ReviewFormModel formModel);
+        Task EditReviewByIdAndFormModelAsync(string reviewId, ReviewFormModel formModel);
+
+        Task<ReviewPreDeleteDetailsViewModel> GetReviewForDeleteByIdAsync(string reviewId);
+
+        Task DeleteReviewByIdAsync(string reviewId);
 
     }
 }

@@ -95,7 +95,18 @@ namespace MoonGameRev.Services.Data
             return allUserReviews;
         }
 
-		public async Task EditReviewByIdAndFormModel(string reviewId, ReviewFormModel formModel)
+        public async Task DeleteReviewByIdAsync(string reviewId)
+        {
+            Review reviewToDelete = await this.dbContext
+                .Reviews
+                .FirstAsync(r => r.Id.ToString() == reviewId);
+
+            this.dbContext.Reviews.Remove(reviewToDelete);
+
+            await this.dbContext.SaveChangesAsync();
+        }
+
+        public async Task EditReviewByIdAndFormModelAsync(string reviewId, ReviewFormModel formModel)
 		{
             Review review = await this.dbContext
                 .Reviews
@@ -118,6 +129,21 @@ namespace MoonGameRev.Services.Data
             return result;
         }
 
+        public async Task<ReviewPreDeleteDetailsViewModel> GetReviewForDeleteByIdAsync(string reviewId)
+        {
+            Review review = await dbContext
+                .Reviews
+                .FirstAsync(r=>r.Id.ToString() == reviewId);
+
+            return new ReviewPreDeleteDetailsViewModel
+            {
+                Rating = review.Rating,
+                Pros = review.Pros,
+                Cons = review.Cons,
+                Comment = review.Comment,
+            };
+        }
+
         public async Task<ReviewFormModel> GetReviewForEditByIdAsync(string reviewId)
         {
             Review review = await this.dbContext
@@ -138,7 +164,7 @@ namespace MoonGameRev.Services.Data
             return await dbContext.Reviews.AnyAsync(r => r.UserId == userId && r.GameID == gameId);
         }
 
-        public async Task<bool> IsUserWhitIdCreatorOfReviewWhitId(string reviewId, string userId)
+        public async Task<bool> IsUserWhitIdCreatorOfReviewWhitIdAsync(string reviewId, string userId)
         {
             Review review = await this.dbContext
                 .Reviews

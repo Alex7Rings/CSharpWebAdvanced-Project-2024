@@ -96,7 +96,7 @@ namespace MoonGameRev.Web.Controllers
             string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
             bool isUserCreatorOfTheReview = await this.reviewService
-                .IsUserWhitIdCreatorOfReviewWhitId(id, userId);
+                .IsUserWhitIdCreatorOfReviewWhitIdAsync(id, userId);
 
             if (!isUserCreatorOfTheReview)
             {
@@ -141,7 +141,7 @@ namespace MoonGameRev.Web.Controllers
 			string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
 			bool isUserCreatorOfTheReview = await this.reviewService
-				.IsUserWhitIdCreatorOfReviewWhitId(id, userId);
+				.IsUserWhitIdCreatorOfReviewWhitIdAsync(id, userId);
 
 			if (!isUserCreatorOfTheReview)
 			{
@@ -151,7 +151,7 @@ namespace MoonGameRev.Web.Controllers
 
             try
             {
-                await this.reviewService.EditReviewByIdAndFormModel(id, model);
+                await this.reviewService.EditReviewByIdAndFormModelAsync(id, model);
             }
             catch (Exception)
             {
@@ -165,8 +165,84 @@ namespace MoonGameRev.Web.Controllers
 
 		}
 
+        [HttpGet]
+        public async Task<IActionResult> Delete(string id)
+        {
+            bool reviewExists = await this.reviewService
+                .ExistsReviewByIdAsync(id);
 
-		[HttpGet]
+            if (!reviewExists)
+            {
+                this.TempData[ErrorMessage] = "Review with the provided id does not exists!";
+
+                return this.RedirectToAction("Mine", "Review");
+            }
+
+            string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            bool isUserCreatorOfTheReview = await this.reviewService
+                .IsUserWhitIdCreatorOfReviewWhitIdAsync(id, userId);
+
+            if (!isUserCreatorOfTheReview)
+            {
+                this.TempData[ErrorMessage] = "You must be the creator to edit this review!";
+                return RedirectToAction("Mine", "Review");
+            }
+
+            try
+            {
+                ReviewPreDeleteDetailsViewModel viewModel =
+                    await this.reviewService.GetReviewForDeleteByIdAsync(id);
+
+                return this.View(viewModel);
+            }
+            catch (Exception)
+            {
+                this.TempData[ErrorMessage] = "Unexpected error occurred. Please try again later or contact administrator.";
+
+                return this.RedirectToAction("Mine", "Review");
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(string id, ReviewPreDeleteDetailsViewModel model)
+        {
+            bool reviewExists = await this.reviewService
+                .ExistsReviewByIdAsync(id);
+
+            if (!reviewExists)
+            {
+                this.TempData[ErrorMessage] = "Review with the provided id does not exists!";
+
+                return this.RedirectToAction("Mine", "Review");
+            }
+
+            string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            bool isUserCreatorOfTheReview = await this.reviewService
+                .IsUserWhitIdCreatorOfReviewWhitIdAsync(id, userId);
+
+            if (!isUserCreatorOfTheReview)
+            {
+                this.TempData[ErrorMessage] = "You must be the creator to edit this review!";
+                return RedirectToAction("Mine", "Review");
+            }
+
+            try
+            {
+                await this.reviewService.DeleteReviewByIdAsync(id);
+                this.TempData[WarningMessage] = "The review was deleted successfully";
+                return this.RedirectToAction("Mine", "Review");
+            }
+            catch (Exception)
+            {
+                this.TempData[ErrorMessage] = "An unexpected error occurred while trying to delete the article. Please try again later or contact the administrator.";
+                return this.RedirectToAction("Mine", "Review");
+            }
+        }
+
+
+        [HttpGet]
         public async Task<IActionResult> Mine()
         {
             List<ReviewAllViewModel> myReviews =
