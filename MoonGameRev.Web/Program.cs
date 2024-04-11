@@ -1,6 +1,7 @@
 namespace MoonGameRev.Web
 {
     using Microsoft.AspNetCore.Identity;
+    using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
     using MoonGameRev.Data;
     using MoonGameRev.Services.Data.Interfaces;
@@ -39,7 +40,12 @@ namespace MoonGameRev.Web
             builder.Services.AddApplicationServices(typeof(IGameService));
             builder.Services.AddApplicationServices(typeof(IReviewService));
 
-            builder.Services.AddControllersWithViews();
+            builder.Services
+                .AddControllersWithViews()
+                .AddMvcOptions(options =>
+                {
+                    options.Filters.Add<AutoValidateAntiforgeryTokenAttribute>();
+                });
 
             var app = builder.Build();
 
