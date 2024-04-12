@@ -1,4 +1,12 @@
-﻿@using static MoonGameRev.Common.GeneralApplicationConstants;
+﻿@using MoonGameRev.Services.Data.Interfaces
+@using MoonGameRev.Web.Infrastructure.Extensions
+@using static MoonGameRev.Common.GeneralApplicationConstants;
+
+@inject IJournalistService JournalistService
+@{
+    bool isUserJournalist =  await JournalistService.JournalistExistsByUserIdAsync(this.User.GetId());
+}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -41,10 +49,13 @@
                            </li>
                            <li class="nav-item">
                                         <a class="nav-link text-dark" asp-area="" asp-controller="Game" asp-action="Add">Add Game</a>
-                           </li>                           
-                           <li class="nav-item">
-                                        <a class="nav-link text-dark" asp-area="" asp-controller="News" asp-action="Add">Add News</a>
-                           </li>
+                           </li>   
+                           @if (isUserJournalist)
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="News" asp-action="Add">Add News</a>
+                                </li>
+                            }
                         }
                     </ul>
                     <partial name="_LoginPartial" />

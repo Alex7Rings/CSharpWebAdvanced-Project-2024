@@ -1,25 +1,28 @@
-﻿@model ReviewAllViewModel
+﻿<link rel="stylesheet" href="~/css/reviews.css" />
+
 
 <div class="col-md-4 mb-4">
     <div class="card h-100">
         <div class="card-body">
             <h5 class="card-title">Review</h5>
             <ul class="list-group list-group-flush">
-                <li class="list-group-item">User: @Model.UserName</li> 
+                <li class="list-group-item">User: @Model.UserName</li>
                 <li class="list-group-item">Rating: @Model.Rating/10</li>
-                <li class="list-group-item">Pros:
+                <li class="list-group-item">
+                    Pros:
                     <ul>
                         @foreach (var pro in Model.Pros.Split(';'))
                         {
-                                    <li>@pro</li>
+                            <li class="@(Model.IsPro ? "pros" : "cons")">@pro</li>
                         }
                     </ul>
                 </li>
-                <li class="list-group-item">Cons:
+                <li class="list-group-item">
+                    Cons:
                     <ul>
                         @foreach (var con in Model.Cons.Split(';'))
                         {
-                                    <li>@con</li>
+                            <li class="@(Model.IsPro ? "pros" : "cons")">@con</li>
                         }
                     </ul>
                 </li>
