@@ -6,7 +6,7 @@ namespace MoonGameRev.Data.Models
     public class News
     {
         [Key]
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
         [Required]
         [MaxLength(TitleMaxLength)]
@@ -24,7 +24,7 @@ namespace MoonGameRev.Data.Models
         public string PictureUrl { get; set; } = null!;
 
         [Required]
-        public int JournalistId { get; set; } 
+        public int JournalistId { get; set; }
 
         public Journalist Journalist { get; set; } = null!;
     }

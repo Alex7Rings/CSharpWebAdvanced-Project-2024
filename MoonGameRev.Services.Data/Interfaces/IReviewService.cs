@@ -7,11 +7,11 @@ namespace MoonGameRev.Services.Data.Interfaces
 {
     public interface IReviewService
     {
-        Task<bool> HasReviewedGameAsync(string userId, int gameId);
+        Task<bool> HasReviewedGameAsync(string userId, Guid gameId);
 
-        Task AddReviewAsync(ReviewFormModel reviewModel, string userId, int gameId);
+        Task AddReviewAsync(ReviewFormModel reviewModel, string userId, Guid gameId);
 
-        Task<AllReviewsFilteredAndPagedServiceModel> AllAsync(int gameId, AllReviewsQueryModel queryModel);
+        Task<AllReviewsFilteredAndPagedServiceModel> AllAsync(Guid gameId, AllReviewsQueryModel queryModel);
 
         Task<IEnumerable<ReviewAllViewModel>> AllByUserIdAsync(string userId);
 

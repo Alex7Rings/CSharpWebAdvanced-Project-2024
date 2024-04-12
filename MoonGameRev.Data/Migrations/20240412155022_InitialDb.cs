@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace MoonGameRev.Data.Migrations
 {
-    public partial class FirstMigDbPLSWork : Migration
+    public partial class InitialDb : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -52,15 +52,15 @@ namespace MoonGameRev.Data.Migrations
                 name: "Games",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false, comment: "Unique identifier for the game.")
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false, comment: "Unique identifier for the game."),
                     Title = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false, comment: "Title of the game."),
                     Description = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: false, comment: "Description of the game."),
                     Developer = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false, comment: "Developer of the game."),
                     Publisher = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false, comment: "Publisher of the game."),
                     GameSite = table.Column<string>(type: "nvarchar(2048)", maxLength: 2048, nullable: false, comment: "Website of the game."),
                     ReleaseDate = table.Column<DateTime>(type: "datetime2", nullable: false, comment: "Release date of the game."),
-                    CoverImage = table.Column<string>(type: "nvarchar(2048)", maxLength: 2048, nullable: false, comment: "URL of the game's cover image.")
+                    CoverImage = table.Column<string>(type: "nvarchar(2048)", maxLength: 2048, nullable: false, comment: "URL of the game's cover image."),
+                    IsReleased = table.Column<bool>(type: "bit", nullable: false, comment: "Specifies whether the game is released or upcoming.")
                 },
                 constraints: table =>
                 {
@@ -189,15 +189,36 @@ namespace MoonGameRev.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Journalists",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: false),
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Journalists", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Journalists_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Reviews",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false, comment: "Unique identifier for the review.")
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Rating = table.Column<int>(type: "int", nullable: false, comment: "Rating given by the user for the game"),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false, comment: "Unique identifier for the review."),
+                    Rating = table.Column<double>(type: "float", nullable: false, comment: "Rating given by the user for the game"),
+                    Pros = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false, comment: "The Pros of the game"),
+                    Cons = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false, comment: "The Cons of the game"),
                     Comment = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false, comment: "Comment provided by the user for the review."),
-                    ReviewDate = table.Column<DateTime>(type: "datetime2", nullable: false, comment: "Date and time when the review was submitted."),
-                    GameID = table.Column<int>(type: "int", nullable: false),
+                    ReviewDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "GETDATE()", comment: "Date and time when the review was submitted."),
+                    GameID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
@@ -222,7 +243,7 @@ namespace MoonGameRev.Data.Migrations
                 name: "GameGenres",
                 columns: table => new
                 {
-                    GameID = table.Column<int>(type: "int", nullable: false),
+                    GameID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     GenreID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -240,6 +261,61 @@ namespace MoonGameRev.Data.Migrations
                         principalTable: "Genres",
                         principalColumn: "GenreID",
                         onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "News",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Title = table.Column<string>(type: "nvarchar(70)", maxLength: 70, nullable: false),
+                    Article = table.Column<string>(type: "nvarchar(2500)", maxLength: 2500, nullable: false),
+                    Date = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "GETDATE()"),
+                    PictureUrl = table.Column<string>(type: "nvarchar(2048)", maxLength: 2048, nullable: false),
+                    JournalistId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_News", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_News_Journalists_JournalistId",
+                        column: x => x.JournalistId,
+                        principalTable: "Journalists",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.InsertData(
+                table: "Genres",
+                columns: new[] { "GenreID", "Name" },
+                values: new object[,]
+                {
+                    { 1, "Adventure" },
+                    { 2, "Action" },
+                    { 3, "Sports" },
+                    { 4, "Simulation" },
+                    { 5, "Platformer" },
+                    { 6, "RPG" },
+                    { 7, "First-person shooter" },
+                    { 8, "Action-adventure" },
+                    { 9, "Fighting" },
+                    { 10, "Real-time strategy" },
+                    { 11, "Racing" },
+                    { 12, "Puzzle" },
+                    { 13, "Strategy game" },
+                    { 14, "MMO" },
+                    { 15, "Party" },
+                    { 16, "Action RPG" },
+                    { 17, "Survival" },
+                    { 18, "Third-Person Shooter" },
+                    { 19, "Casual" },
+                    { 20, "Story-Rich" },
+                    { 21, "Role-Playing" },
+                    { 22, "Building & Automation" },
+                    { 23, "Card & Board" },
+                    { 24, "Souls-Like" },
+                    { 25, "Open World" },
+                    { 26, "Third-Person" }
                 });
 
             migrationBuilder.CreateIndex(
@@ -287,6 +363,16 @@ namespace MoonGameRev.Data.Migrations
                 column: "GenreID");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Journalists_UserId",
+                table: "Journalists",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_News_JournalistId",
+                table: "News",
+                column: "JournalistId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Reviews_GameID",
                 table: "Reviews",
                 column: "GameID");
@@ -318,6 +404,9 @@ namespace MoonGameRev.Data.Migrations
                 name: "GameGenres");
 
             migrationBuilder.DropTable(
+                name: "News");
+
+            migrationBuilder.DropTable(
                 name: "Reviews");
 
             migrationBuilder.DropTable(
@@ -327,10 +416,13 @@ namespace MoonGameRev.Data.Migrations
                 name: "Genres");
 
             migrationBuilder.DropTable(
-                name: "AspNetUsers");
+                name: "Journalists");
 
             migrationBuilder.DropTable(
                 name: "Games");
+
+            migrationBuilder.DropTable(
+                name: "AspNetUsers");
         }
     }
 }

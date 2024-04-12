@@ -226,12 +226,10 @@ namespace MoonGameRev.Data.Migrations
 
             modelBuilder.Entity("MoonGameRev.Data.Models.Game", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
+                        .HasColumnType("uniqueidentifier")
                         .HasComment("Unique identifier for the game.");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("CoverImage")
                         .IsRequired()
@@ -286,8 +284,8 @@ namespace MoonGameRev.Data.Migrations
 
             modelBuilder.Entity("MoonGameRev.Data.Models.GameGenre", b =>
                 {
-                    b.Property<int>("GameID")
-                        .HasColumnType("int");
+                    b.Property<Guid>("GameID")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("GenreID")
                         .HasColumnType("int");
@@ -479,11 +477,9 @@ namespace MoonGameRev.Data.Migrations
 
             modelBuilder.Entity("MoonGameRev.Data.Models.News", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Article")
                         .IsRequired()
@@ -517,12 +513,10 @@ namespace MoonGameRev.Data.Migrations
 
             modelBuilder.Entity("MoonGameRev.Data.Models.Review", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
+                        .HasColumnType("uniqueidentifier")
                         .HasComment("Unique identifier for the review.");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("Comment")
                         .IsRequired()
@@ -536,8 +530,8 @@ namespace MoonGameRev.Data.Migrations
                         .HasColumnType("nvarchar(500)")
                         .HasComment("The Cons of the game");
 
-                    b.Property<int>("GameID")
-                        .HasColumnType("int");
+                    b.Property<Guid>("GameID")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Pros")
                         .IsRequired()

@@ -36,9 +36,11 @@ namespace MoonGameRev.Services.Data
                 queryModel.CurrentPage = totalPages;
             }
 
+            int currentPage = Math.Max(queryModel.CurrentPage, 1);
+
             IEnumerable<NewsAllViewModel> allNews = await newsQuery
                 .OrderByDescending(n => n.Date)
-                .Skip((queryModel.CurrentPage - 1) * queryModel.NewsPerPage)
+                .Skip((currentPage - 1) * queryModel.NewsPerPage)
                 .Take(queryModel.NewsPerPage)
                 .Select(n => new NewsAllViewModel
                 {

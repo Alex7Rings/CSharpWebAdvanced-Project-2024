@@ -12,8 +12,8 @@ using MoonGameRev.Data;
 namespace MoonGameRev.Data.Migrations
 {
     [DbContext(typeof(MoonGameRevDbContext))]
-    [Migration("20240318110403_SeedingGenreDb")]
-    partial class SeedingGenreDb
+    [Migration("20240412155022_InitialDb")]
+    partial class InitialDb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -228,12 +228,10 @@ namespace MoonGameRev.Data.Migrations
 
             modelBuilder.Entity("MoonGameRev.Data.Models.Game", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
+                        .HasColumnType("uniqueidentifier")
                         .HasComment("Unique identifier for the game.");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("CoverImage")
                         .IsRequired()
@@ -258,6 +256,10 @@ namespace MoonGameRev.Data.Migrations
                         .HasMaxLength(2048)
                         .HasColumnType("nvarchar(2048)")
                         .HasComment("Website of the game.");
+
+                    b.Property<bool>("IsReleased")
+                        .HasColumnType("bit")
+                        .HasComment("Specifies whether the game is released or upcoming.");
 
                     b.Property<string>("Publisher")
                         .IsRequired()
@@ -284,8 +286,8 @@ namespace MoonGameRev.Data.Migrations
 
             modelBuilder.Entity("MoonGameRev.Data.Models.GameGenre", b =>
                 {
-                    b.Property<int>("GameID")
-                        .HasColumnType("int");
+                    b.Property<Guid>("GameID")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("GenreID")
                         .HasColumnType("int");
@@ -451,14 +453,72 @@ namespace MoonGameRev.Data.Migrations
                         });
                 });
 
-            modelBuilder.Entity("MoonGameRev.Data.Models.Review", b =>
+            modelBuilder.Entity("MoonGameRev.Data.Models.Journalist", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasComment("Unique identifier for the review.");
+                        .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("PhoneNumber")
+                        .IsRequired()
+                        .HasMaxLength(15)
+                        .HasColumnType("nvarchar(15)");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Journalists");
+                });
+
+            modelBuilder.Entity("MoonGameRev.Data.Models.News", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Article")
+                        .IsRequired()
+                        .HasMaxLength(2500)
+                        .HasColumnType("nvarchar(2500)");
+
+                    b.Property<DateTime>("Date")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("GETDATE()");
+
+                    b.Property<int>("JournalistId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("PictureUrl")
+                        .IsRequired()
+                        .HasMaxLength(2048)
+                        .HasColumnType("nvarchar(2048)");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(70)
+                        .HasColumnType("nvarchar(70)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("JournalistId");
+
+                    b.ToTable("News");
+                });
+
+            modelBuilder.Entity("MoonGameRev.Data.Models.Review", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier")
+                        .HasComment("Unique identifier for the review.");
 
                     b.Property<string>("Comment")
                         .IsRequired()
@@ -466,15 +526,29 @@ namespace MoonGameRev.Data.Migrations
                         .HasColumnType("nvarchar(500)")
                         .HasComment("Comment provided by the user for the review.");
 
-                    b.Property<int>("GameID")
-                        .HasColumnType("int");
+                    b.Property<string>("Cons")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)")
+                        .HasComment("The Cons of the game");
 
-                    b.Property<int>("Rating")
-                        .HasColumnType("int")
+                    b.Property<Guid>("GameID")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Pros")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)")
+                        .HasComment("The Pros of the game");
+
+                    b.Property<double>("Rating")
+                        .HasColumnType("float")
                         .HasComment("Rating given by the user for the game");
 
                     b.Property<DateTime>("ReviewDate")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
+                        .HasDefaultValueSql("GETDATE()")
                         .HasComment("Date and time when the review was submitted.");
 
                     b.Property<string>("UserId")
@@ -562,6 +636,28 @@ namespace MoonGameRev.Data.Migrations
                     b.Navigation("Genre");
                 });
 
+            modelBuilder.Entity("MoonGameRev.Data.Models.Journalist", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("MoonGameRev.Data.Models.News", b =>
+                {
+                    b.HasOne("MoonGameRev.Data.Models.Journalist", "Journalist")
+                        .WithMany("NewsArticles")
+                        .HasForeignKey("JournalistId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Journalist");
+                });
+
             modelBuilder.Entity("MoonGameRev.Data.Models.Review", b =>
                 {
                     b.HasOne("MoonGameRev.Data.Models.Game", "Game")
@@ -591,6 +687,11 @@ namespace MoonGameRev.Data.Migrations
             modelBuilder.Entity("MoonGameRev.Data.Models.Genre", b =>
                 {
                     b.Navigation("GameGenres");
+                });
+
+            modelBuilder.Entity("MoonGameRev.Data.Models.Journalist", b =>
+                {
+                    b.Navigation("NewsArticles");
                 });
 #pragma warning restore 612, 618
         }

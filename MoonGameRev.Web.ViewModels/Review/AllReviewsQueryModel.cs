@@ -22,7 +22,7 @@ namespace MoonGameRev.Web.ViewModels.Review
 
         public int TotalReviews { get; set; }
 
-        public int GameId { get; set; }  
+        public string GameId { get; set; }  
 
         public IEnumerable<ReviewAllViewModel> Reviews { get; set; }
     }

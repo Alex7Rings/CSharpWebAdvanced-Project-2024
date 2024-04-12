@@ -62,7 +62,7 @@ namespace MoonGameRev.Services.Data
                 .Take(queryModel.GamesPerPage)
                 .Select(g => new GameAllViewModel
                 {
-                    Id = g.Id,
+                    Id = g.Id.ToString(),
                     Title = g.Title,
                     ImageUrl = g.CoverImage,
                     Rating = g.Reviews.Any() ? g.Reviews.Average(r => r.Rating) : 0, // Calculate average rating if there are reviews
@@ -90,7 +90,7 @@ namespace MoonGameRev.Services.Data
                 .Take(queryModel.GamesPerPage)
                 .Select(g => new UpcomingGamesViewModel
                 {
-                    Id = g.Id,
+                    Id = g.Id.ToString(),
                     Title = g.Title,
                     PictureUrl = g.CoverImage,
                     ReleasDate = g.ReleaseDate,
@@ -195,7 +195,7 @@ namespace MoonGameRev.Services.Data
 
             var viewModel = new GameDetailsViewModel()
             {
-                Id = game.Id,
+                Id = game.Id.ToString(),
                 Title = game.Title,
                 Description = game.Description,
                 Developer = game.Developer,
@@ -306,7 +306,7 @@ namespace MoonGameRev.Services.Data
                 .Take(5)
                 .Select(g=> new IndexViewModel
                 {
-                    Id = g.Id,
+                    Id = g.Id.ToString(),
                     Title = g.Title,
                     ImageUrl = g.CoverImage,
                     IsReleased = g.IsReleased == true,
@@ -324,7 +324,7 @@ namespace MoonGameRev.Services.Data
                 .Take(5)
                 .Select(g => new IndexViewModel
                 {
-                    Id = g.Id,
+                    Id = g.Id.ToString(),
                     Title = g.Title,
                     ImageUrl = g.CoverImage,
                     IsReleased = g.IsReleased,

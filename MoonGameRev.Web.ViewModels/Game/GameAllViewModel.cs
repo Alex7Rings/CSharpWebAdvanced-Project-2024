@@ -4,7 +4,7 @@ namespace MoonGameRev.Web.ViewModels.Game
 {
     public class GameAllViewModel
     {
-        public int Id { get; set; } 
+        public string Id { get; set; } 
 
         public string Title { get; set; } = null!;
 

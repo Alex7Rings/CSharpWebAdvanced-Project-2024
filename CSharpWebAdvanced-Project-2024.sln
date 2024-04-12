@@ -25,7 +25,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MoonGameRev.Web.Infrastruct
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MoonGameRev.Services.Data.Models", "MoonGameRev.Services.Data.Models\MoonGameRev.Services.Data.Models.csproj", "{559BB485-1802-43EA-9338-C2483BFE24CE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoonGameRev.WebAPI", "MoonGameRev.WebAPI\MoonGameRev.WebAPI.csproj", "{502B4716-2574-436C-B4A5-C736967815D7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MoonGameRev.WebAPI", "MoonGameRev.WebAPI\MoonGameRev.WebAPI.csproj", "{502B4716-2574-436C-B4A5-C736967815D7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

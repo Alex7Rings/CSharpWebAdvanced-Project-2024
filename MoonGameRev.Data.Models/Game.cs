@@ -15,7 +15,7 @@
 
         [Key]
         [Comment("Unique identifier for the game.")]
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
         [Required]
         [Comment("Title of the game.")]
@@ -29,7 +29,7 @@
 
         [Required]
         [Comment("Developer of the game.")]
-        [MaxLength (DeveloperNameMaxLength)]
+        [MaxLength(DeveloperNameMaxLength)]
         public string Developer { get; set; } = null!;
 
         [Required]

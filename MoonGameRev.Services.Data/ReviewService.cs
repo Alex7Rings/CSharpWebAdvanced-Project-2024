@@ -19,7 +19,7 @@ namespace MoonGameRev.Services.Data
             this.dbContext = dbContext;
         }
 
-        public async Task AddReviewAsync(ReviewFormModel reviewModel, string userId, int gameId)
+        public async Task AddReviewAsync(ReviewFormModel reviewModel, string userId, Guid gameId)
         {
             Review newReview = new Review
             {
@@ -35,7 +35,7 @@ namespace MoonGameRev.Services.Data
             await dbContext.SaveChangesAsync();
         }
 
-        public async Task<AllReviewsFilteredAndPagedServiceModel> AllAsync(int gameId, AllReviewsQueryModel queryModel)
+        public async Task<AllReviewsFilteredAndPagedServiceModel> AllAsync(Guid gameId, AllReviewsQueryModel queryModel)
         {
             IQueryable<Review> reviewsQuery = this.dbContext
                 .Reviews
@@ -90,7 +90,7 @@ namespace MoonGameRev.Services.Data
                      Date = r.ReviewDate.ToString(),
                      GameName = r.Game.Title,
                      CoverImage = r.Game.CoverImage,
-                     GameId = r.GameID
+                     GameId = r.GameID.ToString()
                  })
                  .ToArrayAsync();
 
@@ -186,7 +186,7 @@ namespace MoonGameRev.Services.Data
             };
         }
 
-        public async Task<bool> HasReviewedGameAsync(string userId, int gameId)
+        public async Task<bool> HasReviewedGameAsync(string userId, Guid gameId)
         {
             return await dbContext.Reviews.AnyAsync(r => r.UserId == userId && r.GameID == gameId);
         }

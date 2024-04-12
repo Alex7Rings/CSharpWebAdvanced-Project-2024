@@ -6,7 +6,7 @@
 
         public string UserName { get; set; } = null!;
 
-        public int GameId { get; set; } 
+        public string GameId { get; set; } = null!;
 
         public string GameName { get; set; } = null!;
 

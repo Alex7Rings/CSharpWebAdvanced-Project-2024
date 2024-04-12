@@ -5,7 +5,7 @@ namespace MoonGameRev.Data.Models
     public class GameGenre
     {
 
-        public int GameID { get; set; }
+        public Guid GameID { get; set; }
         [ForeignKey(nameof(GameID))]
         public Game Game { get; set; } = null!;
 

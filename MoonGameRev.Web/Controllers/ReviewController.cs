@@ -25,7 +25,7 @@ namespace MoonGameRev.Web.Controllers
         }
 
         [AllowAnonymous]
-        public async Task<IActionResult> All(int gameId, [FromQuery]AllReviewsQueryModel queryModel)
+        public async Task<IActionResult> All(Guid gameId, [FromQuery]AllReviewsQueryModel queryModel)
         {
             AllReviewsFilteredAndPagedServiceModel serviceModel =
                 await this.reviewService.AllAsync(gameId, queryModel);
@@ -37,7 +37,7 @@ namespace MoonGameRev.Web.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Add(int gameId)
+        public async Task<IActionResult> Add(Guid gameId)
         {
             // Get the current user's ID
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -56,7 +56,7 @@ namespace MoonGameRev.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Add(ReviewFormModel reviewModel, int gameId)
+        public async Task<IActionResult> Add(ReviewFormModel reviewModel, Guid gameId)
         {
             if (!ModelState.IsValid)
             {
