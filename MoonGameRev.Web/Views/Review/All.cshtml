@@ -11,7 +11,6 @@
     <input type="hidden" name="gameId" value="@Model.GameId">
     <div class="row">
         <div class="form-group col-md-3 d-flex justify-content-between">
-           
             <div class="form-group">
                 <label asp-for="ReviewsPerPage"></label>
                 <select asp-for="ReviewsPerPage" class="form-control">
@@ -21,20 +20,16 @@
                 </select>
             </div>
         </div>
-
-
-
         <div class="form-group col-md-3">
             <div class="form-group">
                 <label asp-for="ReviewSorting"></label>
                 <select asp-for="ReviewSorting" class="form-control">
                     <option value="0">Newest</option>
-                    <option value="2">Reting (Ascending)</option>
+                    <option value="2">Rating (Ascending)</option>
                     <option value="1">Rating (Descending)</option>
                 </select>
             </div>
         </div>
-
         <div class="col-md-3">
             <div class="form-group mt-4 p-2">
                 <input type="submit" value="Search" class="btn btn-primary" />
@@ -43,7 +38,6 @@
     </div>
 </form>
 
-
 @{
     int previousPage = Model.CurrentPage - 1;
     if (previousPage < 1)
@@ -51,8 +45,7 @@
         previousPage = 1;
     }
 
-    int maxPage = (int)Math.Ceiling((double)Model.TotalReviews /
-        Model.ReviewsPerPage);
+    int maxPage = (int)Math.Ceiling((double)Model.TotalReviews / Model.ReviewsPerPage);
 }
 
 <div class="row mb-5">
@@ -60,23 +53,23 @@
         <a class="btn btn-primary @(Model.CurrentPage == 1 ? "disabled" : string.Empty)"
            asp-controller="Review"
            asp-action="All"
-           asp-route-gameId="@Model.GameId"
+           asp-route-ReviewsPerPage="@Model.ReviewsPerPage"
+           asp-route-GameId="@Model.GameId"
            asp-route-currentPage="@previousPage"
            asp-route-ReviewSorting="@((int)Model.ReviewSorting)"><<</a>
     </div>
 
     @{
-        bool shouldNextPageBeDisabled = Model.CurrentPage == maxPage ||
-            !Model.Reviews.Any();
+        bool shouldNextPageBeDisabled = Model.CurrentPage == maxPage || !Model.Reviews.Any();
     }
 
     <div class="col-md-6 d-grid gap-2 d-md-flex justify-content-md-end">
-        <a class="btn btn-primary 
-           @(shouldNextPageBeDisabled ? "disabled" : string.Empty)"
+        <a class="btn btn-primary @(shouldNextPageBeDisabled ? "disabled" : string.Empty)"
            asp-controller="Review"
            asp-action="All"
-           asp-route-gameId="@Model.GameId"
-           asp-route-currentPage="@(Model.CurrentPage + 1)"
+           asp-route-ReviewsPerPage="@Model.ReviewsPerPage"
+           asp-route-GameId="@Model.GameId"
+           asp-route-CurrentPage="@(Model.CurrentPage + 1)"
            asp-route-ReviewSorting="@((int)Model.ReviewSorting)">>></a>
     </div>
 </div>
@@ -87,8 +80,8 @@
 }
 
 <div class="row">
-    @foreach (var house in Model.Reviews)
+    @foreach (var review in Model.Reviews)
     {
-        <partial name="_ReviewPartial" model="@house" />
+        <partial name="_ReviewPartial" model="@review" />
     }
 </div>
