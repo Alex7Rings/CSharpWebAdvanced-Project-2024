@@ -10,6 +10,7 @@ namespace MoonGameRev.Web
     using MoonGameRev.Data.Models;
     using MoonGameRev.Services.Data.Interfaces;
     using MoonGameRev.Web.Infrastructure.Extensions;
+    using static MoonGameRev.Common.GeneralApplicationConstants;
 
     public class Program
     {
@@ -39,6 +40,7 @@ namespace MoonGameRev.Web
                 options.Password.RequiredLength =
                     builder.Configuration.GetValue<int>("Identity:Password:RequiredLength");
             })
+                .AddRoles<IdentityRole<Guid>>()
                 .AddEntityFrameworkStores<MoonGameRevDbContext>();
 
             builder.Services.AddApplicationServices(typeof(IGameService));
@@ -77,6 +79,8 @@ namespace MoonGameRev.Web
 
             app.UseAuthentication();
             app.UseAuthorization();
+
+            app.SeedAdmin(DevAdminEmail);
 
             app.MapDefaultControllerRoute();
             app.MapRazorPages();

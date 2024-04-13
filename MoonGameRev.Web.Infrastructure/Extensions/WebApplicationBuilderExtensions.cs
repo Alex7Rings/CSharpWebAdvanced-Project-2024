@@ -1,11 +1,12 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using MoonGameRev.Services.Data.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Reflection;
+
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.DependencyInjection;
+using MoonGameRev.Data.Models;
+
+using static MoonGameRev.Common.GeneralApplicationConstants;
+
 
 namespace MoonGameRev.Web.Infrastructure.Extensions
 {
@@ -42,5 +43,44 @@ namespace MoonGameRev.Web.Infrastructure.Extensions
                 services.AddScoped(interfaceType, implementationType);
             }
         }
+
+        public static IApplicationBuilder SeedAdmin(this IApplicationBuilder app, string email)
+        {
+            using IServiceScope scopedServices = app.ApplicationServices.CreateScope();
+
+            IServiceProvider serviceProvider = scopedServices.ServiceProvider;
+
+            UserManager<AppUser> userManager =
+                serviceProvider.GetRequiredService<UserManager<AppUser>>();
+            RoleManager<IdentityRole<Guid>> roleManager =
+                serviceProvider.GetRequiredService<RoleManager<IdentityRole<Guid>>>();
+
+            Task.Run(async () =>
+            {
+                if (await roleManager.RoleExistsAsync(AdminRoleName))
+                {
+                    return;
+                }
+
+                IdentityRole<Guid> role =
+                    new IdentityRole<Guid>(AdminRoleName);
+
+                await roleManager.CreateAsync(role);
+
+                AppUser adminUser =
+                    await userManager.FindByEmailAsync(email);
+
+                await userManager.AddToRoleAsync(adminUser, AdminRoleName);
+            })
+            .GetAwaiter()
+            .GetResult();
+
+            return app;
+        }
+
+        //public static IApplicationBuilder EnableOnlineUsersCheck(this IApplicationBuilder app)
+        //{
+        //    return app.UseMiddleware<OnlineUsersMiddleware>();
+        //}
     }
 }
