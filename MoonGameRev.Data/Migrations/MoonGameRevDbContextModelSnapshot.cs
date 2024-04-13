@@ -276,7 +276,7 @@ namespace MoonGameRev.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Games");
+                    b.ToTable("Games", (string)null);
 
                     b.HasComment("Represents a game.");
                 });
@@ -293,7 +293,7 @@ namespace MoonGameRev.Data.Migrations
 
                     b.HasIndex("GenreID");
 
-                    b.ToTable("GameGenres");
+                    b.ToTable("GameGenres", (string)null);
                 });
 
             modelBuilder.Entity("MoonGameRev.Data.Models.Genre", b =>
@@ -313,7 +313,7 @@ namespace MoonGameRev.Data.Migrations
 
                     b.HasKey("GenreID");
 
-                    b.ToTable("Genres");
+                    b.ToTable("Genres", (string)null);
 
                     b.HasComment("Represents a genre.");
 
@@ -470,7 +470,7 @@ namespace MoonGameRev.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Journalists");
+                    b.ToTable("Journalists", (string)null);
                 });
 
             modelBuilder.Entity("MoonGameRev.Data.Models.News", b =>
@@ -506,7 +506,7 @@ namespace MoonGameRev.Data.Migrations
 
                     b.HasIndex("JournalistId");
 
-                    b.ToTable("News");
+                    b.ToTable("News", (string)null);
                 });
 
             modelBuilder.Entity("MoonGameRev.Data.Models.Review", b =>
@@ -556,7 +556,7 @@ namespace MoonGameRev.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Reviews");
+                    b.ToTable("Reviews", (string)null);
 
                     b.HasComment("Review for a game");
                 });

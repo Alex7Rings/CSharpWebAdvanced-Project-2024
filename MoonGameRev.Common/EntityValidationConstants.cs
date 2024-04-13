@@ -53,5 +53,14 @@
 
             public const int PictureUrlMaxLength = 2048;
         }
+
+        public static class User
+        {
+            public const int PasswordMinLength = 6;
+            public const int PasswordMaxLength = 100;
+
+            public const int UserNameMinLength = 3;
+            public const int UserNameMaxLength = 33;
+        }
     }
 }
