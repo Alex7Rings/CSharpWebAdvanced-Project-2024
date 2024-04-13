@@ -19,9 +19,9 @@ namespace MoonGameRev.Data.Models
         public string PhoneNumber { get; set; } = null!;
 
         [Required]
-        public string UserId { get; set; }
+        public Guid UserId { get; set; }
 
-        public IdentityUser User { get; set; } = null!;
+        public AppUser User { get; set; } = null!;
 
         public ICollection<News> NewsArticles { get; set; }
     }

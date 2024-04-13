@@ -1,11 +1,12 @@
 ﻿namespace MoonGameRev.Data
 {
+    using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore;
     using MoonGameRev.Data.Models;
     using System.Reflection;
 
-    public class MoonGameRevDbContext : IdentityDbContext
+    public class MoonGameRevDbContext : IdentityDbContext<AppUser, IdentityRole<Guid>, Guid>
     {
         public MoonGameRevDbContext(DbContextOptions<MoonGameRevDbContext> options)
             : base(options)

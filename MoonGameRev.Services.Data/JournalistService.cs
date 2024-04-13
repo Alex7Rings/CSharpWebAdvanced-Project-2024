@@ -17,10 +17,11 @@ namespace MoonGameRev.Services.Data
 
         public async Task CreateAsync(string userId, BecomeJournalistFormModel model)
         {
+
             Journalist journalist = new Journalist()
             {
                 PhoneNumber = model.PhoneNumber,
-                UserId = userId,
+                UserId = Guid.Parse(userId)
             };
 
             await this.dbContext.Journalists.AddAsync(journalist);
@@ -31,7 +32,7 @@ namespace MoonGameRev.Services.Data
         {
             Journalist? journalist = await this.dbContext
                 .Journalists
-                .FirstOrDefaultAsync(j=>j.UserId == userId);
+                .FirstOrDefaultAsync(j=>j.UserId.ToString() == userId);
 
             if (journalist == null)
             {
@@ -54,7 +55,7 @@ namespace MoonGameRev.Services.Data
         {
             bool result = await this.dbContext
                 .Journalists
-                .AnyAsync(j=>j.UserId == userId);
+                .AnyAsync(j=>j.UserId.ToString() == userId);
 
             return result;
         }

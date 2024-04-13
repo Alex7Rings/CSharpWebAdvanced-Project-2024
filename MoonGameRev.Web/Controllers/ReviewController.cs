@@ -16,9 +16,9 @@ namespace MoonGameRev.Web.Controllers
     public class ReviewController : Controller
     {
         private readonly IReviewService reviewService;
-        private readonly UserManager<IdentityUser> userManager;
+        private readonly UserManager<AppUser> userManager;
 
-        public ReviewController(IReviewService reviewService, UserManager<IdentityUser> userManager)
+        public ReviewController(IReviewService reviewService, UserManager<AppUser> userManager)
         {
             this.reviewService = reviewService;
             this.userManager = userManager;
@@ -28,7 +28,7 @@ namespace MoonGameRev.Web.Controllers
         public async Task<IActionResult> All(Guid gameId, [FromQuery]AllReviewsQueryModel queryModel)
         {
             AllReviewsFilteredAndPagedServiceModel serviceModel =
-                await this.reviewService.AllAsync(gameId, queryModel);
+                await this.reviewService.AllAsync(gameId.ToString(), queryModel);
 
             queryModel.Reviews = serviceModel.Reviews;
             queryModel.TotalReviews = serviceModel.TotalReviewsCount;
@@ -37,7 +37,7 @@ namespace MoonGameRev.Web.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Add(Guid gameId)
+        public async Task<IActionResult> Add(string gameId)
         {
             // Get the current user's ID
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -56,7 +56,7 @@ namespace MoonGameRev.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Add(ReviewFormModel reviewModel, Guid gameId)
+        public async Task<IActionResult> Add(ReviewFormModel reviewModel, string gameId)
         {
             if (!ModelState.IsValid)
             {
@@ -73,7 +73,7 @@ namespace MoonGameRev.Web.Controllers
             }
 
             // Add the review to the database
-            await reviewService.AddReviewAsync(reviewModel, user.Id, gameId);
+            await reviewService.AddReviewAsync(reviewModel, user.Id.ToString(), gameId);
 
             // Redirect back to the game details page with the same gameId
             this.TempData[SuccessMessage] = "The review was added successfully";

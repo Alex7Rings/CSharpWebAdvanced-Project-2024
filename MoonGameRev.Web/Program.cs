@@ -4,6 +4,7 @@ namespace MoonGameRev.Web
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
     using MoonGameRev.Data;
+    using MoonGameRev.Data.Models;
     using MoonGameRev.Services.Data.Interfaces;
     using MoonGameRev.Web.Infrastructure.Extensions;
 
@@ -22,7 +23,7 @@ namespace MoonGameRev.Web
 
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-            builder.Services.AddDefaultIdentity<IdentityUser>(options =>
+            builder.Services.AddDefaultIdentity<AppUser>(options =>
             {
                 options.SignIn.RequireConfirmedAccount =
                     builder.Configuration.GetValue<bool>("Identity:SignIn:RequireConfirmedAccount");

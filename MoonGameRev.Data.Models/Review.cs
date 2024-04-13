@@ -43,8 +43,9 @@
         public Game Game { get; set; } = null!;
 
         [Required]
-        public string UserId { get; set; } = null!;
+        public Guid UserId { get; set; } 
+
         [ForeignKey(nameof(UserId))]
-        public IdentityUser User { get; set; } = null!;
+        public AppUser User { get; set; } = null!;
     }
 }

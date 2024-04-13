@@ -19,7 +19,7 @@ namespace MoonGameRev.Services.Data
             this.dbContext = dbContext;
         }
 
-        public async Task AddReviewAsync(ReviewFormModel reviewModel, string userId, Guid gameId)
+        public async Task AddReviewAsync(ReviewFormModel reviewModel, string userId, string gameId)
         {
             Review newReview = new Review
             {
@@ -27,19 +27,19 @@ namespace MoonGameRev.Services.Data
                 Pros = reviewModel.Pros,
                 Cons = reviewModel.Cons,
                 Comment = reviewModel.Comment,
-                UserId = userId, // Set the user ID
-                GameID = gameId // Set the game ID
+                UserId = Guid.Parse(userId), // Set the user ID
+                GameID = Guid.Parse(gameId) // Set the game ID
             };
 
             await dbContext.Reviews.AddAsync(newReview);
             await dbContext.SaveChangesAsync();
         }
 
-        public async Task<AllReviewsFilteredAndPagedServiceModel> AllAsync(Guid gameId, AllReviewsQueryModel queryModel)
+        public async Task<AllReviewsFilteredAndPagedServiceModel> AllAsync(string gameId, AllReviewsQueryModel queryModel)
         {
             IQueryable<Review> reviewsQuery = this.dbContext
                 .Reviews
-                .Where(r => r.GameID == gameId)
+                .Where(r => r.GameID.ToString() == gameId)
                 .AsQueryable();
 
             reviewsQuery = queryModel.ReviewSorting switch
@@ -78,7 +78,7 @@ namespace MoonGameRev.Services.Data
         {
             IEnumerable<ReviewAllViewModel> allUserReviews = await this.dbContext
                  .Reviews
-                 .Where(r => r.UserId == userId)
+                 .Where(r => r.UserId.ToString() == userId)
                  .Select(r => new ReviewAllViewModel
                  {
                      Id= r.Id.ToString(),
@@ -143,7 +143,7 @@ namespace MoonGameRev.Services.Data
                 .GroupBy(r => r.UserId)
                 .Select(g => new RankingServiceModel
                 {
-                    UserId = g.Key,
+                    UserId = g.Key.ToString(),
                     UserName = g.FirstOrDefault().User.UserName,
                     TotalReviews = g.Count()
                 })
@@ -186,9 +186,9 @@ namespace MoonGameRev.Services.Data
             };
         }
 
-        public async Task<bool> HasReviewedGameAsync(string userId, Guid gameId)
+        public async Task<bool> HasReviewedGameAsync(string userId, string gameId)
         {
-            return await dbContext.Reviews.AnyAsync(r => r.UserId == userId && r.GameID == gameId);
+            return await dbContext.Reviews.AnyAsync(r => r.UserId.ToString() == userId && r.GameID.ToString() == gameId);
         }
 
         public async Task<bool> IsUserWhitIdCreatorOfReviewWhitIdAsync(string reviewId, string userId)
