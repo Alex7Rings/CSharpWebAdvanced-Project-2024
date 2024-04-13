@@ -31,4 +31,8 @@
     <ProjectReference Include="..\MoonGameRev.WebAPI\MoonGameRev.WebAPI.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Areas\Identity\Pages\Account\" />
+  </ItemGroup>
+
 </Project>
