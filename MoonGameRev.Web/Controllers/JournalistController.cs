@@ -23,7 +23,7 @@ namespace MoonGameRev.Web.Controllers
             string? userId = this.User.GetId();
             bool isJournalist = await this.journalistService.JournalistExistsByUserIdAsync(userId);
 
-            if (isJournalist)
+            if (isJournalist || User.IsInRole("Admin") || User.IsInRole("Moderator"))
             {
                 this.TempData[ErrorMessage] = "You are already a journalist!";
 
@@ -39,7 +39,7 @@ namespace MoonGameRev.Web.Controllers
             string? userId = this.User.GetId();
             bool isJournalist = await this.journalistService.JournalistExistsByUserIdAsync(userId);
 
-            if (isJournalist)
+            if (isJournalist || User.IsInRole("Admin") || User.IsInRole("Moderator"))
             {
                 this.TempData[ErrorMessage] = "You are already a journalist!";
 
