@@ -37,35 +37,34 @@ namespace MoonGameRev.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> Add()
         {
-            bool isJournalist = await this.journalistService.JournalistExistsByUserIdAsync(this.User.GetId()!);//Sure we have a user.
-            if (!isJournalist)
+            // Check if the user is a journalist or an admin/moderator
+            bool isJournalist = await this.journalistService.JournalistExistsByUserIdAsync(this.User.GetId()!);
+            if (!isJournalist && !this.User.IsAdminOrModerator())
             {
                 this.TempData[ErrorMessage] = "Only journalists can add news!";
-
                 return this.RedirectToAction("All", "News");
             }
 
             try
             {
-				NewsFormModel model = new NewsFormModel();
-
-				return View(model);
-			}
+                NewsFormModel model = new NewsFormModel();
+                return View(model);
+            }
             catch (Exception)
             {
-				this.TempData[ErrorMessage] = "Unexpected error occurred. Please try again later or contact administrator.";
-				return this.RedirectToAction("All", "News");
-			}
+                this.TempData[ErrorMessage] = "An unexpected error occurred. Please try again later or contact the administrator.";
+                return this.RedirectToAction("All", "News");
+            }
         }
 
         [HttpPost]
         public async Task<IActionResult> Add(NewsFormModel model)
         {
-            bool isJournalist = await this.journalistService.JournalistExistsByUserIdAsync(this.User.GetId()!);//Sure we have a user.
-            if (!isJournalist)
+            // Check if the user is a journalist or an admin/moderator
+            bool isJournalist = await this.journalistService.JournalistExistsByUserIdAsync(this.User.GetId()!);
+            if (!isJournalist && !this.User.IsAdminOrModerator())
             {
-                this.TempData[ErrorMessage] = "Only journalists can add news!";
-
+                this.TempData[ErrorMessage] = "Only journalists add news!";
                 return this.RedirectToAction("All", "News");
             }
 
@@ -80,16 +79,14 @@ namespace MoonGameRev.Web.Controllers
                 string newsId = await this.newsService.CreateAsync(model, journalistId!);
                 this.TempData[SuccessMessage] = "The article was added successfully";
                 return this.RedirectToAction("Details", "News", new { id = newsId });
-			}
+            }
             catch (Exception)
             {
-                this.TempData[ErrorMessage] = "Unexpected error occurred while trying to add your news! Please try again later or contact administrator.";
-
+                this.TempData[ErrorMessage] = "An unexpected error occurred while trying to add your news! Please try again later or contact the administrator.";
                 return this.View(model);
             }
-
-            
         }
+
 
         [HttpGet]
         [AllowAnonymous]
@@ -138,84 +135,56 @@ namespace MoonGameRev.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> Edit(string id)
         {
-            bool newsExists = await this.newsService
-               .ExistsByIdAsync(id);
+            bool newsExists = await this.newsService.ExistsByIdAsync(id);
             if (!newsExists)
             {
-                this.TempData[ErrorMessage] = "Article whit the provided id does not exist!";
-
+                this.TempData[ErrorMessage] = "Article with the provided id does not exist!";
                 return this.RedirectToAction("All", "News");
             }
 
-            bool isUserJournalist = await this.journalistService
-                .JournalistExistsByUserIdAsync(this.User.GetId()!);
-
-            if (!isUserJournalist)
-            {
-                this.TempData[ErrorMessage] = "You must be the article owner to edit!";
-
-                return this.RedirectToAction("All", "News");
-            }
-
+            // Check if the user is the journalist who wrote the article or an admin/moderator
             string? journalistId = await this.journalistService.GetJournalistIdByUserIdAsync(this.User.GetId()!);
-            bool isJournalist = await this.newsService
-                .IsJournalistWithIdOwnerOfTheNewsIdAsync(id, journalistId!);
-            if (!isJournalist)
+            bool isJournalist = await this.newsService.IsJournalistWithIdOwnerOfTheNewsIdAsync(id, journalistId!);
+            if (!isJournalist && !this.User.IsAdminOrModerator())
             {
-                this.TempData[ErrorMessage] = "You must be the article owner to edit!";
-
+                this.TempData[ErrorMessage] = "You must be the article owner or an admin/moderator to edit news!";
                 return this.RedirectToAction("All", "News");
             }
+
             try
             {
-				NewsFormModel model = await this.newsService
-	            .GetNewsForEditAsync(id);
-
-				return this.View(model);
-			}
+                NewsFormModel model = await this.newsService.GetNewsForEditAsync(id);
+                return this.View(model);
+            }
             catch (Exception)
             {
-				this.TempData[ErrorMessage] = "Unexpected error occurred. Please try again later or contact administrator.";
-				return this.RedirectToAction("All", "News");
-			}
+                this.TempData[ErrorMessage] = "An unexpected error occurred. Please try again later or contact the administrator.";
+                return this.RedirectToAction("All", "News");
+            }
         }
-
         [HttpPost]
         public async Task<IActionResult> Edit(string id, NewsFormModel model)
         {
-            if (!this.ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 return this.View(model);
             }
 
-			bool newsExists = await this.newsService
-			   .ExistsByIdAsync(id);
-			if (!newsExists)
-			{
-				this.TempData[ErrorMessage] = "Article whit the provided id does not exist!";
+            bool newsExists = await this.newsService.ExistsByIdAsync(id);
+            if (!newsExists)
+            {
+                this.TempData[ErrorMessage] = "Article with the provided id does not exist!";
+                return this.RedirectToAction("All", "News");
+            }
 
-				return this.RedirectToAction("All", "News");
-			}
-
-			bool isUserJournalist = await this.journalistService
-				.JournalistExistsByUserIdAsync(this.User.GetId()!);
-
-			if (!isUserJournalist)
-			{
-				this.TempData[ErrorMessage] = "You must be the article owner to edit!";
-
-				return this.RedirectToAction("All", "News");
-			}
-
-			string? journalistId = await this.journalistService.GetJournalistIdByUserIdAsync(this.User.GetId()!);
-			bool isJournalist = await this.newsService
-				.IsJournalistWithIdOwnerOfTheNewsIdAsync(id, journalistId!);
-			if (!isJournalist)
-			{
-				this.TempData[ErrorMessage] = "You must be the article owner to edit!";
-
-				return this.RedirectToAction("All", "News");
-			}
+            // Check if the user is the journalist who wrote the article or an admin/moderator
+            string? journalistId = await this.journalistService.GetJournalistIdByUserIdAsync(this.User.GetId()!);
+            bool isJournalist = await this.newsService.IsJournalistWithIdOwnerOfTheNewsIdAsync(id, journalistId!);
+            if (!isJournalist && !this.User.IsAdminOrModerator())
+            {
+                this.TempData[ErrorMessage] = "You must be the article owner or an admin/moderator to edit news!";
+                return this.RedirectToAction("All", "News");
+            }
 
             try
             {
@@ -223,57 +192,41 @@ namespace MoonGameRev.Web.Controllers
             }
             catch (Exception)
             {
-				this.ModelState.AddModelError(string.Empty, "Unexpected error occurred while trying to update the article. Please try again later or contact administrator!");
-
-				return this.View(model);
-			}
+                this.ModelState.AddModelError(string.Empty, "An unexpected error occurred while trying to update the article. Please try again later or contact the administrator.");
+                return this.View(model);
+            }
 
             this.TempData[SuccessMessage] = "The article was edited successfully";
-            return this.RedirectToAction("Details", "News", new {  id });
-		}
+            return this.RedirectToAction("Details", "News", new { id });
+        }
 
         [HttpGet]
         public async Task<IActionResult> Delete(string id)
         {
-            bool newsExists = await this.newsService
-               .ExistsByIdAsync(id);
+            bool newsExists = await this.newsService.ExistsByIdAsync(id);
             if (!newsExists)
             {
-                this.TempData[ErrorMessage] = "Article whit the provided id does not exist!";
-
+                this.TempData[ErrorMessage] = "Article with the provided id does not exist!";
                 return this.RedirectToAction("All", "News");
             }
 
-            bool isUserJournalist = await this.journalistService
-                .JournalistExistsByUserIdAsync(this.User.GetId()!);
-
-            if (!isUserJournalist)
-            {
-                this.TempData[ErrorMessage] = "You must be the article owner to edit!";
-
-                return this.RedirectToAction("All", "News");
-            }
-
+            // Check if the user is the journalist who wrote the article or an admin/moderator
             string? journalistId = await this.journalistService.GetJournalistIdByUserIdAsync(this.User.GetId()!);
-            bool isJournalist = await this.newsService
-                .IsJournalistWithIdOwnerOfTheNewsIdAsync(id, journalistId!);
-            if (!isJournalist)
+            bool isJournalist = await this.newsService.IsJournalistWithIdOwnerOfTheNewsIdAsync(id, journalistId!);
+            if (!isJournalist && !this.User.IsAdminOrModerator())
             {
-                this.TempData[ErrorMessage] = "You must be the article owner to edit!";
-
+                this.TempData[ErrorMessage] = "You must be the article owner or an admin/moderator to delete news!";
                 return this.RedirectToAction("All", "News");
             }
 
             try
             {
-                NewsPreDeleteDetailsViewModel viewModel =
-                    await this.newsService.GetNewsForDeleteByIdAsync(id);
-
+                NewsPreDeleteDetailsViewModel viewModel = await this.newsService.GetNewsForDeleteByIdAsync(id);
                 return this.View(viewModel);
             }
             catch (Exception)
             {
-                this.TempData[ErrorMessage] = "Unexpected error occurred. Please try again later or contact administrator.";
+                this.TempData[ErrorMessage] = "An unexpected error occurred. Please try again later or contact the administrator.";
                 return this.RedirectToAction("All", "News");
             }
         }
@@ -281,46 +234,32 @@ namespace MoonGameRev.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> Delete(string id, NewsPreDeleteDetailsViewModel model)
         {
-            bool newsExists = await this.newsService
-               .ExistsByIdAsync(id);
+            bool newsExists = await this.newsService.ExistsByIdAsync(id);
             if (!newsExists)
             {
-                this.TempData[ErrorMessage] = "Article whit the provided id does not exist!";
-
+                this.TempData[ErrorMessage] = "Article with the provided id does not exist!";
                 return this.RedirectToAction("All", "News");
             }
 
-            bool isUserJournalist = await this.journalistService
-                .JournalistExistsByUserIdAsync(this.User.GetId()!);
-
-            if (!isUserJournalist)
-            {
-                this.TempData[ErrorMessage] = "You must be the article owner to edit!";
-
-                return this.RedirectToAction("All", "News");
-            }
-
+            // Check if the user is the journalist who wrote the article or an admin/moderator
             string? journalistId = await this.journalistService.GetJournalistIdByUserIdAsync(this.User.GetId()!);
-            bool isJournalist = await this.newsService
-                .IsJournalistWithIdOwnerOfTheNewsIdAsync(id, journalistId!);
-            if (!isJournalist)
+            bool isJournalist = await this.newsService.IsJournalistWithIdOwnerOfTheNewsIdAsync(id, journalistId!);
+            if (!isJournalist && !this.User.IsAdminOrModerator())
             {
-                this.TempData[ErrorMessage] = "You must be the article owner to edit!";
-
+                this.TempData[ErrorMessage] = "You must be the article owner or an admin/moderator to delete news!";
                 return this.RedirectToAction("All", "News");
             }
 
             try
             {
                 await this.newsService.DeleteByIdAsync(id);
-
                 this.TempData[WarningMessage] = "The article was deleted successfully";
                 return this.RedirectToAction("All", "News");
             }
             catch (Exception)
             {
                 this.TempData[ErrorMessage] = "An unexpected error occurred while trying to delete the article. Please try again later or contact the administrator.";
-                return this.RedirectToAction("All");
+                return this.RedirectToAction("All", "News");
             }
         }
     }

@@ -7,12 +7,12 @@
         <p>Author: <a href="@Url.Action("JournalistNews", "News", new { journalistId = Model.JournalistId })">@Model.AuthorName</a></p>
         <p>@Model.Date</p>
         <p>@Model.Article</p>
-        @if (User.Identity.IsAuthenticated && User.Identity.Name == Model.AuthorName)
+        @if (User.Identity.IsAuthenticated && (User.Identity.Name == Model.AuthorName || User.IsInRole("Admin") || User.IsInRole("Moderator")))
         {
-                <div>
-                    <a href="@Url.Action("Edit", "News", new { id = Model.Id })" class="btn btn-primary">Edit</a>
-                    <a href="@Url.Action("Delete", "News", new { id = Model.Id })" class="btn btn-danger">Delete</a>
-                </div>
+            <div>
+                <a href="@Url.Action("Edit", "News", new { id = Model.Id })" class="btn btn-primary">Edit</a>
+                <a href="@Url.Action("Delete", "News", new { id = Model.Id })" class="btn btn-danger">Delete</a>
+            </div>
         }
     </div>
 </div>
