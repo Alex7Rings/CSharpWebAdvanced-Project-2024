@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 using MoonGameRev.Data.Models;
 using MoonGameRev.Web.ViewModels.User;
 using static MoonGameRev.Common.NotificationMessagesConstants;
+using static MoonGameRev.Common.GeneralApplicationConstants;
+using Microsoft.AspNetCore.Authorization;
 
 
 namespace MoonGameRev.Web.Controllers
@@ -102,5 +104,30 @@ namespace MoonGameRev.Web.Controllers
             return Redirect(model.ReturnUrl ?? "/Home/Index");
 
         }
+
+
+        [HttpGet]
+        [Authorize(Roles = "Admin")]
+        public IActionResult AddToModerator()
+        {
+            var model = new AddToModeratorViewModel();
+            return View(model);
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> AddToModerator(string userId)
+        {
+            var user = await userManager.FindByIdAsync(userId);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            await userManager.AddToRoleAsync(user, ModeratorRoleName);
+
+            return RedirectToAction("Index", "Home");
+        }
+
     }
 }

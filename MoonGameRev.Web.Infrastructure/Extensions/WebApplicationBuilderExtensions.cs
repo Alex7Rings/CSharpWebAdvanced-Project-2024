@@ -44,36 +44,46 @@ namespace MoonGameRev.Web.Infrastructure.Extensions
             }
         }
 
-        public static IApplicationBuilder SeedAdmin(this IApplicationBuilder app, string email)
+        /// <summary>
+        /// This method seeds admin role if it does not exist.
+        /// Passed email should be valid email of existing user in the application.
+        /// </summary>
+        /// <param name="app"></param>
+        /// <param name="email"></param>
+        /// <returns></returns>
+        public static IApplicationBuilder SeedAdmin(this IApplicationBuilder app, string adminEmail)
         {
             using IServiceScope scopedServices = app.ApplicationServices.CreateScope();
-
             IServiceProvider serviceProvider = scopedServices.ServiceProvider;
 
-            UserManager<AppUser> userManager =
-                serviceProvider.GetRequiredService<UserManager<AppUser>>();
-            RoleManager<IdentityRole<Guid>> roleManager =
-                serviceProvider.GetRequiredService<RoleManager<IdentityRole<Guid>>>();
+            UserManager<AppUser> userManager = serviceProvider.GetRequiredService<UserManager<AppUser>>();
+            RoleManager<IdentityRole<Guid>> roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole<Guid>>>();
 
             Task.Run(async () =>
             {
-                if (await roleManager.RoleExistsAsync(AdminRoleName))
+                // Check if admin role exists, if not, create it
+                if (!await roleManager.RoleExistsAsync(AdminRoleName))
                 {
-                    return;
+                    IdentityRole<Guid> adminRole = new IdentityRole<Guid>(AdminRoleName);
+                    await roleManager.CreateAsync(adminRole);
                 }
 
-                IdentityRole<Guid> role =
-                    new IdentityRole<Guid>(AdminRoleName);
+                // Check if moderator role exists, if not, create it
+                if (!await roleManager.RoleExistsAsync(ModeratorRoleName))
+                {
+                    IdentityRole<Guid> moderatorRole = new IdentityRole<Guid>(ModeratorRoleName);
+                    await roleManager.CreateAsync(moderatorRole);
+                }
 
-                await roleManager.CreateAsync(role);
+                // Find the admin user by email
+                AppUser adminUser = await userManager.FindByEmailAsync(adminEmail);
 
-                AppUser adminUser =
-                    await userManager.FindByEmailAsync(email);
-
-                await userManager.AddToRoleAsync(adminUser, AdminRoleName);
-            })
-            .GetAwaiter()
-            .GetResult();
+                // If the admin user exists, assign it to the admin role
+                if (adminUser != null)
+                {
+                    await userManager.AddToRoleAsync(adminUser, AdminRoleName);
+                }
+            }).GetAwaiter().GetResult();
 
             return app;
         }

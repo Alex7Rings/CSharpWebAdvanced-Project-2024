@@ -9,5 +9,8 @@
 
         public const string AdminRoleName = "Admin";
         public const string DevAdminEmail = "testAdmin1@admin.com";
+
+        public const string ModeratorRoleName = "Moderator";
+
     }
 }

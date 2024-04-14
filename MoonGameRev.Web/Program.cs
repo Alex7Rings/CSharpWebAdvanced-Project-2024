@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using MoonGameRev.Data;
 namespace MoonGameRev.Web
 {
+    using Microsoft.AspNetCore.Authentication.Cookies;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
@@ -48,7 +49,8 @@ namespace MoonGameRev.Web
 
             builder.Services.ConfigureApplicationCookie(cfg =>
             {
-                cfg.LogoutPath = "/User/Login";
+                cfg.LoginPath = "/User/Login";
+                cfg.AccessDeniedPath = "/Home/Error/401";
             });
 
             builder.Services
