@@ -47,10 +47,13 @@
                            <li class="nav-item">
                                         <a class="nav-link text-dark" asp-area="" asp-controller="Review" asp-action="Mine">My Reviews</a>
                            </li>
-                           <li class="nav-item">
-                                        <a class="nav-link text-dark" asp-area="" asp-controller="Game" asp-action="Add">Add Game</a>
-                           </li>   
-                           @if (isUserJournalist)
+                            @if (User.IsInRole("Admin") || User.IsInRole("Moderator"))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Game" asp-action="Add">Add Game</a>
+                                </li>
+                            }
+                            @if (isUserJournalist || User.IsInRole("Admin") || User.IsInRole("Moderator"))
                             {
                                 <li class="nav-item">
                                     <a class="nav-link text-dark" asp-area="" asp-controller="News" asp-action="Add">Add News</a>

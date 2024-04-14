@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using MoonGameRev.Services.Data.Interfaces;
 using MoonGameRev.Services.Data.Models.Game;
+using MoonGameRev.Web.Infrastructure.Extensions;
 using MoonGameRev.Web.ViewModels.Game;
 using static MoonGameRev.Common.NotificationMessagesConstants;
 
@@ -49,7 +50,14 @@ namespace MoonGameRev.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> Add()
         {
-            try
+			if (!this.User.IsAdminOrModerator())
+			{
+				this.TempData[ErrorMessage] = "You don't have access to this feature!";
+
+				return this.RedirectToAction("All", "Game");
+			}
+
+			try
             {
 				GameFormModel formModel = new GameFormModel()
 				{
@@ -69,7 +77,14 @@ namespace MoonGameRev.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> Add(GameFormModel model)
         {
-            if (model.GenreIds == null || !model.GenreIds.Any())
+			if (!this.User.IsAdminOrModerator())
+			{
+				this.TempData[ErrorMessage] = "You don't have access to this feature!";
+
+				return this.RedirectToAction("All", "Game");
+			}
+
+			if (model.GenreIds == null || !model.GenreIds.Any())
             {
                 ModelState.AddModelError(nameof(model.GenreIds), "Please select at least one genre!");
             }
@@ -140,7 +155,14 @@ namespace MoonGameRev.Web.Controllers
             bool gameExists = await this.gameService
                 .ExistsByIdAsync(id);
 
-            if (!gameExists)
+			if (!this.User.IsAdminOrModerator())
+			{
+				this.TempData[ErrorMessage] = "You don't have access to this feature!";
+
+				return this.RedirectToAction("All", "Game");
+			}
+
+			if (!gameExists)
             {
                 this.TempData[ErrorMessage] = "Game with the provided ID does not exists!";
                 return this.RedirectToAction("All", "Game");
@@ -171,7 +193,14 @@ namespace MoonGameRev.Web.Controllers
                 return this.View(model);
             }
 
-            bool gameExists = await this.gameService
+			if (!this.User.IsAdminOrModerator())
+			{
+				this.TempData[ErrorMessage] = "You don't have access to this feature!";
+
+				return this.RedirectToAction("All", "Game");
+			}
+
+			bool gameExists = await this.gameService
                 .ExistsByIdAsync(id);
 
             if (!gameExists)
@@ -196,5 +225,6 @@ namespace MoonGameRev.Web.Controllers
             return this.RedirectToAction("Details", "Game", new { id });
 
         }
+
     }
 }

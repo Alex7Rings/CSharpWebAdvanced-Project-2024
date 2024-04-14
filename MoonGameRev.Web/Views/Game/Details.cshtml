@@ -21,8 +21,10 @@
             {
                 <a href="@Url.Action("Add", "Review", new { gameId = Model.Id })" class="btn btn-primary">Add Review</a>
             }
-            <a class="btn btn-warning" asp-controller="Game" asp-action="Edit"
-                           asp-route-id="@Model.Id">Edit</a>
+            @if (User.IsInRole("Admin") || User.IsInRole("Moderator"))
+            {
+                <a class="btn btn-warning" asp-controller="Game" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
+            }
         </div>
     </div>
     @if (Model.IsReleased)
