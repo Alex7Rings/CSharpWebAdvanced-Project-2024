@@ -1,7 +1,10 @@
-﻿<form method="post">
+﻿@model MoonGameRev.Web.ViewModels.User.AddToModeratorViewModel
+
+<form method="post">
     <div class="form-group">
         <label for="userId">User ID:</label>
-        <input type="text" id="userId" name="UserId" class="form-control" />
+        <input type="text" id="userId" name="userId" class="form-control" />
     </div>
     <button type="submit" class="btn btn-primary">Add to Moderator</button>
+    <button type="submit" formaction="/Admin/Home/RemoveFromModerator" class="btn btn-danger">Remove from Moderator</button>
 </form>
