@@ -1,0 +1,55 @@
+﻿@using MoonGameRev.Web.Areas.Admin.ViewModels.User
+@model IEnumerable<UserViewModel>
+
+@{
+    ViewBag.Title = "All Users";
+}
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th><label>Email</label></th>
+            <th><label>User Name</label></th>
+            <th><label>Phone Number</label></th>
+            <th><label>User Is Journalist</label></th>
+            <th><label>User Role</label></th> 
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td><label>@user.Email</label></td>
+                <td><label>@user.UserName</label></td>
+                <td><label>@user.PhoneNumber</label></td>
+                <td>
+                    @if (user.PhoneNumber != string.Empty)
+                    {
+                        <label>✔</label>
+                    }
+                    else
+                    {
+                        <label class="text-center">❌</label>
+                    }
+                </td>
+                <td>
+                    @if (user.IsAdmin)
+                    {
+                        <label>👑Admin👑</label>
+                    }
+                    else if (user.IsModerator)
+                    {
+                        <label>🔧Moderator🔧</label>
+                    }
+                    else
+                    {
+                        <label>User</label>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

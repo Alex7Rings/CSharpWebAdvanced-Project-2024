@@ -10,12 +10,10 @@ namespace MoonGameRev.Web.Areas.Admin.Controllers
 {
     public class HomeController : AdminController
     {
-		private readonly SignInManager<AppUser> signInManager;
 		private readonly UserManager<AppUser> userManager;
 
-		public HomeController(SignInManager<AppUser> signInManager, UserManager<AppUser> userManager)
+		public HomeController(UserManager<AppUser> userManager)
 		{
-			this.signInManager = signInManager;
 			this.userManager = userManager;
 		}
 
