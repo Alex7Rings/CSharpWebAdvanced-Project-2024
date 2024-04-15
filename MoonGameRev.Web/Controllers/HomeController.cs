@@ -4,6 +4,7 @@
     using MoonGameRev.Services.Data.Interfaces;
     using MoonGameRev.Web.ViewModels.Home;
     using System.Diagnostics;
+    using static MoonGameRev.Common.GeneralApplicationConstants;
 
     public class HomeController : Controller
     {
@@ -16,6 +17,11 @@
 
         public async Task<IActionResult> Index()
         {
+            if (this.User.IsInRole(AdminRoleName))
+            {
+                return this.RedirectToAction("Index", "Home", new { Area = AdminAreaName });
+            }
+
             // Retrieve last five upcoming games
             IEnumerable<IndexViewModel> upcomingGamesViewModel =
                await this.gameService.LastFiveUpcomingGamesAsync();
