@@ -211,6 +211,7 @@ namespace MoonGameRev.Services.Data
 
             viewModel.Reviews = game.Reviews.Select(r => new ReviewDetailsViewModel
             {
+                Id = r.Id.ToString(),
                 Rating = r.Rating,
                 Pros = r.Pros,
                 Cons = r.Cons,

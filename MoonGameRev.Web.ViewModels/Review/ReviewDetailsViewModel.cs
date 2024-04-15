@@ -4,6 +4,7 @@ namespace MoonGameRev.Web.ViewModels.Review
 {
     public class ReviewDetailsViewModel
     {
+        public string Id { get; set; }
         public double Rating { get; set; }
         public string Pros { get; set; } 
         public string Cons { get; set; } 
