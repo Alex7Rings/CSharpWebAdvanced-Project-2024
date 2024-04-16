@@ -1,18 +1,14 @@
 ﻿using MoonGameRev.Data;
 using MoonGameRev.Data.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace MoonGameRev.Services.Tests
+
+namespace MoonGameRev.Services.Tests.UserAndJournalistTests
 {
 	public static class DataBaseSeeder
 	{
 		public static AppUser User;
 		public static Journalist Journalist;
-		
+
 		public static void SeedDataBase(MoonGameRevDbContext dbContext)
 		{
 
