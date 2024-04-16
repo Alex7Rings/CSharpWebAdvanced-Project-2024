@@ -10,13 +10,13 @@ namespace MoonGameRev.Services.Tests
 {
 	public static class DataBaseSeeder
 	{
-		public static AppUser JournalistUser;
+		public static AppUser User;
 		public static Journalist Journalist;
 		
 		public static void SeedDataBase(MoonGameRevDbContext dbContext)
 		{
 
-			JournalistUser = new AppUser()
+			User = new AppUser()
 			{
 				UserName = "TestUser",
 				NormalizedUserName = "TESTUSER",
@@ -29,14 +29,57 @@ namespace MoonGameRev.Services.Tests
 				TwoFactorEnabled = false,
 			};
 
+			var user2 = new AppUser()
+			{
+				UserName = "User2",
+				NormalizedUserName = "USER2",
+				Email = "user2@test.com",
+				NormalizedEmail = "USER2@TEST.COM",
+				EmailConfirmed = true,
+				PasswordHash = "hashedpassword",
+				ConcurrencyStamp = Guid.NewGuid().ToString(),
+				SecurityStamp = Guid.NewGuid().ToString(),
+				TwoFactorEnabled = false,
+			};
+
+			var user3 = new AppUser()
+			{
+				UserName = "User3",
+				NormalizedUserName = "USER3",
+				Email = "user3@test.com",
+				NormalizedEmail = "USER3@TEST.COM",
+				EmailConfirmed = true,
+				PasswordHash = "hashedpassword",
+				ConcurrencyStamp = Guid.NewGuid().ToString(),
+				SecurityStamp = Guid.NewGuid().ToString(),
+				TwoFactorEnabled = false,
+			};
+
 			Journalist = new Journalist()
 			{
 				PhoneNumber = "+359886785089",
-				UserId = JournalistUser.Id // Ensure UserId is set to the unique identifier
+				UserId = User.Id
 			};
 
-			dbContext.Users.Add(JournalistUser);
+			var journalist2 = new Journalist()
+			{
+				PhoneNumber = "+123456789",
+				UserId = user2.Id
+			};
+
+			var journalist3 = new Journalist()
+			{
+				PhoneNumber = "+987654321",
+				UserId = user3.Id
+			};
+
+			dbContext.Users.Add(User);
+			dbContext.Users.Add(user2);
+			dbContext.Users.Add(user3);
+
 			dbContext.Journalists.Add(Journalist);
+			dbContext.Journalists.Add(journalist2);
+			dbContext.Journalists.Add(journalist3);
 
 			dbContext.SaveChanges();
 

@@ -24,6 +24,7 @@ namespace MoonGameRev.Services.JournalistServiceTests
 			this.dbContext = new MoonGameRevDbContext(this.optionsDb);
 
 			dbContext.Database.EnsureCreated();
+
 			SeedDataBase(this.dbContext);
 
 			this.journalistService = new JournalistService(this.dbContext);
@@ -32,7 +33,7 @@ namespace MoonGameRev.Services.JournalistServiceTests
 		[Test]
 		public async Task JournalistExistsByUserIdAsyncShoudReturnTrueWhenExists()
 		{
-			string existingJournalistUserId = JournalistUser.Id.ToString();
+			string existingJournalistUserId = User.Id.ToString();
 
 			bool result =  await this.journalistService.JournalistExistsByUserIdAsync(existingJournalistUserId);
 
@@ -72,7 +73,7 @@ namespace MoonGameRev.Services.JournalistServiceTests
 		{
 			// Arrange
 			string phoneNumber = "1234567890";
-			var existingJournalist = new Journalist { UserId = JournalistUser.Id, PhoneNumber = phoneNumber };
+			var existingJournalist = new Journalist { UserId = User.Id, PhoneNumber = phoneNumber };
 			await this.dbContext.Journalists.AddAsync(existingJournalist);
 			await this.dbContext.SaveChangesAsync();
 
