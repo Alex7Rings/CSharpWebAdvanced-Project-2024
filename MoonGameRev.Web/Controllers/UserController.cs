@@ -6,6 +6,7 @@ using MoonGameRev.Web.ViewModels.User;
 using static MoonGameRev.Common.NotificationMessagesConstants;
 using static MoonGameRev.Common.GeneralApplicationConstants;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.Extensions.Caching.Memory;
 
 
 namespace MoonGameRev.Web.Controllers
@@ -15,12 +16,14 @@ namespace MoonGameRev.Web.Controllers
         private readonly SignInManager<AppUser> signInManager;
         private readonly UserManager<AppUser> userManager;
         private readonly IUserStore<AppUser> userStore;
+		private readonly IMemoryCache memoryCache;
 
-        public UserController(SignInManager<AppUser> signInManager, UserManager<AppUser> userManager, IUserStore<AppUser> userStore)
+		public UserController(SignInManager<AppUser> signInManager, UserManager<AppUser> userManager, IUserStore<AppUser> userStore, IMemoryCache memoryCache)
         {
             this.signInManager = signInManager;
             this.userManager = userManager;
             this.userStore = userStore;
+            this.memoryCache = memoryCache;
         }
 
         [HttpGet]
@@ -29,38 +32,41 @@ namespace MoonGameRev.Web.Controllers
             return View();
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Register(RegisterFormModel model)
-        {
-            if (!ModelState.IsValid)
-            {
-                return this.View(model);
-            }
-            AppUser user = new AppUser();
+		[HttpPost]
+		public async Task<IActionResult> Register(RegisterFormModel model)
+		{
+			if (!ModelState.IsValid)
+			{
+				return this.View(model);
+			}
 
-            await this.userManager.SetEmailAsync(user, model.Email);
-            await this.userManager.SetUserNameAsync(user, model.UserName);
+			AppUser user = new AppUser
+			{
+				UserName = model.UserName,
+				Email = model.Email
+			};
 
-            IdentityResult result =  await this.userManager.CreateAsync(user, model.Password);
+			IdentityResult result = await this.userManager.CreateAsync(user, model.Password);
 
-            if (result.Succeeded)
-            {
-                foreach (IdentityError error in result.Errors)
-                {
-                    ModelState.AddModelError(string.Empty, error.Description);
-                }
+			if (result.Succeeded)
+			{
+				await this.signInManager.SignInAsync(user, isPersistent: false);
+				this.memoryCache.Remove(UserCacheKey);
+				return this.RedirectToAction("Index", "Home");
+			}
+			else
+			{
+				foreach (IdentityError error in result.Errors)
+				{
+					ModelState.AddModelError(string.Empty, error.Description);
+				}
+				return this.View(model);
+			}
+		}
 
-               return this.RedirectToAction("Index", "Home");
-            }
-
-            await this.signInManager.SignInAsync(user, isPersistent: false);
-
-            return this.RedirectToAction("Index", "Home");
-
-        }
 
 
-        [HttpGet]
+		[HttpGet]
         public async Task<IActionResult> Login(string? returnUrl = null)
         {
             await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);

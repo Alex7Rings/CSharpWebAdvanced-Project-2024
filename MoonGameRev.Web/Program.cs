@@ -47,6 +47,8 @@ namespace MoonGameRev.Web
             builder.Services.AddApplicationServices(typeof(IGameService));
             builder.Services.AddApplicationServices(typeof(IReviewService));
 
+            builder.Services.AddMemoryCache();
+
             builder.Services.ConfigureApplicationCookie(cfg =>
             {
                 cfg.LoginPath = "/User/Login";
