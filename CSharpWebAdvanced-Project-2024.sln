@@ -27,6 +27,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MoonGameRev.Services.Data.M
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MoonGameRev.WebAPI", "MoonGameRev.WebAPI\MoonGameRev.WebAPI.csproj", "{502B4716-2574-436C-B4A5-C736967815D7}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{6E502C66-250A-42A2-AE76-7ACBE78F730E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoonGameRev.Services.Tests", "MoonGameRev.Services.Tests\MoonGameRev.Services.Tests.csproj", "{373D891C-6DED-49E4-90C9-759745046F61}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,6 +73,10 @@ Global
 		{502B4716-2574-436C-B4A5-C736967815D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{502B4716-2574-436C-B4A5-C736967815D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{502B4716-2574-436C-B4A5-C736967815D7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{373D891C-6DED-49E4-90C9-759745046F61}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{373D891C-6DED-49E4-90C9-759745046F61}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{373D891C-6DED-49E4-90C9-759745046F61}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{373D891C-6DED-49E4-90C9-759745046F61}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -82,6 +90,7 @@ Global
 		{21A48CDB-311D-4686-B30A-65F0CAF6EE7B} = {4E0E389F-F56E-420E-8848-6E155207E81D}
 		{559BB485-1802-43EA-9338-C2483BFE24CE} = {0117B982-955B-4EAA-8598-9954F9BC7A0B}
 		{502B4716-2574-436C-B4A5-C736967815D7} = {4E0E389F-F56E-420E-8848-6E155207E81D}
+		{373D891C-6DED-49E4-90C9-759745046F61} = {6E502C66-250A-42A2-AE76-7ACBE78F730E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C71E0B8F-89BC-4120-AA16-D123957D15E1}

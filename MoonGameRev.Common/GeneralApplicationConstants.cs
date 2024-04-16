@@ -14,8 +14,6 @@
         public const string ModeratorRoleName = "Moderator";
 
         public const string UserCacheKey = "UserCache";
-		public const string GameCacheKey = "GameCache";
-		public const string NewsCacheKey = "NewsCache";
 
 	}
 }
