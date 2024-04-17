@@ -1,5 +1,4 @@
-﻿<link rel="stylesheet" href="~/css/reviews.css" />
-
+﻿@model ReviewAllViewModel
 
 <div class="col-md-4 mb-4">
     <div class="card h-100">
@@ -13,7 +12,7 @@
                     <ul>
                         @foreach (var pro in Model.Pros.Split(';'))
                         {
-                            <li class="@(Model.IsPro ? "pros" : "cons")">@pro</li>
+                            <li>@pro</li>
                         }
                     </ul>
                 </li>
@@ -22,7 +21,7 @@
                     <ul>
                         @foreach (var con in Model.Cons.Split(';'))
                         {
-                            <li class="@(Model.IsPro ? "pros" : "cons")">@con</li>
+                            <li>@con</li>
                         }
                     </ul>
                 </li>

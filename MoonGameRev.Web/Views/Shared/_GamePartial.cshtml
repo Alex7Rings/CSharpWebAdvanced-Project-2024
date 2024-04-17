@@ -20,7 +20,7 @@
             <h5 class="card-title">
                 <a href="@Url.Action("Details", "Game", new { id = Model.Id })">@Model.Title</a>
             </h5>
-            <p class="card-text">Rating: @Model.Rating</p>
+            <p class="card-text">Rating: @Math.Round(Model.Rating, 1)</p>
         </div>
     </div>
 </div>
