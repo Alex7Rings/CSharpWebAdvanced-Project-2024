@@ -1,9 +1,11 @@
-﻿using MoonGameRev.Data;
-using MoonGameRev.Data.Models;
-
-namespace MoonGameRev.Services.Tests.ReviewTests
+﻿namespace MoonGameRev.Services.Tests.ReviewTests
 {
-	public static class ReviewDatabaseSeeder
+    using MoonGameRev.Data;
+    using MoonGameRev.Data.Models;
+
+
+
+    public static class ReviewDatabaseSeeder
 	{
 		public static AppUser User1;
 		public static AppUser User2;

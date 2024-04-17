@@ -1,13 +1,14 @@
-﻿using Microsoft.EntityFrameworkCore;
-using MoonGameRev.Data;
-using MoonGameRev.Data.Models;
-using MoonGameRev.Services.Data.Interfaces;
-using MoonGameRev.Services.Data.Models.News;
-using MoonGameRev.Web.ViewModels.Home;
-using MoonGameRev.Web.ViewModels.News;
-
-namespace MoonGameRev.Services.Data
+﻿namespace MoonGameRev.Services.Data
 {
+    using Microsoft.EntityFrameworkCore;
+    using MoonGameRev.Data;
+    using MoonGameRev.Data.Models;
+    using MoonGameRev.Services.Data.Interfaces;
+    using MoonGameRev.Services.Data.Models.News;
+    using MoonGameRev.Web.ViewModels.Home;
+    using MoonGameRev.Web.ViewModels.News;
+
+
     public class NewsService : INewsService
     {
         private readonly MoonGameRevDbContext dbContext;
@@ -138,7 +139,7 @@ namespace MoonGameRev.Services.Data
                 Id= newsId,
                 Title = news.Title,
                 JournalistId = news.JournalistId.ToString(),
-                AuthorName = news.Journalist.User.Email,
+                AuthorName = news.Journalist.User.UserName,
                 Date = news.Date.ToString(),
                 PictureUrl= news.PictureUrl,
                 Article = news.Article

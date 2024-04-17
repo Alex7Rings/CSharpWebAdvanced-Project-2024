@@ -1,9 +1,8 @@
-﻿using MoonGameRev.Web.ViewModels.News;
-using System.ComponentModel.DataAnnotations;
-using static MoonGameRev.Common.GeneralApplicationConstants;
-
-namespace MoonGameRev.Web.ViewModels.Game
+﻿namespace MoonGameRev.Web.ViewModels.Game
 {
+    using static MoonGameRev.Common.GeneralApplicationConstants;
+
+
     public class UpcomingGamesQueryModel
     {
         public UpcomingGamesQueryModel()

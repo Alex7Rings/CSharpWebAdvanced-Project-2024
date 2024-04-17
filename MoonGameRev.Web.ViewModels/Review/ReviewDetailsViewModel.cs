@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace MoonGameRev.Web.ViewModels.Review
+﻿namespace MoonGameRev.Web.ViewModels.Review
 {
     public class ReviewDetailsViewModel
     {

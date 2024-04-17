@@ -1,13 +1,15 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using MoonGameRev.Data.Models;
-using MoonGameRev.Web.ViewModels.User;
-using static MoonGameRev.Common.GeneralApplicationConstants;
-using static MoonGameRev.Common.NotificationMessagesConstants;
-
-namespace MoonGameRev.Web.Areas.Admin.Controllers
+﻿namespace MoonGameRev.Web.Areas.Admin.Controllers
 {
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.AspNetCore.Mvc;
+    using MoonGameRev.Data.Models;
+    using MoonGameRev.Web.ViewModels.User;
+    using static MoonGameRev.Common.GeneralApplicationConstants;
+    using static MoonGameRev.Common.NotificationMessagesConstants;
+
+
+
     public class HomeController : AdminController
     {
 		private readonly UserManager<AppUser> userManager;

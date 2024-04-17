@@ -1,8 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
-using static MoonGameRev.Common.EntityValidationConstants.Journalist;
-
-namespace MoonGameRev.Web.ViewModels.Journalist
+﻿namespace MoonGameRev.Web.ViewModels.Journalist
 {
+    using System.ComponentModel.DataAnnotations;
+    using static MoonGameRev.Common.EntityValidationConstants.Journalist;
+
+
     public class BecomeJournalistFormModel
     {
         [Required]

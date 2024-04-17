@@ -1,7 +1,7 @@
-﻿using MoonGameRev.Web.ViewModels.News;
-
-namespace MoonGameRev.Services.Data.Models.News
+﻿namespace MoonGameRev.Services.Data.Models.News
 {
+    using MoonGameRev.Web.ViewModels.News;
+
     public class AllNewsFilteredAndPagedServiceModel
     {
         public AllNewsFilteredAndPagedServiceModel()

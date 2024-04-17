@@ -1,12 +1,14 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using MoonGameRev.Services.Data.Interfaces;
-using MoonGameRev.Web.Infrastructure.Extensions;
-using MoonGameRev.Web.ViewModels.Journalist;
-using static MoonGameRev.Common.NotificationMessagesConstants;
-
-namespace MoonGameRev.Web.Controllers
+﻿namespace MoonGameRev.Web.Controllers
 {
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Mvc;
+    using MoonGameRev.Services.Data.Interfaces;
+    using MoonGameRev.Web.Infrastructure.Extensions;
+    using MoonGameRev.Web.ViewModels.Journalist;
+    using static MoonGameRev.Common.NotificationMessagesConstants;
+
+
+
     [Authorize]
     public class JournalistController : Controller
     {

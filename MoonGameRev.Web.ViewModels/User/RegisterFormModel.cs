@@ -1,8 +1,8 @@
-﻿using System.ComponentModel.DataAnnotations;
-using static MoonGameRev.Common.EntityValidationConstants.User;
-
-namespace MoonGameRev.Web.ViewModels.User
+﻿namespace MoonGameRev.Web.ViewModels.User
 {
+    using System.ComponentModel.DataAnnotations;
+    using static MoonGameRev.Common.EntityValidationConstants.User;
+
     public class RegisterFormModel
     {
         [Required]

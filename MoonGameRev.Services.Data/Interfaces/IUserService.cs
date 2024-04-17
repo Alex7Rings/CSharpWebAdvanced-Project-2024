@@ -1,8 +1,7 @@
-﻿using MoonGameRev.Web.Areas.Admin.ViewModels.User;
-
-
-namespace MoonGameRev.Services.Data.Interfaces
+﻿namespace MoonGameRev.Services.Data.Interfaces
 {
+    using MoonGameRev.Web.Areas.Admin.ViewModels.User;
+
     public interface IUserService
     {
         Task<string> GetUserNameByIdAsync(string userId);

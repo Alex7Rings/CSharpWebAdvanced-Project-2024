@@ -1,8 +1,8 @@
-﻿using System.ComponentModel.DataAnnotations;
-using static MoonGameRev.Common.EntityValidationConstants.News;
-
-namespace MoonGameRev.Web.ViewModels.News
+﻿namespace MoonGameRev.Web.ViewModels.News
 {
+    using System.ComponentModel.DataAnnotations;
+    using static MoonGameRev.Common.EntityValidationConstants.News;
+
     public class NewsFormModel
     {
         [Required]

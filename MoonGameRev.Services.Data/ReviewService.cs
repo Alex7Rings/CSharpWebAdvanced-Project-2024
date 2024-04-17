@@ -1,15 +1,14 @@
-﻿using Microsoft.EntityFrameworkCore;
-using MoonGameRev.Data;
-using MoonGameRev.Data.Models;
-using MoonGameRev.Services.Data.Interfaces;
-using MoonGameRev.Services.Data.Models.Ranking;
-using MoonGameRev.Services.Data.Models.Review;
-using MoonGameRev.Web.ViewModels.Review;
-using MoonGameRev.Web.ViewModels.Review.Enums;
-using static MoonGameRev.Services.Data.Models.Ranking.RankingServiceModel;
-
-namespace MoonGameRev.Services.Data
+﻿namespace MoonGameRev.Services.Data
 {
+    using Microsoft.EntityFrameworkCore;
+    using MoonGameRev.Data;
+    using MoonGameRev.Data.Models;
+    using MoonGameRev.Services.Data.Interfaces;
+    using MoonGameRev.Services.Data.Models.Ranking;
+    using MoonGameRev.Services.Data.Models.Review;
+    using MoonGameRev.Web.ViewModels.Review;
+    using MoonGameRev.Web.ViewModels.Review.Enums;
+
     public class ReviewService : IReviewService
     {
         private readonly MoonGameRevDbContext dbContext;
@@ -27,8 +26,8 @@ namespace MoonGameRev.Services.Data
                 Pros = reviewModel.Pros,
                 Cons = reviewModel.Cons,
                 Comment = reviewModel.Comment,
-                UserId = Guid.Parse(userId), // Set the user ID
-                GameID = Guid.Parse(gameId) // Set the game ID
+                UserId = Guid.Parse(userId), 
+                GameID = Guid.Parse(gameId) 
             };
 
             await dbContext.Reviews.AddAsync(newReview);

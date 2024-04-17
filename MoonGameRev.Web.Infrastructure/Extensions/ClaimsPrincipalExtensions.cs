@@ -1,8 +1,8 @@
-﻿using System.Security.Claims;
-using static MoonGameRev.Common.GeneralApplicationConstants;
-
-namespace MoonGameRev.Web.Infrastructure.Extensions
+﻿namespace MoonGameRev.Web.Infrastructure.Extensions
 {
+    using System.Security.Claims;
+    using static MoonGameRev.Common.GeneralApplicationConstants;
+
     public static class ClaimsPrincipalExtensions
     {
         public static string? GetId(this ClaimsPrincipal user)

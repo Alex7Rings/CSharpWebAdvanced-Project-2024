@@ -1,17 +1,17 @@
-﻿using Microsoft.EntityFrameworkCore;
-using MoonGameRev.Data;
-using MoonGameRev.Data.Models;
-using MoonGameRev.Services.Data.Interfaces;
-using MoonGameRev.Services.Data.Models.Game;
-using MoonGameRev.Web.ViewModels.Game;
-using MoonGameRev.Web.ViewModels.Game.Enums;
-using MoonGameRev.Web.ViewModels.Genre;
-using MoonGameRev.Web.ViewModels.Home;
-using MoonGameRev.Web.ViewModels.Review;
-using System.Globalization;
-
-namespace MoonGameRev.Services.Data
+﻿namespace MoonGameRev.Services.Data
 {
+    using Microsoft.EntityFrameworkCore;
+    using MoonGameRev.Data;
+    using MoonGameRev.Data.Models;
+    using MoonGameRev.Services.Data.Interfaces;
+    using MoonGameRev.Services.Data.Models.Game;
+    using MoonGameRev.Web.ViewModels.Game;
+    using MoonGameRev.Web.ViewModels.Game.Enums;
+    using MoonGameRev.Web.ViewModels.Home;
+    using MoonGameRev.Web.ViewModels.Review;
+    using System.Globalization;
+
+
     public class GameService : IGameService
     {
         private readonly MoonGameRevDbContext dbContext;
@@ -135,13 +135,13 @@ namespace MoonGameRev.Services.Data
             {
                 var gameGenre = new GameGenre
                 {
-                    GameID = newGame.Id, // Use the ID of the newly created game
+                    GameID = newGame.Id, 
                     GenreID = genreId
                 };
-                // Add the new GameGenre entry to the database
+                
                 await this.dbContext.GameGenres.AddAsync(gameGenre);
             }
-            // Save changes to persist the new GameGenre entries
+            
             await this.dbContext.SaveChangesAsync();
 
             return newGame.Id.ToString();
@@ -163,7 +163,7 @@ namespace MoonGameRev.Services.Data
             game.ReleaseDate = DateTime.ParseExact(formModel.ReleaseDate, "dd/MM/yyyy", CultureInfo.InvariantCulture);
             game.IsReleased = formModel.IsReleased;
 
-            // Update game genres
+            
             List<int> selectedGenreIds = formModel.GenreIds.ToList();
             UpdateGameGenres(game, selectedGenreIds);
 

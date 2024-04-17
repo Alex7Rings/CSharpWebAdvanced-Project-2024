@@ -3,7 +3,6 @@
     using Microsoft.AspNetCore.Mvc;
     using MoonGameRev.Services.Data.Interfaces;
     using MoonGameRev.Web.ViewModels.Home;
-    using System.Diagnostics;
     using static MoonGameRev.Common.GeneralApplicationConstants;
 
     public class HomeController : Controller
@@ -24,18 +23,18 @@
                 return this.RedirectToAction("Index", "Home", new { Area = AdminAreaName });
             }
 
-            // Retrieve last five upcoming games
+            
             IEnumerable<IndexViewModel> upcomingGamesViewModel =
                await this.gameService.LastFiveUpcomingGamesAsync();
 
-            // Retrieve last five trending games
+           
             IEnumerable<IndexViewModel> trendingGamesViewModel =
                await this.gameService.LastFiveGamesAsync();
 
             IEnumerable<IndexViewModel> latestNews =
                 await this.newsService.LatestNewsAsync();
 
-            // Pass the view models to the view
+            
             ViewData["UpcomingGames"] = upcomingGamesViewModel;
             ViewData["TrendingGames"] = trendingGamesViewModel;
             ViewData["LatestNews"] = latestNews;

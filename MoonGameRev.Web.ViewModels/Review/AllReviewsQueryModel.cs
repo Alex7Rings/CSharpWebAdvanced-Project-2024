@@ -1,9 +1,9 @@
-﻿using MoonGameRev.Web.ViewModels.Review.Enums;
-using System.ComponentModel.DataAnnotations;
-using static MoonGameRev.Common.GeneralApplicationConstants;
-
-namespace MoonGameRev.Web.ViewModels.Review
+﻿namespace MoonGameRev.Web.ViewModels.Review
 {
+    using MoonGameRev.Web.ViewModels.Review.Enums;
+    using System.ComponentModel.DataAnnotations;
+    using static MoonGameRev.Common.GeneralApplicationConstants;
+
     public class AllReviewsQueryModel
     {
         public AllReviewsQueryModel()

@@ -1,7 +1,7 @@
-﻿using MoonGameRev.Web.ViewModels.Genre;
-
-namespace MoonGameRev.Services.Data.Interfaces
+﻿namespace MoonGameRev.Services.Data.Interfaces
 {
+    using MoonGameRev.Web.ViewModels.Genre;
+
     public interface IGenreService
     {
         Task<IEnumerable<GameSelectGenreFormModel>> AllGenresAsync();

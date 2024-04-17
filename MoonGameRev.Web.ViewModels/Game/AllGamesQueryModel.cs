@@ -1,9 +1,10 @@
-﻿using MoonGameRev.Web.ViewModels.Game.Enums;
-using System.ComponentModel.DataAnnotations;
-using static MoonGameRev.Common.GeneralApplicationConstants;
-
-namespace MoonGameRev.Web.ViewModels.Game
+﻿namespace MoonGameRev.Web.ViewModels.Game
 {
+    using MoonGameRev.Web.ViewModels.Game.Enums;
+    using System.ComponentModel.DataAnnotations;
+    using static MoonGameRev.Common.GeneralApplicationConstants;
+
+
     public class AllGamesQueryModel
     {
         public AllGamesQueryModel()

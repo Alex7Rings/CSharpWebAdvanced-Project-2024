@@ -1,17 +1,18 @@
-﻿using Microsoft.EntityFrameworkCore;
-using MoonGameRev.Data;
-using MoonGameRev.Data.Models;
-using MoonGameRev.Services.Data;
-using MoonGameRev.Services.Data.Interfaces;
-using MoonGameRev.Web.ViewModels.Game;
-using MoonGameRev.Web.ViewModels.Game.Enums;
-using MoonGameRev.Web.ViewModels.Home;
-using System.Globalization;
-using static MoonGameRev.Services.Tests.GameServiceTests.GameDataBaseSeeder;
-
-namespace MoonGameRev.Services.Tests.GameServiceTests
+﻿namespace MoonGameRev.Services.Tests.GameServiceTests
 {
-	public class GameAndGenreServicesTests
+    using Microsoft.EntityFrameworkCore;
+    using MoonGameRev.Data;
+    using MoonGameRev.Services.Data;
+    using MoonGameRev.Services.Data.Interfaces;
+    using MoonGameRev.Web.ViewModels.Game;
+    using MoonGameRev.Web.ViewModels.Game.Enums;
+    using MoonGameRev.Web.ViewModels.Home;
+    using System.Globalization;
+    using static MoonGameRev.Services.Tests.GameServiceTests.GameDataBaseSeeder;
+
+
+
+    public class GameAndGenreServicesTests
 	{
 		private MoonGameRevDbContext dbContext;
 		private DbContextOptions<MoonGameRevDbContext> optionsDb;

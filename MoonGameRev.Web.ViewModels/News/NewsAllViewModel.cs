@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MoonGameRev.Web.ViewModels.News
+﻿namespace MoonGameRev.Web.ViewModels.News
 {
+    using System.ComponentModel.DataAnnotations;
+
     public class NewsAllViewModel
     {
         public string Id { get; set; } = null!;

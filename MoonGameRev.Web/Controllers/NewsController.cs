@@ -1,15 +1,15 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using MoonGameRev.Services.Data.Interfaces;
-using MoonGameRev.Services.Data.Models.Game;
-using MoonGameRev.Services.Data.Models.News;
-using MoonGameRev.Web.Infrastructure.Extensions;
-using MoonGameRev.Web.ViewModels.Home;
-using MoonGameRev.Web.ViewModels.News;
-using static MoonGameRev.Common.NotificationMessagesConstants;
-
-namespace MoonGameRev.Web.Controllers
+﻿namespace MoonGameRev.Web.Controllers
 {
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Mvc;
+    using MoonGameRev.Services.Data.Interfaces;
+    using MoonGameRev.Services.Data.Models.News;
+    using MoonGameRev.Web.Infrastructure.Extensions;
+    using MoonGameRev.Web.ViewModels.Home;
+    using MoonGameRev.Web.ViewModels.News;
+    using static MoonGameRev.Common.NotificationMessagesConstants;
+
+
     [Authorize]
     public class NewsController : Controller
     {
@@ -38,7 +38,7 @@ namespace MoonGameRev.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> Add()
         {
-            // Check if the user is a journalist or an admin/moderator
+            
             bool isJournalist = await this.journalistService.JournalistExistsByUserIdAsync(this.User.GetId()!);
             if (!isJournalist && !this.User.IsAdminOrModerator())
             {
@@ -61,7 +61,7 @@ namespace MoonGameRev.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> Add(NewsFormModel model)
         {
-            // Check if the user is a journalist or an admin/moderator
+            
             bool isJournalist = await this.journalistService.JournalistExistsByUserIdAsync(this.User.GetId()!);
             if (!isJournalist && !this.User.IsAdminOrModerator())
             {
@@ -148,7 +148,7 @@ namespace MoonGameRev.Web.Controllers
                 return this.RedirectToAction("All", "News");
             }
 
-            // Check if the user is the journalist who wrote the article or an admin/moderator
+            
             string? journalistId = await this.journalistService.GetJournalistIdByUserIdAsync(this.User.GetId()!);
             bool isJournalist = await this.newsService.IsJournalistWithIdOwnerOfTheNewsIdAsync(id, journalistId!);
             if (!isJournalist && !this.User.IsAdminOrModerator())
@@ -183,7 +183,7 @@ namespace MoonGameRev.Web.Controllers
                 return this.RedirectToAction("All", "News");
             }
 
-            // Check if the user is the journalist who wrote the article or an admin/moderator
+            
             string? journalistId = await this.journalistService.GetJournalistIdByUserIdAsync(this.User.GetId()!);
             bool isJournalist = await this.newsService.IsJournalistWithIdOwnerOfTheNewsIdAsync(id, journalistId!);
             if (!isJournalist && !this.User.IsAdminOrModerator())
@@ -216,7 +216,7 @@ namespace MoonGameRev.Web.Controllers
                 return this.RedirectToAction("All", "News");
             }
 
-            // Check if the user is the journalist who wrote the article or an admin/moderator
+           
             string? journalistId = await this.journalistService.GetJournalistIdByUserIdAsync(this.User.GetId()!);
             bool isJournalist = await this.newsService.IsJournalistWithIdOwnerOfTheNewsIdAsync(id, journalistId!);
             if (!isJournalist && !this.User.IsAdminOrModerator())
@@ -247,7 +247,7 @@ namespace MoonGameRev.Web.Controllers
                 return this.RedirectToAction("All", "News");
             }
 
-            // Check if the user is the journalist who wrote the article or an admin/moderator
+           
             string? journalistId = await this.journalistService.GetJournalistIdByUserIdAsync(this.User.GetId()!);
             bool isJournalist = await this.newsService.IsJournalistWithIdOwnerOfTheNewsIdAsync(id, journalistId!);
             if (!isJournalist && !this.User.IsAdminOrModerator())

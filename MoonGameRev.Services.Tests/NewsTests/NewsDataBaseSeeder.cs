@@ -1,9 +1,11 @@
-﻿using MoonGameRev.Data;
-using MoonGameRev.Data.Models;
-
-namespace MoonGameRev.Services.Tests.NewsTests
+﻿namespace MoonGameRev.Services.Tests.NewsTests
 {
-	public static class NewsDataBaseSeeder
+    using MoonGameRev.Data;
+    using MoonGameRev.Data.Models;
+
+
+
+    public static class NewsDataBaseSeeder
 	{
 		public static News News1;
 		public static News News2;
@@ -27,7 +29,7 @@ namespace MoonGameRev.Services.Tests.NewsTests
 
 			Journalist1 = new Journalist()
 			{
-				PhoneNumber = "+359886785089",
+				PhoneNumber = "+359886785022",
 				UserId = User1.Id
 			};
 

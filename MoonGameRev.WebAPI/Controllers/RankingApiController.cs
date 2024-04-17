@@ -1,10 +1,10 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using MoonGameRev.Services.Data.Interfaces;
-using MoonGameRev.Services.Data.Models.Ranking;
-
-namespace MoonGameRev.WebAPI.Controllers
+﻿namespace MoonGameRev.WebAPI.Controllers
 {
+    using Microsoft.AspNetCore.Mvc;
+    using MoonGameRev.Services.Data.Interfaces;
+    using MoonGameRev.Services.Data.Models.Ranking;
+
+
     [Route("api/ranking")]
     [ApiController]
     public class RankingApiController : ControllerBase

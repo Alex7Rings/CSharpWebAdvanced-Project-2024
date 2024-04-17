@@ -1,15 +1,13 @@
-﻿using System.Reflection;
-
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.DependencyInjection;
-using MoonGameRev.Data.Models;
-
-using static MoonGameRev.Common.GeneralApplicationConstants;
-
-
-namespace MoonGameRev.Web.Infrastructure.Extensions
+﻿namespace MoonGameRev.Web.Infrastructure.Extensions
 {
+    using Microsoft.AspNetCore.Builder;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.Extensions.DependencyInjection;
+    using MoonGameRev.Data.Models;
+    using System.Reflection;
+    using static MoonGameRev.Common.GeneralApplicationConstants;
+
+
     public static class WebApplicationBuilderExtensions
     {
         /// <summary>
@@ -88,9 +86,5 @@ namespace MoonGameRev.Web.Infrastructure.Extensions
             return app;
         }
 
-        //public static IApplicationBuilder EnableOnlineUsersCheck(this IApplicationBuilder app)
-        //{
-        //    return app.UseMiddleware<OnlineUsersMiddleware>();
-        //}
     }
 }

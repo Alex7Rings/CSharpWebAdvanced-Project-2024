@@ -1,7 +1,7 @@
-﻿using MoonGameRev.Web.ViewModels.Game;
-
-namespace MoonGameRev.Services.Data.Models.Game
+﻿namespace MoonGameRev.Services.Data.Models.Game
 {
+    using MoonGameRev.Web.ViewModels.Game;
+
     public class AllUpcomingGamesPagedServiceModel
     {
         public AllUpcomingGamesPagedServiceModel()

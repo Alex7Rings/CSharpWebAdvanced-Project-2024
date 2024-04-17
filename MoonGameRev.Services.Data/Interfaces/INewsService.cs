@@ -1,9 +1,9 @@
-﻿using MoonGameRev.Services.Data.Models.News;
-using MoonGameRev.Web.ViewModels.Home;
-using MoonGameRev.Web.ViewModels.News;
-
-namespace MoonGameRev.Services.Data.Interfaces
+﻿namespace MoonGameRev.Services.Data.Interfaces
 {
+    using MoonGameRev.Services.Data.Models.News;
+    using MoonGameRev.Web.ViewModels.Home;
+    using MoonGameRev.Web.ViewModels.News;
+
     public interface INewsService
     {
         Task<string> CreateAsync(NewsFormModel formModel, string journalistId);

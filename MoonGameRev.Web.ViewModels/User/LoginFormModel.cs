@@ -1,7 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace MoonGameRev.Web.ViewModels.User
+﻿namespace MoonGameRev.Web.ViewModels.User
 {
+    using System.ComponentModel.DataAnnotations;
+
     public class LoginFormModel
     {
         [Required]

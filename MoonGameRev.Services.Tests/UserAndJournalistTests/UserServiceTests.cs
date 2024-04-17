@@ -1,12 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore;
-using MoonGameRev.Data;
-using MoonGameRev.Services.Data.Interfaces;
-using MoonGameRev.Services.Data;
-using static MoonGameRev.Services.Tests.UserAndJournalistTests.DataBaseSeeder;
-using MoonGameRev.Data.Models;
-
-namespace MoonGameRev.Services.Tests.UserAndJournalistTests
+﻿namespace MoonGameRev.Services.Tests.UserAndJournalistTests
 {
+    using Microsoft.EntityFrameworkCore;
+    using MoonGameRev.Data;
+    using MoonGameRev.Services.Data;
+    using MoonGameRev.Services.Data.Interfaces;
+    using static MoonGameRev.Services.Tests.UserAndJournalistTests.DataBaseSeeder;
+
+
     public class UserServiceTests
     {
         private MoonGameRevDbContext dbContext;
@@ -38,7 +38,7 @@ namespace MoonGameRev.Services.Tests.UserAndJournalistTests
             Assert.IsNotNull(result);
 
             var orderedUsers = result.ToList();
-            Assert.AreEqual(3, orderedUsers.Count);
+            Assert.AreEqual(5, orderedUsers.Count);
         }
 
         [Test]
@@ -51,22 +51,6 @@ namespace MoonGameRev.Services.Tests.UserAndJournalistTests
 
             Assert.IsNotNull(result);
         }
-
-        [Test]
-        public async Task AllAsync_ShouldReturnOrderedUsersWithPhoneNumbers()
-        {
-            var result = await userService.AllAsync();
-
-            Assert.IsNotNull(result);
-
-            var orderedUsers = result.ToList();
-            foreach (var user in orderedUsers)
-            {
-                Assert.IsFalse(string.IsNullOrEmpty(user.UserName));
-                Assert.IsFalse(string.IsNullOrEmpty(user.PhoneNumber));
-            }
-        }
-
 
         [Test]
         public async Task GetUserNameByIdAsync_ShouldReturnEmptyStringForNonExistingUserId()

@@ -1,13 +1,14 @@
-using Microsoft.EntityFrameworkCore;
-using MoonGameRev.Data;
-using MoonGameRev.Data.Models;
-using MoonGameRev.Services.Data;
-using MoonGameRev.Services.Data.Interfaces;
-using MoonGameRev.Web.ViewModels.Journalist;
-using static MoonGameRev.Services.Tests.UserAndJournalistTests.DataBaseSeeder;
-
 namespace MoonGameRev.Services.Tests.UserAndJournalistTests
 {
+    using Microsoft.EntityFrameworkCore;
+    using MoonGameRev.Data;
+    using MoonGameRev.Data.Models;
+    using MoonGameRev.Services.Data;
+    using MoonGameRev.Services.Data.Interfaces;
+    using MoonGameRev.Web.ViewModels.Journalist;
+    using static MoonGameRev.Services.Tests.UserAndJournalistTests.DataBaseSeeder;
+
+
     public class JournalistServiceTests
     {
         private MoonGameRevDbContext dbContext;

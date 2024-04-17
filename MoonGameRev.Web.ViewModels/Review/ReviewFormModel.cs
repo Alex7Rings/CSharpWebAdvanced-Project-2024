@@ -1,9 +1,10 @@
-﻿using MoonGameRev.Common.Attributes;
-using System.ComponentModel.DataAnnotations;
-using static MoonGameRev.Common.EntityValidationConstants.Review;
-
-namespace MoonGameRev.Web.ViewModels.Review
+﻿namespace MoonGameRev.Web.ViewModels.Review
 {
+    using MoonGameRev.Common.Attributes;
+    using System.ComponentModel.DataAnnotations;
+    using static MoonGameRev.Common.EntityValidationConstants.Review;
+
+
     public class ReviewFormModel
     {
         [Required]

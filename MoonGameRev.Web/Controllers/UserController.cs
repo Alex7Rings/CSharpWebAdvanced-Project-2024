@@ -1,16 +1,15 @@
-﻿using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using MoonGameRev.Data.Models;
-using MoonGameRev.Web.ViewModels.User;
-using static MoonGameRev.Common.NotificationMessagesConstants;
-using static MoonGameRev.Common.GeneralApplicationConstants;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.Extensions.Caching.Memory;
-
-
-namespace MoonGameRev.Web.Controllers
+﻿namespace MoonGameRev.Web.Controllers
 {
+    using Microsoft.AspNetCore.Authentication;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.Extensions.Caching.Memory;
+    using MoonGameRev.Data.Models;
+    using MoonGameRev.Web.ViewModels.User;
+    using static MoonGameRev.Common.GeneralApplicationConstants;
+    using static MoonGameRev.Common.NotificationMessagesConstants;
+
+
     public class UserController : Controller
     {
         private readonly SignInManager<AppUser> signInManager;

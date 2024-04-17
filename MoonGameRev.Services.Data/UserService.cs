@@ -1,12 +1,12 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using MoonGameRev.Data;
-using MoonGameRev.Data.Models;
-using MoonGameRev.Services.Data.Interfaces;
-using MoonGameRev.Web.Areas.Admin.ViewModels.User;
-
-namespace MoonGameRev.Services.Data
+﻿namespace MoonGameRev.Services.Data
 {
+    using Microsoft.EntityFrameworkCore;
+    using MoonGameRev.Data;
+    using MoonGameRev.Data.Models;
+    using MoonGameRev.Services.Data.Interfaces;
+    using MoonGameRev.Web.Areas.Admin.ViewModels.User;
+
+
     public class UserService : IUserService
     {
         private readonly MoonGameRevDbContext dbContext;

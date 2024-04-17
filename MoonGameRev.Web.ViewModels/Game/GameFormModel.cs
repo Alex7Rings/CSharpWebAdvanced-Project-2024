@@ -1,9 +1,10 @@
-﻿using MoonGameRev.Web.ViewModels.Genre;
-using System.ComponentModel.DataAnnotations;
-using static MoonGameRev.Common.EntityValidationConstants.Game;
-
-namespace MoonGameRev.Web.ViewModels.Game
+﻿namespace MoonGameRev.Web.ViewModels.Game
 {
+    using MoonGameRev.Web.ViewModels.Genre;
+    using System.ComponentModel.DataAnnotations;
+    using static MoonGameRev.Common.EntityValidationConstants.Game;
+
+
     public class GameFormModel
     {
         public GameFormModel()

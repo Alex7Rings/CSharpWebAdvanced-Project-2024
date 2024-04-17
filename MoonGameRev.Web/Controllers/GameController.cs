@@ -1,13 +1,14 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using MoonGameRev.Services.Data.Interfaces;
-using MoonGameRev.Services.Data.Models.Game;
-using MoonGameRev.Web.Infrastructure.Extensions;
-using MoonGameRev.Web.ViewModels.Game;
-using static MoonGameRev.Common.NotificationMessagesConstants;
-
-namespace MoonGameRev.Web.Controllers
+﻿namespace MoonGameRev.Web.Controllers
 {
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Mvc;
+    using MoonGameRev.Services.Data.Interfaces;
+    using MoonGameRev.Services.Data.Models.Game;
+    using MoonGameRev.Web.Infrastructure.Extensions;
+    using MoonGameRev.Web.ViewModels.Game;
+    using static MoonGameRev.Common.NotificationMessagesConstants;
+
+
     [Authorize]
     public class GameController : Controller
     {
@@ -115,7 +116,7 @@ namespace MoonGameRev.Web.Controllers
                 }
             }
 
-            // If the model state is not valid, retrieve the genres again
+           
             model.Genres = await this.genreService.AllGenresAsync();
             return View(model);
         }

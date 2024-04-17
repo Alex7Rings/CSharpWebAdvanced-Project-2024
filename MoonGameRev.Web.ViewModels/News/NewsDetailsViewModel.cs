@@ -1,7 +1,7 @@
-﻿using MoonGameRev.Web.ViewModels.Home;
-
-namespace MoonGameRev.Web.ViewModels.News
+﻿namespace MoonGameRev.Web.ViewModels.News
 {
+    using MoonGameRev.Web.ViewModels.Home;
+
     public class NewsDetailsViewModel: NewsAllViewModel
     {
         public string AuthorName { get; set; } = null!;

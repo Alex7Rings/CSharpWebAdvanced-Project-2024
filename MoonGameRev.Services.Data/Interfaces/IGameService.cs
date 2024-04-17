@@ -1,10 +1,9 @@
-﻿using MoonGameRev.Data.Models;
-using MoonGameRev.Services.Data.Models.Game;
-using MoonGameRev.Web.ViewModels.Game;
-using MoonGameRev.Web.ViewModels.Home;
-
-namespace MoonGameRev.Services.Data.Interfaces
+﻿namespace MoonGameRev.Services.Data.Interfaces
 {
+    using MoonGameRev.Services.Data.Models.Game;
+    using MoonGameRev.Web.ViewModels.Game;
+    using MoonGameRev.Web.ViewModels.Home;
+
     public interface IGameService
     {
         string GetRatingCategory(double averageRating);

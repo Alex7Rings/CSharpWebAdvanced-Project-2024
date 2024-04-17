@@ -1,10 +1,8 @@
-﻿using MoonGameRev.Services.Data.Models.Ranking;
-using MoonGameRev.Services.Data.Models.Review;
-using MoonGameRev.Web.ViewModels.Review;
-using static MoonGameRev.Services.Data.Models.Ranking.RankingServiceModel;
-
-namespace MoonGameRev.Services.Data.Interfaces
+﻿namespace MoonGameRev.Services.Data.Interfaces
 {
+    using MoonGameRev.Services.Data.Models.Ranking;
+    using MoonGameRev.Services.Data.Models.Review;
+    using MoonGameRev.Web.ViewModels.Review;
     public interface IReviewService
     {
         Task<bool> HasReviewedGameAsync(string userId, string gameId);

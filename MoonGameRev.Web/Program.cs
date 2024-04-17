@@ -1,9 +1,5 @@
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using MoonGameRev.Data;
 namespace MoonGameRev.Web
 {
-    using Microsoft.AspNetCore.Authentication.Cookies;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
@@ -45,7 +41,7 @@ namespace MoonGameRev.Web
                 .AddEntityFrameworkStores<MoonGameRevDbContext>();
 
             builder.Services.AddApplicationServices(typeof(IGameService));
-            builder.Services.AddApplicationServices(typeof(IReviewService));
+            //builder.Services.AddApplicationServices(typeof(IReviewService));
 
             builder.Services.AddMemoryCache();
 

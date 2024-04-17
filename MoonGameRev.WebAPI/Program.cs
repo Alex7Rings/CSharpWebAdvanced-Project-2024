@@ -1,10 +1,12 @@
-using Microsoft.EntityFrameworkCore;
-using MoonGameRev.Data;
-using MoonGameRev.Services.Data.Interfaces;
-using MoonGameRev.Web.Infrastructure.Extensions;
-
 namespace MoonGameRev.WebAPI
 {
+    using Microsoft.EntityFrameworkCore;
+    using MoonGameRev.Data;
+    using MoonGameRev.Services.Data.Interfaces;
+    using MoonGameRev.Web.Infrastructure.Extensions;
+
+
+
     public class Program
     {
         public static void Main(string[] args)

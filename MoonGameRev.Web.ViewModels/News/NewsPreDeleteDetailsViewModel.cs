@@ -1,7 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace MoonGameRev.Web.ViewModels.News
+﻿namespace MoonGameRev.Web.ViewModels.News
 {
+    using System.ComponentModel.DataAnnotations;
+
     public class NewsPreDeleteDetailsViewModel
     {
         public string Title { get; set; } = null!;

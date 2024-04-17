@@ -1,13 +1,15 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Caching.Memory;
-using MoonGameRev.Data.Models;
-using MoonGameRev.Services.Data.Interfaces;
-using MoonGameRev.Web.Areas.Admin.ViewModels.User;
-using static MoonGameRev.Common.GeneralApplicationConstants;
-
-namespace MoonGameRev.Web.Areas.Admin.Controllers
+﻿namespace MoonGameRev.Web.Areas.Admin.Controllers
 {
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.Extensions.Caching.Memory;
+    using MoonGameRev.Data.Models;
+    using MoonGameRev.Services.Data.Interfaces;
+    using MoonGameRev.Web.Areas.Admin.ViewModels.User;
+    using static MoonGameRev.Common.GeneralApplicationConstants;
+
+
+
     public class UserController : AdminController
     {
         private readonly IUserService userService;

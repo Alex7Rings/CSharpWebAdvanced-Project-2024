@@ -1,11 +1,13 @@
-﻿using Microsoft.EntityFrameworkCore;
-using MoonGameRev.Data;
-using MoonGameRev.Data.Models;
-using MoonGameRev.Services.Data.Interfaces;
-using MoonGameRev.Web.ViewModels.Journalist;
-
-namespace MoonGameRev.Services.Data
+﻿namespace MoonGameRev.Services.Data
 {
+    using Microsoft.EntityFrameworkCore;
+    using MoonGameRev.Data;
+    using MoonGameRev.Data.Models;
+    using MoonGameRev.Services.Data.Interfaces;
+    using MoonGameRev.Web.ViewModels.Journalist;
+
+
+
     public class JournalistService : IJournalistService
     {
         private readonly MoonGameRevDbContext dbContext;

@@ -1,8 +1,7 @@
-﻿using MoonGameRev.Web.ViewModels.Review;
-using System.ComponentModel.DataAnnotations;
-
-namespace MoonGameRev.Web.ViewModels.Game
+﻿namespace MoonGameRev.Web.ViewModels.Game
 {
+    using MoonGameRev.Web.ViewModels.Review;
+
     public class GameDetailsViewModel : GameAllViewModel
     {
         public string Description { get; set; } = null!;

@@ -1,17 +1,17 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using MoonGameRev.Data.Models;
-using MoonGameRev.Services.Data;
-using MoonGameRev.Services.Data.Interfaces;
-using MoonGameRev.Services.Data.Models.Review;
-using MoonGameRev.Web.Infrastructure.Extensions;
-using MoonGameRev.Web.ViewModels.Review;
-using System.Security.Claims;
-using static MoonGameRev.Common.NotificationMessagesConstants;
-
-namespace MoonGameRev.Web.Controllers
+﻿namespace MoonGameRev.Web.Controllers
 {
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.AspNetCore.Mvc;
+    using MoonGameRev.Data.Models;
+    using MoonGameRev.Services.Data.Interfaces;
+    using MoonGameRev.Services.Data.Models.Review;
+    using MoonGameRev.Web.Infrastructure.Extensions;
+    using MoonGameRev.Web.ViewModels.Review;
+    using System.Security.Claims;
+    using static MoonGameRev.Common.NotificationMessagesConstants;
+
+
     [Authorize]
     public class ReviewController : Controller
     {
@@ -39,13 +39,11 @@ namespace MoonGameRev.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> Add(string gameId)
         {
-            // Get the current user's ID
+            
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-            // Check if the user has already reviewed the game
             bool hasReviewed = await reviewService.HasReviewedGameAsync(userId, gameId);
 
-            // If the user has already reviewed the game, redirect with an error message
             if (hasReviewed)
             {
                 TempData["ErrorMessage"] = "You have already submitted a review for this game.";
@@ -60,22 +58,17 @@ namespace MoonGameRev.Web.Controllers
         {
             if (!ModelState.IsValid)
             {
-                // Handle invalid model state
                 return View(reviewModel);
             }
 
-            // Get the current user's ID
             var user = await userManager.GetUserAsync(User);
             if (user == null)
             {
-                // User is not authenticated, handle accordingly (e.g., redirect to login page)
                 return RedirectToAction("Login", "Account");
             }
 
-            // Add the review to the database
             await reviewService.AddReviewAsync(reviewModel, user.Id.ToString(), gameId);
 
-            // Redirect back to the game details page with the same gameId
             this.TempData[SuccessMessage] = "The review was added successfully";
             return RedirectToAction("Details", "Game", new { id = gameId });
         }

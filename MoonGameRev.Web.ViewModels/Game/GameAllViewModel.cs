@@ -1,7 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace MoonGameRev.Web.ViewModels.Game
+﻿namespace MoonGameRev.Web.ViewModels.Game
 {
+    using System.ComponentModel.DataAnnotations;
+
     public class GameAllViewModel
     {
         public string Id { get; set; } 

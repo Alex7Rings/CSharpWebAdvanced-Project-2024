@@ -1,8 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using MoonGameRev.Data.Models;
-namespace MoonGameRev.Data.Configurations
+﻿namespace MoonGameRev.Data.Configurations
 {
+    using Microsoft.EntityFrameworkCore;
+    using Microsoft.EntityFrameworkCore.Metadata.Builders;
+    using MoonGameRev.Data.Models;
     public class SeedNewsEntityConfiguration : IEntityTypeConfiguration<News>
     {
         public void Configure(EntityTypeBuilder<News> builder)

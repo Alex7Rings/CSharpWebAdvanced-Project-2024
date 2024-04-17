@@ -1,10 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
-using MoonGameRev.Data;
-using MoonGameRev.Services.Data.Interfaces;
-using MoonGameRev.Web.ViewModels.Genre;
-
-namespace MoonGameRev.Services.Data
+﻿namespace MoonGameRev.Services.Data
 {
+    using Microsoft.EntityFrameworkCore;
+    using MoonGameRev.Data;
+    using MoonGameRev.Services.Data.Interfaces;
+    using MoonGameRev.Web.ViewModels.Genre;
+
+
     public class GenreService : IGenreService
     {
         private readonly MoonGameRevDbContext dbContext;

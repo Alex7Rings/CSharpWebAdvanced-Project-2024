@@ -1,7 +1,7 @@
-﻿using MoonGameRev.Web.ViewModels.Journalist;
-
-namespace MoonGameRev.Services.Data.Interfaces
+﻿namespace MoonGameRev.Services.Data.Interfaces
 {
+    using MoonGameRev.Web.ViewModels.Journalist;
+
     public interface IJournalistService
     {
         Task<bool> JournalistExistsByUserIdAsync(string userId);

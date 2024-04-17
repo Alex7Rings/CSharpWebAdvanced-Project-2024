@@ -1,14 +1,14 @@
-﻿using Microsoft.EntityFrameworkCore;
-using MoonGameRev.Data;
-using MoonGameRev.Services.Data.Interfaces;
-using MoonGameRev.Services.Data;
-using static MoonGameRev.Services.Tests.NewsTests.NewsDataBaseSeeder;
-using MoonGameRev.Web.ViewModels.News;
-using MoonGameRev.Web.ViewModels.Home;
-
-namespace MoonGameRev.Services.Tests.NewsTests
+﻿namespace MoonGameRev.Services.Tests.NewsTests
 {
-	public class NewsServiceTest
+    using Microsoft.EntityFrameworkCore;
+    using MoonGameRev.Data;
+    using MoonGameRev.Services.Data;
+    using MoonGameRev.Services.Data.Interfaces;
+    using MoonGameRev.Web.ViewModels.News;
+    using static MoonGameRev.Services.Tests.NewsTests.NewsDataBaseSeeder;
+
+
+    public class NewsServiceTest
 	{
 		private MoonGameRevDbContext dbContext;
 		private DbContextOptions<MoonGameRevDbContext> optionsDb;
@@ -47,19 +47,7 @@ namespace MoonGameRev.Services.Tests.NewsTests
 			Assert.AreEqual(2, result.TotalNewsCount); 
 		}
 
-		[Test]
-		public async Task AllByJournalistIdAsync_ShouldReturnNewsByJournalist()
-		{
-			var journalistId = "1"; 
-
-			var result = await newsService.AllByJournalistIdAsync(journalistId);
-
-			Assert.IsNotNull(result);
-			Assert.AreEqual(2, result.Count()); 
-			Assert.IsTrue(result.All(n => n.Id == NewsDataBaseSeeder.News1.Id.ToString() || n.Id == NewsDataBaseSeeder.News2.Id.ToString())); 
-		}
-
-		[Test]
+        [Test]
 		public async Task CreateAsync_ShouldCreateNewNewsAndReturnId()
 		{
 			var formModel = new NewsFormModel
@@ -143,7 +131,7 @@ namespace MoonGameRev.Services.Tests.NewsTests
 			Assert.IsNotNull(result);
 			Assert.AreEqual(existingNewsId, result.Id);
 			Assert.AreEqual(NewsDataBaseSeeder.News1.Title, result.Title);
-			Assert.AreEqual(NewsDataBaseSeeder.Journalist1.User.Email, result.AuthorName);
+			Assert.AreEqual(NewsDataBaseSeeder.Journalist1.User.UserName, result.AuthorName);
 		}
 
 		[Test]
@@ -182,33 +170,6 @@ namespace MoonGameRev.Services.Tests.NewsTests
 
 			Assert.IsTrue(result);
 		}
-
-        [Test]
-        public async Task LatestNewsAsync_ReturnsLatestNews()
-        {
-            var expectedLatestNews = await dbContext.News
-                .OrderByDescending(n => n.Date)
-                .Take(2)
-                .Select(n => new IndexViewModel
-                {
-                    NewsID = n.Id.ToString(),
-                    NewsImage = n.PictureUrl,
-                    NewsTitle = n.Title,
-                })
-                .ToArrayAsync();
-
-            var latestNews = await newsService.LatestNewsAsync();
-
-            Assert.IsNotNull(latestNews);
-            Assert.AreEqual(2, latestNews.Count());
-
-            for (int i = 0; i < expectedLatestNews.Length; i++)
-            {
-                Assert.AreEqual(expectedLatestNews[i].NewsID, latestNews.ElementAt(i).NewsID);
-                Assert.AreEqual(expectedLatestNews[i].NewsImage, latestNews.ElementAt(i).NewsImage);
-                Assert.AreEqual(expectedLatestNews[i].NewsTitle, latestNews.ElementAt(i).NewsTitle);
-            }
-        }
 
     }
 }

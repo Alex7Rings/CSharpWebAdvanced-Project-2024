@@ -1,7 +1,7 @@
-﻿using MoonGameRev.Web.ViewModels.Review;
-
-namespace MoonGameRev.Services.Data.Models.Review
+﻿namespace MoonGameRev.Services.Data.Models.Review
 {
+    using MoonGameRev.Web.ViewModels.Review;
+
     public class AllReviewsFilteredAndPagedServiceModel
     {
         public AllReviewsFilteredAndPagedServiceModel()
