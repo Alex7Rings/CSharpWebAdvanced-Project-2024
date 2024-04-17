@@ -40,8 +40,10 @@ Run the Web Application and Web API:
 
 Create an Account:
 - Register an account through the web application by accessing the registration page via either "User/login" or "User/register".
+  
 Elevate Account to Journalist:
 - After creating the account, navigate to the "/Journalist/Become" endpoint to elevate the account to journalist status.
+  
 Configure Administrator Email:
 -In the MoonGameRev.Common.GeneralApplicationConstants file, locate the public const string DevAdminEmail field.
 -Set the email address of the desired account to be assigned as an administrator.
