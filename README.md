@@ -20,7 +20,8 @@ MoonGameRev is a web application for gaming enthusiasts to discover, review, and
 - MS SQL Server: Relational database management system for storing application data.
 - GitHub: Version control and collaboration platform for managing project code.
 
-3. Getting Started: 
+3. Getting Started:
+
 Set the Startup Project:
 - Set MoonGameRev.Web as the startup project in your development environment.
 
