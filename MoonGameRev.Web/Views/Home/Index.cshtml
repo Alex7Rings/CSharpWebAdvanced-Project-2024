@@ -1,14 +1,16 @@
 ﻿@model MoonGameRev.Web.ViewModels.Home.IndexViewModel
 
+<link rel="stylesheet" href="~/css/MyCss.css" />
+
 <div class="container mt-5">
     <h2>Latest News</h2>
     <div class="row">
         @foreach (var news in ViewData["LatestNews"] as IEnumerable<MoonGameRev.Web.ViewModels.Home.IndexViewModel>)
         {
-            <div class="col-md-4">
+            <div class="col-md-4 position-relative">
                 <a href="@Url.Action("Details", "News", new { id = news.NewsID })">
                     <img class="d-block w-100 news-image" src="@news.NewsImage" alt="@news.NewsTitle">
-                    <div class="text-center">
+                    <div class="news-overlay">
                         <h5>@news.NewsTitle</h5>
                     </div>
                 </a>
@@ -18,9 +20,10 @@
     <a href="/News/All" class="btn btn-primary mt-3">See all</a>
 </div>
 
+
 <!-- Display upcoming games -->
 <div class="container mt-5">
-    <h2>5 Upcoming Games</h2>
+    <h2>Upcoming Games</h2>
     <div class="row">
         @foreach (var game in ViewData["UpcomingGames"] as IEnumerable<MoonGameRev.Web.ViewModels.Home.IndexViewModel>)
         {
@@ -40,7 +43,7 @@
 
 <!-- Display trending games -->
 <div class="container mt-5">
-    <h2>5 Trending Games</h2>
+    <h2>Trending Games</h2>
     <div class="row">
         @foreach (var game in ViewData["TrendingGames"] as IEnumerable<MoonGameRev.Web.ViewModels.Home.IndexViewModel>)
         {

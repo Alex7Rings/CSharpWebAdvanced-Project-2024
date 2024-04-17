@@ -1,7 +1,9 @@
 ﻿@model ReviewAllViewModel
 
+<link rel="stylesheet" href="~/css/MyCss.css" />
+
 <div class="col-md-4 mb-4">
-    <div class="card h-100">
+    <div class="card h-100 fancy-review-card">
         <div class="card-body">
             <h5 class="card-title">Review</h5>
             <ul class="list-group list-group-flush">
@@ -12,7 +14,7 @@
                     <ul>
                         @foreach (var pro in Model.Pros.Split(';'))
                         {
-                            <li>@pro</li>
+                            <li><span class="checkmark">&#10003;</span><span class="pro-text">@pro</span></li>
                         }
                     </ul>
                 </li>
@@ -21,7 +23,7 @@
                     <ul>
                         @foreach (var con in Model.Cons.Split(';'))
                         {
-                            <li>@con</li>
+                            <li><span class="crossmark">&#10007;</span><span class="con-text">@con</span></li>
                         }
                     </ul>
                 </li>
@@ -31,3 +33,4 @@
         </div>
     </div>
 </div>
+

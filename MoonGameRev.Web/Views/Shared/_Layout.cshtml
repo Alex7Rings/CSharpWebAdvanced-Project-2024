@@ -44,7 +44,6 @@
                         <li class="nav-item">
                             <a class="nav-link" asp-area="" asp-controller="News" asp-action="All">News</a>
                         </li>
-                        <span> | </span>
                         @if (this.User.Identity?.IsAuthenticated ?? false)
                         {
                             <li class="nav-item">

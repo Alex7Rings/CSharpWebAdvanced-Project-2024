@@ -13,6 +13,43 @@
  */
 @import url("https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap");
 
+.fancy-review-card {
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 10px;
+}
+
+.checkmark {
+    color: #28a745; /* Green color for pros */
+    font-size: 18px;
+    margin-right: 5px;
+}
+
+.crossmark {
+    color: #dc3545; /* Red color for cons */
+    font-size: 18px;
+    margin-right: 5px;
+}
+
+.pro-text, .con-text {
+     /* Black color for pros and cons text */
+    font-weight: bold; /* Make the text bold for better readability */
+}
+
+
+
+
+.news-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.7); /* Adjust opacity as needed */
+    color: white;
+    padding: 10px; /* Adjust padding as needed */
+}
+
+
 :root,
 [data-bs-theme=light] {
     --bs-blue: #1ba2f6;

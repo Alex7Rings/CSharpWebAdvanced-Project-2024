@@ -1,13 +1,17 @@
 ﻿@model NewsAllViewModel
 
-<div class="col-md-4 mb-4"> 
-    <div class="card h-100"> 
+<link rel="stylesheet" href="~/css/MyCss.css" />
+
+<div class="col-md-4 mb-4">
+    <div class="card position-relative">
         <a href="@Url.Action("Details", "News", new { id = Model.Id })">
             <img src="@Model.PictureUrl" class="card-img-top" alt="@Model.Title">
+            <div class="news-overlay">
+                <h5 class="card-title">@Model.Title</h5>
+                <p class="card-text">@Model.Date</p>
+            </div>
         </a>
-        <div class="card-body">
-            <h5 class="card-title"><a href="@Url.Action("Details", "News", new { id = Model.Id })">@Model.Title</a></h5> 
-            <p class="card-text">@Model.Date</p>
-        </div>
     </div>
 </div>
+
+

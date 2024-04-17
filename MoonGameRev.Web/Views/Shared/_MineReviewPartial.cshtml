@@ -1,7 +1,9 @@
 ﻿@model MoonGameRev.Web.ViewModels.Review.ReviewAllViewModel
 
+<link rel="stylesheet" href="~/css/MyCss.css" />
+
 <div class="col-md-4 mb-4">
-    <div class="card h-100">
+    <div class="card h-100 fancy-review-card">
         <a href="@Url.Action("Details", "Game", new { id = Model.GameId })">
             <img src="@Model.CoverImage" class="card-img-top" alt="@Model.GameName">
         </a>
@@ -10,29 +12,33 @@
             <ul class="list-group list-group-flush">
                 <li class="list-group-item">User: @Model.UserName</li>
                 <li class="list-group-item">Rating: @Model.Rating/10</li>
-                <li class="list-group-item">Pros:
+                <li class="list-group-item">
+                    Pros:
                     <ul>
                         @foreach (var pro in Model.Pros.Split(';'))
                         {
-                                <li>@pro</li>
+                            <li><span class="checkmark">&#10003;</span> <span class="pro-text">@pro</span></li>
                         }
                     </ul>
                 </li>
-                <li class="list-group-item">Cons:
+                <li class="list-group-item">
+                    Cons:
                     <ul>
                         @foreach (var con in Model.Cons.Split(';'))
                         {
-                                <li>@con</li>
+                            <li><span class="crossmark">&#10007;</span> <span class="con-text">@con</span></li>
                         }
                     </ul>
                 </li>
                 <li class="list-group-item">Comment: @Model.Comment</li>
                 <li class="list-group-item">Date: @Model.Date</li>
             </ul>
+            <div class="text-center mt-3">
                 <a class="btn btn-warning" asp-controller="Review" asp-action="Edit"
-                           asp-route-id="@Model.Id">Edit</a>
+                   asp-route-id="@Model.Id">Edit</a>
                 <a class="ml-2 btn btn-danger" asp-controller="Review" asp-action="Delete"
-                           asp-route-id="@Model.Id">Delete</a>
+                   asp-route-id="@Model.Id">Delete</a>
+            </div>
         </div>
     </div>
 </div>
