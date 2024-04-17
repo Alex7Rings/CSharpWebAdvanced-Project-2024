@@ -37,7 +37,7 @@ namespace MoonGameRev.Services.Tests.NewsTests
 				Article = "This is a test for the test database to test the services in the newsService.",
 				Date = DateTime.Now,
 				PictureUrl = "PictureUrl_url_1",
-				Journalist = Journalist1, // Associate the news article with the journalist
+				Journalist = Journalist1, 
 			};
 
 			News2 = new News()
@@ -46,11 +46,11 @@ namespace MoonGameRev.Services.Tests.NewsTests
 				Article = "2This is a test for the test database to test the services in the newsService.",
 				Date = DateTime.Now,
 				PictureUrl = "PictureUrl_url_2",
-				Journalist = Journalist1, // Associate the news article with the journalist
+				Journalist = Journalist1, 
 			};
 
 			dbContext.Users.Add(User1);
-			dbContext.News.AddRange(News1, News2); // Add news articles to the context
+			dbContext.News.AddRange(News1, News2); 
 			dbContext.SaveChanges();
 		}
 

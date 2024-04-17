@@ -33,15 +33,10 @@ namespace MoonGameRev.Services.Tests.UserAndJournalistTests
         [Test]
         public async Task AllAsync_ShouldReturnOrderedUsers()
         {
-            // Arrange - No additional setup needed
-
-            // Act
             var result = await userService.AllAsync();
 
-            // Assert
             Assert.IsNotNull(result);
 
-            // Verify that the users are ordered correctly
             var orderedUsers = result.ToList();
             Assert.AreEqual(3, orderedUsers.Count);
         }
@@ -60,12 +55,8 @@ namespace MoonGameRev.Services.Tests.UserAndJournalistTests
         [Test]
         public async Task AllAsync_ShouldReturnOrderedUsersWithPhoneNumbers()
         {
-            // Arrange - No additional setup needed
-
-            // Act
             var result = await userService.AllAsync();
 
-            // Assert
             Assert.IsNotNull(result);
 
             var orderedUsers = result.ToList();
@@ -80,13 +71,10 @@ namespace MoonGameRev.Services.Tests.UserAndJournalistTests
         [Test]
         public async Task GetUserNameByIdAsync_ShouldReturnEmptyStringForNonExistingUserId()
         {
-            // Arrange
             string nonExistingUserId = "non-existing-id";
 
-            // Act
             var result = await userService.GetUserNameByIdAsync(nonExistingUserId);
 
-            // Assert
             Assert.IsNotNull(result);
             Assert.IsEmpty(result);
         }
