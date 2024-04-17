@@ -1,18 +1,20 @@
 ﻿@model NewsDetailsViewModel
 
-<h2>@Model.Title</h2>
-<div class="row">
-    <div class="col-md-8">
-        <img src="@Model.PictureUrl" class="img-fluid" alt="@Model.Title">
-        <p>Author: <a href="@Url.Action("JournalistNews", "News", new { journalistId = Model.JournalistId })">@Model.AuthorName</a></p>
-        <p>@Model.Date</p>
-        <p>@Model.Article</p>
-        @if (User.Identity.IsAuthenticated && (User.Identity.Name == Model.AuthorName || User.IsInRole("Admin") || User.IsInRole("Moderator")))
-        {
-            <div>
-                <a href="@Url.Action("Edit", "News", new { id = Model.Id })" class="btn btn-primary">Edit</a>
-                <a href="@Url.Action("Delete", "News", new { id = Model.Id })" class="btn btn-danger">Delete</a>
-            </div>
-        }
+<div class="container">
+    <h2 class="text-center">@Model.Title</h2>
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <img src="@Model.PictureUrl" class="img-fluid mt-3" alt="@Model.Title">
+            <p>Author: <a href="@Url.Action("JournalistNews", "News", new { journalistId = Model.JournalistId })">@Model.AuthorName</a></p>
+            <p>@Model.Date</p>
+            <p>@Model.Article</p>
+            @if (User.Identity.IsAuthenticated && (User.Identity.Name == Model.AuthorName || User.IsInRole("Admin") || User.IsInRole("Moderator")))
+            {
+                <div>
+                    <a href="@Url.Action("Edit", "News", new { id = Model.Id })" class="btn btn-primary">Edit</a>
+                    <a href="@Url.Action("Delete", "News", new { id = Model.Id })" class="btn btn-danger">Delete</a>
+                </div>
+            }
+        </div>
     </div>
 </div>
