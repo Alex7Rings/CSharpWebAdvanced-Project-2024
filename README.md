@@ -36,7 +36,7 @@ Run the Web Application and Web API:
 
 
 # 4. Administrator Setup Instructions
-- The application includes an administrator role for enhanced management capabilities. Follow these steps to add an administrator:
+The application includes an administrator role for enhanced management capabilities. Follow these steps to add an administrator:
 
 Create an Account:
 - Register an account through the web application by accessing the registration page via either "User/login" or "User/register".
@@ -45,8 +45,8 @@ Elevate Account to Journalist:
 - After creating the account, navigate to the "/Journalist/Become" endpoint to elevate the account to journalist status.
   
 Configure Administrator Email:
--In the MoonGameRev.Common.GeneralApplicationConstants file, locate the public const string DevAdminEmail field.
--Set the email address of the desired account to be assigned as an administrator.
+- In the MoonGameRev.Common.GeneralApplicationConstants file, locate the public const string DevAdminEmail field.
+- Set the email address of the desired account to be assigned as an administrator.
 
 Upon completing these steps, the designated administrator will gain access to additional functionalities, including the ability to assign moderator roles to other users through the "/User/AddToModerator" endpoint.
 
