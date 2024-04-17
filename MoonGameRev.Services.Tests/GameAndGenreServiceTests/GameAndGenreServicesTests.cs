@@ -5,6 +5,7 @@ using MoonGameRev.Services.Data;
 using MoonGameRev.Services.Data.Interfaces;
 using MoonGameRev.Web.ViewModels.Game;
 using MoonGameRev.Web.ViewModels.Game.Enums;
+using MoonGameRev.Web.ViewModels.Home;
 using System.Globalization;
 using static MoonGameRev.Services.Tests.GameServiceTests.GameDataBaseSeeder;
 
@@ -62,18 +63,18 @@ namespace MoonGameRev.Services.Tests.GameServiceTests
 		{
 			var queryModel = new AllGamesQueryModel
 			{
-				Genre = "Action", 
-				SearchString = "", 
-				GameSorting = GameSorting.Newest, 
+				Genre = "Action",
+				SearchString = "",
+				GameSorting = GameSorting.Newest,
 				CurrentPage = 1,
-				GamesPerPage = 10 
+				GamesPerPage = 10
 			};
 
 			var result = await gameService.AllAsync(queryModel);
 
 			Assert.IsNotNull(result);
-			Assert.AreEqual(1, result.Games.Count()); 
-													  
+			Assert.AreEqual(1, result.Games.Count());
+
 		}
 
 		[Test]
@@ -143,7 +144,7 @@ namespace MoonGameRev.Services.Tests.GameServiceTests
 		[Test]
 		public async Task GetDetailsByIdAsync_ShouldReturnGameDetailsViewModel()
 		{
-			
+
 
 			string gameId = GameDataBaseSeeder.Game1.Id.ToString();
 
@@ -197,70 +198,19 @@ namespace MoonGameRev.Services.Tests.GameServiceTests
 			CollectionAssert.AreEqual(formModel.GenreIds, updatedGenreIds);
 		}
 
-
-		//[Test]
-		//public async Task LastFiveGamesAsync_ShouldReturnLastAddedGames()
-		//{
-		//	var newGame = new Game
-		//	{
-		//		Title = "New Game",
-		//		Description = "Description of New Game",
-		//		Developer = "New Developer",
-		//		Publisher = "New Publisher",
-		//		GameSite = "http://newgamesite.com",
-		//		ReleaseDate = DateTime.Parse("2024-01-01"),
-		//		CoverImage = "new_cover_image_url",
-		//		IsReleased = true
-		//	};
-		//	dbContext.Games.Add(newGame);
-		//	await dbContext.SaveChangesAsync();
-
-
-		//	var result = await gameService.LastFiveGamesAsync();
-
-
-		//	Assert.IsNotNull(result);
-		//	Assert.IsTrue(result.Any(g => g.Title == "New Game"));
-		//}
-
-		//[Test]
-		//public async Task LastFiveUpcomingGamesAsync_ShouldReturnLastAddedGames()
-		//{
-		//	var upcomingGames = new Game
-		//	{
-		//		Title = "New Up Game",
-		//		Description = "Description of New Up Game",
-		//		Developer = "New Up Developer",
-		//		Publisher = "New Up Publisher",
-		//		GameSite = "http://newgamesite.com",
-		//		ReleaseDate = DateTime.Parse("2024-01-01"), 
-		//		CoverImage = "new_cover_up_image_url",
-		//		IsReleased = false
-		//	};
-		//	dbContext.Games.Add(upcomingGames);
-		//	await dbContext.SaveChangesAsync();
-
-
-		//	var result = await gameService.LastFiveUpcomingGamesAsync();
-
-
-		//	Assert.IsNotNull(result);
-		//	Assert.IsTrue(result.Any(g => g.Title == "New Up Game"));
-		//}
-
 		[Test]
 		public async Task AllGenresAsync_ShouldReturnAllGenres()
 		{
 			var result = await genreService.AllGenresAsync();
 
 			Assert.IsNotNull(result);
-			Assert.AreEqual(28, result.Count()); 
+			Assert.AreEqual(28, result.Count());
 		}
 
 		[Test]
 		public async Task ExistsByIdAsync_ShouldReturnTrueForExistingGenreId()
 		{
-			int existingGenreId = 1; 
+			int existingGenreId = 1;
 
 			bool exists = await genreService.ExistsByIdAsync(existingGenreId);
 
@@ -270,11 +220,71 @@ namespace MoonGameRev.Services.Tests.GameServiceTests
 		[Test]
 		public async Task ExistsByIdAsync_ShouldReturnFalseForNonExistingGenreId()
 		{
-			int nonExistingGenreId = 1000; 
+			int nonExistingGenreId = 1000;
 
 			bool exists = await genreService.ExistsByIdAsync(nonExistingGenreId);
 
 			Assert.IsFalse(exists);
+		}
+
+		[Test]
+		public async Task LastFiveGamesAsync_ReturnsLastFiveReleasedGames()
+		{
+			var expectedLastFiveReleasedGames = await dbContext.Games
+				.Where(g => g.IsReleased)
+				.OrderByDescending(g => g.Reviews.Count())
+				.Take(5)
+				.Select(g => new IndexViewModel
+				{
+					Id = g.Id.ToString(),
+					Title = g.Title,
+					ImageUrl = g.CoverImage,
+					IsReleased = g.IsReleased
+				})
+				.ToArrayAsync();
+
+			var lastFiveReleasedGames = await gameService.LastFiveGamesAsync();
+
+			Assert.IsNotNull(lastFiveReleasedGames);
+			Assert.AreEqual(5, lastFiveReleasedGames.Count());
+
+			for (int i = 0; i < expectedLastFiveReleasedGames.Length; i++)
+			{
+				Assert.AreEqual(expectedLastFiveReleasedGames[i].Id, lastFiveReleasedGames.ElementAt(i).Id);
+				Assert.AreEqual(expectedLastFiveReleasedGames[i].Title, lastFiveReleasedGames.ElementAt(i).Title);
+				Assert.AreEqual(expectedLastFiveReleasedGames[i].ImageUrl, lastFiveReleasedGames.ElementAt(i).ImageUrl);
+				Assert.AreEqual(expectedLastFiveReleasedGames[i].IsReleased, lastFiveReleasedGames.ElementAt(i).IsReleased);
+			}
+		}
+
+		[Test]
+		public async Task LastFiveUpcomingGamesAsync_ReturnsLastFiveUpcomingGames()
+		{
+			var expectedLastFiveUpcomingGames = await dbContext.Games
+				.Where(g => !g.IsReleased)
+				.OrderBy(g => g.ReleaseDate)
+				.Take(5)
+				.Select(g => new IndexViewModel
+				{
+					Id = g.Id.ToString(),
+					Title = g.Title,
+					ImageUrl = g.CoverImage,
+					IsReleased = g.IsReleased
+				})
+				.ToArrayAsync();
+
+			var lastFiveUpcomingGames = await gameService.LastFiveUpcomingGamesAsync();
+
+			Assert.IsNotNull(lastFiveUpcomingGames);
+			Assert.AreEqual(5, lastFiveUpcomingGames.Count());
+
+			for (int i = 0; i < expectedLastFiveUpcomingGames.Length; i++)
+			{
+				Assert.AreEqual(expectedLastFiveUpcomingGames[i].Id, lastFiveUpcomingGames.ElementAt(i).Id);
+				Assert.AreEqual(expectedLastFiveUpcomingGames[i].Title, lastFiveUpcomingGames.ElementAt(i).Title);
+				Assert.AreEqual(expectedLastFiveUpcomingGames[i].ImageUrl, lastFiveUpcomingGames.ElementAt(i).ImageUrl);
+				Assert.AreEqual(expectedLastFiveUpcomingGames[i].IsReleased, lastFiveUpcomingGames.ElementAt(i).IsReleased);
+			}
 		}
 	}
 }

@@ -1,9 +1,7 @@
-﻿@model NewsDetailsViewModel
-
-<div class="container">
-    <h2 class="text-center">@Model.Title</h2>
+﻿<div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
+            <h2 class="text-center">@Model.Title</h2>
             <img src="@Model.PictureUrl" class="img-fluid mt-3" alt="@Model.Title">
             <p>Author: <a href="@Url.Action("JournalistNews", "News", new { journalistId = Model.JournalistId })">@Model.AuthorName</a></p>
             <p>@Model.Date</p>
@@ -15,6 +13,28 @@
                     <a href="@Url.Action("Delete", "News", new { id = Model.Id })" class="btn btn-danger">Delete</a>
                 </div>
             }
+        </div>
+
+        <div class="col-md-4">
+            <h3 class="text-center">More News</h3>
+            <div class="list-group">
+                @foreach (var news in ViewData["LatestNews"] as IEnumerable<MoonGameRev.Web.ViewModels.Home.IndexViewModel>)
+                {
+                    @if (news.NewsID != Model.Id) 
+                    {
+                        <a href="@Url.Action("Details", "News", new { id = news.NewsID })" class="list-group-item list-group-item-action">
+                            <div class="row align-items-center">
+                                <div class="col-md-4">
+                                    <img src="@news.NewsImage" class="img-fluid" alt="@news.NewsTitle">
+                                </div>
+                                <div class="col-md-8">
+                                    <p class="mb-0">@news.NewsTitle</p>
+                                </div>
+                            </div>
+                        </a>
+                    }
+                }
+            </div>
         </div>
     </div>
 </div>

@@ -4,6 +4,7 @@ using MoonGameRev.Services.Data.Interfaces;
 using MoonGameRev.Services.Data;
 using static MoonGameRev.Services.Tests.NewsTests.NewsDataBaseSeeder;
 using MoonGameRev.Web.ViewModels.News;
+using MoonGameRev.Web.ViewModels.Home;
 
 namespace MoonGameRev.Services.Tests.NewsTests
 {
@@ -182,7 +183,32 @@ namespace MoonGameRev.Services.Tests.NewsTests
 			Assert.IsTrue(result);
 		}
 
+        [Test]
+        public async Task LatestNewsAsync_ReturnsLatestNews()
+        {
+            var expectedLatestNews = await dbContext.News
+                .OrderByDescending(n => n.Date)
+                .Take(2)
+                .Select(n => new IndexViewModel
+                {
+                    NewsID = n.Id.ToString(),
+                    NewsImage = n.PictureUrl,
+                    NewsTitle = n.Title,
+                })
+                .ToArrayAsync();
 
+            var latestNews = await newsService.LatestNewsAsync();
 
-	}
+            Assert.IsNotNull(latestNews);
+            Assert.AreEqual(2, latestNews.Count());
+
+            for (int i = 0; i < expectedLatestNews.Length; i++)
+            {
+                Assert.AreEqual(expectedLatestNews[i].NewsID, latestNews.ElementAt(i).NewsID);
+                Assert.AreEqual(expectedLatestNews[i].NewsImage, latestNews.ElementAt(i).NewsImage);
+                Assert.AreEqual(expectedLatestNews[i].NewsTitle, latestNews.ElementAt(i).NewsTitle);
+            }
+        }
+
+    }
 }

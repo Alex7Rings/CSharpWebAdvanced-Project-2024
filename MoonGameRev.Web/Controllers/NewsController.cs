@@ -4,6 +4,7 @@ using MoonGameRev.Services.Data.Interfaces;
 using MoonGameRev.Services.Data.Models.Game;
 using MoonGameRev.Services.Data.Models.News;
 using MoonGameRev.Web.Infrastructure.Extensions;
+using MoonGameRev.Web.ViewModels.Home;
 using MoonGameRev.Web.ViewModels.News;
 using static MoonGameRev.Common.NotificationMessagesConstants;
 
@@ -119,7 +120,12 @@ namespace MoonGameRev.Web.Controllers
             }
             try
             {
-				NewsDetailsViewModel? model = await this.newsService
+                IEnumerable<IndexViewModel> latestNews =
+                 await this.newsService.LatestNewsAsync();
+
+                ViewData["LatestNews"] = latestNews;
+
+                NewsDetailsViewModel? model = await this.newsService
 	            .GetDetailsByIdAsync(id);
 
 				return this.View(model);
