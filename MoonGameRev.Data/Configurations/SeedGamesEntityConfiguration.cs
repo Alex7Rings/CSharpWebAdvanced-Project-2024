@@ -31,7 +31,7 @@ namespace MoonGameRev.Data.Configurations
                             },
                             new Game
                             {
-                                Id = Guid.NewGuid(),
+                                Id = Guid.Parse("8f6e6a53-b537-458d-8cbb-407fc01f7da9"),
                                 Title = "Red Dead Redemption 2",
                                 Description = "An action-adventure game developed and published by Rockstar Games.",
                                 Developer = "Rockstar Games",
@@ -67,7 +67,7 @@ namespace MoonGameRev.Data.Configurations
                             },
                             new Game
                             {
-                                Id = Guid.NewGuid(),
+                                Id = Guid.Parse("6a1c7f48-d1c9-41d9-a638-2aa7fbb1db53"),
                                 Title = "Elden Ring",
                                 Description = "An upcoming action role-playing game developed by FromSoftware and published by Bandai Namco Entertainment.",
                                 Developer = "FromSoftware",
