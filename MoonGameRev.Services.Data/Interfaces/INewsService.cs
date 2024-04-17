@@ -1,4 +1,5 @@
 ﻿using MoonGameRev.Services.Data.Models.News;
+using MoonGameRev.Web.ViewModels.Home;
 using MoonGameRev.Web.ViewModels.News;
 
 namespace MoonGameRev.Services.Data.Interfaces
@@ -24,5 +25,7 @@ namespace MoonGameRev.Services.Data.Interfaces
         Task<NewsPreDeleteDetailsViewModel> GetNewsForDeleteByIdAsync(string newsId);
 
         Task DeleteByIdAsync(string newsId);
+
+        Task<IEnumerable<IndexViewModel>> LatestNewsAsync();
     }
 }

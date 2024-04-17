@@ -9,10 +9,12 @@
     public class HomeController : Controller
     {
         private readonly IGameService gameService;
+        private readonly INewsService newsService;
 
-        public HomeController(IGameService gameService)
+        public HomeController(IGameService gameService, INewsService newsService)
         {
            this.gameService = gameService;
+           this.newsService = newsService;
         }
 
         public async Task<IActionResult> Index()
@@ -30,9 +32,13 @@
             IEnumerable<IndexViewModel> trendingGamesViewModel =
                await this.gameService.LastFiveGamesAsync();
 
+            IEnumerable<IndexViewModel> latestNews =
+                await this.newsService.LatestNewsAsync();
+
             // Pass the view models to the view
             ViewData["UpcomingGames"] = upcomingGamesViewModel;
             ViewData["TrendingGames"] = trendingGamesViewModel;
+            ViewData["LatestNews"] = latestNews;
 
             return View();
         }

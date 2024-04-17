@@ -3,6 +3,7 @@ using MoonGameRev.Data;
 using MoonGameRev.Data.Models;
 using MoonGameRev.Services.Data.Interfaces;
 using MoonGameRev.Services.Data.Models.News;
+using MoonGameRev.Web.ViewModels.Home;
 using MoonGameRev.Web.ViewModels.News;
 
 namespace MoonGameRev.Services.Data
@@ -179,6 +180,22 @@ namespace MoonGameRev.Services.Data
                 .FirstAsync(n=>n.Id.ToString() == newsId);
 
             return news.JournalistId.ToString() == journalistID;
+        }
+
+        public async Task<IEnumerable<IndexViewModel>> LatestNewsAsync()
+        {
+            IEnumerable<IndexViewModel> latestNews = await this.dbContext
+               .News
+               .OrderByDescending(n => n.Date)
+               .Take(3)
+               .Select(n => new IndexViewModel
+               {
+                   NewsID = n.Id.ToString(),
+                   NewsImage = n.PictureUrl,
+                   NewsTitle = n.Title,
+               })
+               .ToArrayAsync();
+            return latestNews;
         }
     }
 }

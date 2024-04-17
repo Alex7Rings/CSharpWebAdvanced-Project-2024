@@ -1,5 +1,23 @@
 ﻿@model MoonGameRev.Web.ViewModels.Home.IndexViewModel
 
+<div class="container mt-5">
+    <h2>Latest News</h2>
+    <div class="row">
+        @foreach (var news in ViewData["LatestNews"] as IEnumerable<MoonGameRev.Web.ViewModels.Home.IndexViewModel>)
+        {
+            <div class="col-md-4">
+                <a href="@Url.Action("Details", "News", new { id = news.NewsID })">
+                    <img class="d-block w-100 news-image" src="@news.NewsImage" alt="@news.NewsTitle">
+                    <div class="text-center">
+                        <h5>@news.NewsTitle</h5>
+                    </div>
+                </a>
+            </div>
+        }
+    </div>
+    <a href="/News/All" class="btn btn-primary mt-3">See all</a>
+</div>
+
 <!-- Display upcoming games -->
 <div class="container mt-5">
     <h2>5 Upcoming Games</h2>
