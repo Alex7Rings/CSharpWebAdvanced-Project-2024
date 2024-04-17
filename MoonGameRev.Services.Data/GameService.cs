@@ -304,7 +304,7 @@ namespace MoonGameRev.Services.Data
             IEnumerable<IndexViewModel> lastFiveGames = await this.dbContext
                 .Games
                 .Where(g => g.IsReleased == true)
-                .OrderByDescending(x => x.Id)
+                .OrderByDescending(x => x.Reviews.Count())
                 .Take(5)
                 .Select(g=> new IndexViewModel
                 {
@@ -322,7 +322,7 @@ namespace MoonGameRev.Services.Data
             IEnumerable<IndexViewModel> lastUpcomingFiveGames = await this.dbContext
                 .Games
                 .Where(g=>g.IsReleased== false)
-                .OrderByDescending(x => x.Id)
+                .OrderBy(x => x.ReleaseDate)
                 .Take(5)
                 .Select(g => new IndexViewModel
                 {
