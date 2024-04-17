@@ -17,7 +17,7 @@
         </a>
         <div class="card-body">
             <h5 class="card-title"><a href="@Url.Action("Details", "Game", new { id = Model.Id })">@Model.Title</a></h5> 
-            <p class="card-text">Release date: @Model.ReleasDate</p>
+            <p class="card-text">Release date: @Model.ReleasDate.ToShortDateString()</p>
         </div>
     </div>
 </div>

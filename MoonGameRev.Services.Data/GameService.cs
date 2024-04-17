@@ -83,6 +83,7 @@ namespace MoonGameRev.Services.Data
             IQueryable<Game> upcomingGamesQuery = this.dbContext
                 .Games
                 .Where(g => g.IsReleased == false)
+                .OrderBy(g => g.ReleaseDate)
                 .AsQueryable();
 
             IEnumerable<UpcomingGamesViewModel> allUpcomingGames = await upcomingGamesQuery
