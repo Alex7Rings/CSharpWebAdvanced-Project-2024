@@ -21,13 +21,14 @@ MoonGameRev is a web application for gaming enthusiasts to discover, review, and
 - GitHub: Version control and collaboration platform for managing project code.
 
 3. Getting Started: 
+Set the Startup Project:
+- Set MoonGameRev.Web as the startup project in your development environment.
 
-Set the Startup:
--  Project: Set MoonGameRev.Web as the startup project in your development environment.
 Update the Database:
 - Add the connection string for your database in the appropriate configuration file.
 - Use the Package Manager Console in Visual Studio and ensure that MoonGameRev.Data is set as the default project.
 - Update-Database
+
 Run the Web Application and Web API:
 - Select both MoonGameRev.Web and MoonGameRev.Api projects as startup projects.
 - Start the projects by choosing "Start without debugging" to run both the web application and the web API.
