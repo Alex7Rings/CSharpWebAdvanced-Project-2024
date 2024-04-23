@@ -43,6 +43,7 @@
         [Required]
         [StringLength(ImageUrlMaxLength)]
         [Display(Name = "Image Link")]
+        [RegularExpression(@"^(https?://)?\S+\.(jpg|jpeg|png|gif)(\?\S*)?$", ErrorMessage = "Invalid image URL format. The link needs to be an image URL")]
         public string CoverImage { get; set; } = null!;
 
         [Required]

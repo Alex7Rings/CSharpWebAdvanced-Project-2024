@@ -9,7 +9,7 @@
 
         public const string AdminAreaName = "Admin";
         public const string AdminRoleName = "Admin";
-        public const string DevAdminEmail = "testAdmin1@admin.com";
+        public const string DevAdminEmail = "alexpetrov66@abv.bg";
 
         public const string ModeratorRoleName = "Moderator";
 
