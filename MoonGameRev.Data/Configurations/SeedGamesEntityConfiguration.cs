@@ -19,7 +19,7 @@
             {
                 new Game
                 {
-                    Id = Guid.NewGuid(),
+                    Id = Guid.Parse("1c68c221-b25c-4cde-916d-663a937cd1ec"),
                     Title = "The Witcher 3: Wild Hunt",
                     Description = "An action RPG game developed and published by CD Projekt.",
                     Developer = "CD Projekt Red",
@@ -43,7 +43,7 @@
                 },
                 new Game
                 {
-                    Id = Guid.NewGuid(),
+                    Id = Guid.Parse("c43a8b45-0560-4c48-8a7d-f5038aa4d841"),
                     Title = "Cyberpunk 2077",
                     Description = "An open-world action-adventure game developed and published by CD Projekt.",
                     Developer = "CD Projekt Red",
@@ -55,7 +55,7 @@
                 },
                 new Game
                 {
-                    Id = Guid.NewGuid(),
+                    Id = Guid.Parse("1f4b307b-7ca9-40d6-ba2e-53c7ce226d0a"),
                     Title = "Apex Legends",
                     Description = "Apex Legends is the award-winning, free-to-play Hero Shooter from Respawn Entertainment. Master an ever-growing roster of legendary characters with powerful abilities, and experience strategic squad play and innovative gameplay in the next evolution of Hero Shooter and Battle Royale.",
                     Developer = "Respawn",
@@ -79,7 +79,7 @@
                 },
                 new Game
                 {
-                    Id = Guid.NewGuid(),
+                    Id = Guid.Parse("3c4ccb83-a315-4f04-b7c0-78f07450a20d"),
                     Title = "The Last of Us Part II",
                     Description = "An action-adventure game developed by Naughty Dog and published by Sony Interactive Entertainment.",
                     Developer = "Naughty Dog",
@@ -91,7 +91,7 @@
                 },
                 new Game
                 {
-                    Id = Guid.NewGuid(),
+                    Id = Guid.Parse("a47ab3e8-26f3-42eb-853c-c478896b80c4"),
                     Title = "Ghost of Tsushima",
                     Description = "An action-adventure game developed by Sucker Punch Productions and published by Sony Interactive Entertainment.",
                     Developer = "Sucker Punch Productions",
@@ -103,7 +103,7 @@
                 },
                 new Game
                 {
-                    Id = Guid.NewGuid(),
+                    Id = Guid.Parse("4455f3f9-6827-47f8-bd46-44018f3c61b9"),
                     Title = "God of War",
                     Description = "An action-adventure game developed by Santa Monica Studio and published by Sony Interactive Entertainment.",
                     Developer = "Santa Monica Studio",
@@ -115,7 +115,7 @@
                 },
                 new Game
                 {
-                    Id = Guid.NewGuid(),
+                    Id = Guid.Parse("3b1e7da9-595e-4613-ba01-2bc815388520"),
                     Title = "Marvel's Spider-Man: Miles Morales",
                     Description = "A follow-up to Marvel's Spider-Man, featuring Miles Morales as the main protagonist.",
                     Developer = "Insomniac Games",
@@ -127,7 +127,7 @@
                 },
                 new Game
                 {
-                    Id = Guid.NewGuid(),
+                    Id = Guid.Parse("8e09ad4c-fa18-4c37-a13b-a1ee585b34bf"),
                     Title = "Demon's Souls",
                     Description = "A remake of the 2009 PlayStation 3 game, featuring stunning graphics and improved gameplay mechanics.",
                     Developer = "Bluepoint Games",
@@ -139,7 +139,7 @@
                 },
                 new Game
                 {
-                    Id = Guid.NewGuid(),
+                    Id = Guid.Parse("e7631ac4-0d71-4d77-b607-94b024bccdff"),
                     Title = "Star Wars Jedi: Survivor",
                     Description = "The story of Cal Kestis continues in Star Wars Jedi: Survivor™, a third-person, galaxy-spanning, action-adventure game from Respawn Entertainment, developed in collaboration with Lucasfilm Games. This narratively driven, single-player title picks up 5 years after the events of Star Wars Jedi: Fallen Order™ and follows Cal’s increasingly desperate fight as the galaxy descends further into darkness. ",
                     Developer = "Electronic Arts, Respawn",
@@ -151,7 +151,7 @@
                 },
                 new Game
                 {
-                    Id = Guid.NewGuid(),
+                    Id = Guid.Parse("321dafc7-35e6-4542-9e43-40de53202a3e"),
                     Title = "Horizon Forbidden West",
                     Description = "A sequel to Horizon Zero Dawn, set in a distant future where robotic creatures roam the earth.",
                     Developer = "Guerrilla Games",
@@ -166,7 +166,7 @@
 
                 new Game
                 {
-                    Id = Guid.NewGuid(),
+                    Id = Guid.Parse("7bd08096-2bbe-4fe8-8f5d-a00d86e6c5fb"),
                     Title = "Star Wars Outlaws",
                     Description = "Experience the first-ever open world Star Wars game and explore distinct planets across the galaxy, both iconic and new. Risk it all as Kay Vess, an emerging scoundrel seeking freedom and the means to start a new life. Fight, steal, & outwit your way through the galaxy’s crime syndicates as you join the galaxy’s most wanted.",
                     Developer = "Massive Entertainment",
@@ -178,7 +178,7 @@
                 },
                 new Game
                 {
-                    Id = Guid.NewGuid(),
+                    Id = Guid.Parse("df0a4f3f-a6b7-497e-9fdb-7867720da203"),
                     Title = "Dragon's Dogma 2",
                     Description = "Dragon’s Dogma is a single player, narrative driven action-RPG series that challenges the players to choose their own experience – from the appearance of their Arisen, their vocation, their party, how to approach different situations and more. Now, in this long-awaited sequel, the deep, explorable fantasy world of Dragon’s Dogma 2 awaits.",
                     Developer = "CAPCOM",
@@ -190,7 +190,7 @@
                 },
                 new Game
                 {
-                    Id = Guid.NewGuid(),
+                    Id = Guid.Parse("049ac5fa-2dca-4a29-9012-b226b16e92c8"),
                     Title = "S.T.A.L.K.E.R. 2: Heart of Chornobyl",
                     Description = "The game is a blend of first person shooter action, combined with an immersive simulation game and a horror game, all rolled into one and sent out into the world with an atmospheric open world for you to explore – if you are brave enough!",
                     Developer = "GSC Game World",
@@ -202,7 +202,7 @@
                 },
                 new Game
                 {
-                    Id = Guid.NewGuid(),
+                    Id = Guid.Parse("0d390f11-1a4c-477f-b72d-dc7c0c15b3ed"),
                     Title = "Elden Ring - Shadow of the Erdtree",
                     Description = "Winner of hundreds of accolades including The Game Awards Game of the Year and Golden Joystick Awards Ultimate Game of the Year, ELDEN RING is the acclaimed action RPG epic set in a vast, dark fantasy world. Players embark on an epic quest with the freedom to explore and adventure at their own pace.\r\n\r\nThe Shadow of the Erdtree expansion features an all-new story set in the Land of Shadow imbued with mystery, perilous dungeons, and new enemies, weapons and equipment.",
                     Developer = "FromSoftware",

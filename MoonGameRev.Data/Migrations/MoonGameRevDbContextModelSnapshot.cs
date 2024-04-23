@@ -317,7 +317,7 @@ namespace MoonGameRev.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("38d0be98-0c0a-436f-a386-f674a49398c5"),
+                            Id = new Guid("1c68c221-b25c-4cde-916d-663a937cd1ec"),
                             CoverImage = "https://gaming-cdn.com/images/products/1497/616x353/the-witcher-3-wild-hunt-game-of-the-year-edition-goty-edition-pc-game-gog-com-cover.jpg?v=1670929985",
                             Description = "An action RPG game developed and published by CD Projekt.",
                             Developer = "CD Projekt Red",
@@ -341,7 +341,7 @@ namespace MoonGameRev.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("1c0ed912-4d97-4311-9c24-a2fd5fef05df"),
+                            Id = new Guid("c43a8b45-0560-4c48-8a7d-f5038aa4d841"),
                             CoverImage = "https://gaming-cdn.com/images/products/840/616x353/cyberpunk-2077-pc-game-gog-com-cover.jpg?v=1701271565",
                             Description = "An open-world action-adventure game developed and published by CD Projekt.",
                             Developer = "CD Projekt Red",
@@ -353,7 +353,7 @@ namespace MoonGameRev.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("90e7a4f8-7ef8-4ee4-856d-e692c792d697"),
+                            Id = new Guid("1f4b307b-7ca9-40d6-ba2e-53c7ce226d0a"),
                             CoverImage = "https://assets.nintendo.com/image/upload/ar_16:9,c_lpad,w_656/b_white/f_auto/q_auto/ncom/software/switch/70010000024591/cdb89d91f73cecccdddc8b421a31af03473ffab2c790a4cd7a133d28538052f2",
                             Description = "Apex Legends is the award-winning, free-to-play Hero Shooter from Respawn Entertainment. Master an ever-growing roster of legendary characters with powerful abilities, and experience strategic squad play and innovative gameplay in the next evolution of Hero Shooter and Battle Royale.",
                             Developer = "Respawn",
@@ -377,7 +377,7 @@ namespace MoonGameRev.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("8692a90e-b629-4893-8aa9-7c4c18a7824d"),
+                            Id = new Guid("3c4ccb83-a315-4f04-b7c0-78f07450a20d"),
                             CoverImage = "https://gaming-cdn.com/images/products/6215/616x353/the-last-of-us-part-ii-pc-game-steam-cover.jpg?v=1710171908",
                             Description = "An action-adventure game developed by Naughty Dog and published by Sony Interactive Entertainment.",
                             Developer = "Naughty Dog",
@@ -389,7 +389,7 @@ namespace MoonGameRev.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("de6cb38e-5c9f-4802-9e4c-d72245c77b4a"),
+                            Id = new Guid("a47ab3e8-26f3-42eb-853c-c478896b80c4"),
                             CoverImage = "https://gaming-cdn.com/images/products/9686/616x353/ghost-of-tsushima-director-s-cut-ps5-director-s-cut-playstation-5-game-playstation-store-europe-cover.jpg?v=1712138768",
                             Description = "An action-adventure game developed by Sucker Punch Productions and published by Sony Interactive Entertainment.",
                             Developer = "Sucker Punch Productions",
@@ -401,7 +401,7 @@ namespace MoonGameRev.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("a46f2eb1-0271-45bf-8bfe-0b4a30f4acbd"),
+                            Id = new Guid("4455f3f9-6827-47f8-bd46-44018f3c61b9"),
                             CoverImage = "https://gaming-cdn.com/images/products/7325/616x353/god-of-war-pc-game-steam-cover.jpg?v=1683627071",
                             Description = "An action-adventure game developed by Santa Monica Studio and published by Sony Interactive Entertainment.",
                             Developer = "Santa Monica Studio",
@@ -413,7 +413,7 @@ namespace MoonGameRev.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("ab635ff6-9b60-4354-a95f-15b797768383"),
+                            Id = new Guid("3b1e7da9-595e-4613-ba01-2bc815388520"),
                             CoverImage = "https://gaming-cdn.com/images/products/12953/616x353/marvel-s-spider-man-miles-morales-pc-game-steam-cover.jpg?v=1695136231",
                             Description = "A follow-up to Marvel's Spider-Man, featuring Miles Morales as the main protagonist.",
                             Developer = "Insomniac Games",
@@ -425,7 +425,7 @@ namespace MoonGameRev.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("46a63a4d-cd15-48ea-ae42-8bebddb8b5ae"),
+                            Id = new Guid("8e09ad4c-fa18-4c37-a13b-a1ee585b34bf"),
                             CoverImage = "https://gaming-cdn.com/images/products/9600/616x353/demon-s-souls-remake-edition-remake-edition-pc-game-cover.jpg?v=1678437042",
                             Description = "A remake of the 2009 PlayStation 3 game, featuring stunning graphics and improved gameplay mechanics.",
                             Developer = "Bluepoint Games",
@@ -437,7 +437,7 @@ namespace MoonGameRev.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("b58551f6-7d64-443a-8481-3f5abb776c49"),
+                            Id = new Guid("e7631ac4-0d71-4d77-b607-94b024bccdff"),
                             CoverImage = "https://gaming-cdn.com/images/products/9143/616x353/star-wars-jedi-survivor-pc-game-ea-app-cover.jpg?v=1705308257",
                             Description = "The story of Cal Kestis continues in Star Wars Jedi: Survivor™, a third-person, galaxy-spanning, action-adventure game from Respawn Entertainment, developed in collaboration with Lucasfilm Games. This narratively driven, single-player title picks up 5 years after the events of Star Wars Jedi: Fallen Order™ and follows Cal’s increasingly desperate fight as the galaxy descends further into darkness. ",
                             Developer = "Electronic Arts, Respawn",
@@ -449,7 +449,7 @@ namespace MoonGameRev.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("6942a2b2-7c22-487d-88c1-e5f22fc4b081"),
+                            Id = new Guid("321dafc7-35e6-4542-9e43-40de53202a3e"),
                             CoverImage = "https://gaming-cdn.com/images/products/15086/616x353/horizon-forbidden-west-complete-edition-complete-edition-pc-game-steam-europe-cover.jpg?v=1711041164",
                             Description = "A sequel to Horizon Zero Dawn, set in a distant future where robotic creatures roam the earth.",
                             Developer = "Guerrilla Games",
@@ -461,7 +461,7 @@ namespace MoonGameRev.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("d2f09ca0-7368-499a-930c-4a91b5971a31"),
+                            Id = new Guid("7bd08096-2bbe-4fe8-8f5d-a00d86e6c5fb"),
                             CoverImage = "https://gaming-cdn.com/images/products/14344/616x353/star-wars-outlaws-pc-game-cover.jpg?v=1712670300",
                             Description = "Experience the first-ever open world Star Wars game and explore distinct planets across the galaxy, both iconic and new. Risk it all as Kay Vess, an emerging scoundrel seeking freedom and the means to start a new life. Fight, steal, & outwit your way through the galaxy’s crime syndicates as you join the galaxy’s most wanted.",
                             Developer = "Massive Entertainment",
@@ -473,7 +473,7 @@ namespace MoonGameRev.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("acd366d5-c22e-4d6f-9a9f-21d9c0977701"),
+                            Id = new Guid("df0a4f3f-a6b7-497e-9fdb-7867720da203"),
                             CoverImage = "https://gaming-cdn.com/images/products/7911/616x353/dragon-s-dogma-2-pc-game-steam-europe-cover.jpg?v=1711626178",
                             Description = "Dragon’s Dogma is a single player, narrative driven action-RPG series that challenges the players to choose their own experience – from the appearance of their Arisen, their vocation, their party, how to approach different situations and more. Now, in this long-awaited sequel, the deep, explorable fantasy world of Dragon’s Dogma 2 awaits.",
                             Developer = "CAPCOM",
@@ -485,7 +485,7 @@ namespace MoonGameRev.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("4f12ed75-3dcc-4dad-b9a4-aef49b917a07"),
+                            Id = new Guid("049ac5fa-2dca-4a29-9012-b226b16e92c8"),
                             CoverImage = "https://gaming-cdn.com/images/products/5376/616x353/s-t-a-l-k-e-r-2-heart-of-chornobyl-pc-game-steam-europe-cover.jpg?v=1709717150",
                             Description = "The game is a blend of first person shooter action, combined with an immersive simulation game and a horror game, all rolled into one and sent out into the world with an atmospheric open world for you to explore – if you are brave enough!",
                             Developer = "GSC Game World",
@@ -497,7 +497,7 @@ namespace MoonGameRev.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("f6e9ff58-10e0-4c21-8015-19ee68a642af"),
+                            Id = new Guid("0d390f11-1a4c-477f-b72d-dc7c0c15b3ed"),
                             CoverImage = "https://gaming-cdn.com/images/products/13652/616x353/elden-ring-shadow-of-the-erdtree-pc-game-steam-europe-cover.jpg?v=1709640799",
                             Description = "Winner of hundreds of accolades including The Game Awards Game of the Year and Golden Joystick Awards Ultimate Game of the Year, ELDEN RING is the acclaimed action RPG epic set in a vast, dark fantasy world. Players embark on an epic quest with the freedom to explore and adventure at their own pace.\r\n\r\nThe Shadow of the Erdtree expansion features an all-new story set in the Land of Shadow imbued with mystery, perilous dungeons, and new enemies, weapons and equipment.",
                             Developer = "FromSoftware",
@@ -522,6 +522,508 @@ namespace MoonGameRev.Data.Migrations
                     b.HasIndex("GenreID");
 
                     b.ToTable("GameGenres");
+
+                    b.HasData(
+                        new
+                        {
+                            GameID = new Guid("1c68c221-b25c-4cde-916d-663a937cd1ec"),
+                            GenreID = 1
+                        },
+                        new
+                        {
+                            GameID = new Guid("1c68c221-b25c-4cde-916d-663a937cd1ec"),
+                            GenreID = 6
+                        },
+                        new
+                        {
+                            GameID = new Guid("1c68c221-b25c-4cde-916d-663a937cd1ec"),
+                            GenreID = 20
+                        },
+                        new
+                        {
+                            GameID = new Guid("1c68c221-b25c-4cde-916d-663a937cd1ec"),
+                            GenreID = 25
+                        },
+                        new
+                        {
+                            GameID = new Guid("1c68c221-b25c-4cde-916d-663a937cd1ec"),
+                            GenreID = 26
+                        },
+                        new
+                        {
+                            GameID = new Guid("c43a8b45-0560-4c48-8a7d-f5038aa4d841"),
+                            GenreID = 1
+                        },
+                        new
+                        {
+                            GameID = new Guid("c43a8b45-0560-4c48-8a7d-f5038aa4d841"),
+                            GenreID = 2
+                        },
+                        new
+                        {
+                            GameID = new Guid("c43a8b45-0560-4c48-8a7d-f5038aa4d841"),
+                            GenreID = 6
+                        },
+                        new
+                        {
+                            GameID = new Guid("c43a8b45-0560-4c48-8a7d-f5038aa4d841"),
+                            GenreID = 7
+                        },
+                        new
+                        {
+                            GameID = new Guid("c43a8b45-0560-4c48-8a7d-f5038aa4d841"),
+                            GenreID = 8
+                        },
+                        new
+                        {
+                            GameID = new Guid("c43a8b45-0560-4c48-8a7d-f5038aa4d841"),
+                            GenreID = 16
+                        },
+                        new
+                        {
+                            GameID = new Guid("c43a8b45-0560-4c48-8a7d-f5038aa4d841"),
+                            GenreID = 25
+                        },
+                        new
+                        {
+                            GameID = new Guid("1f4b307b-7ca9-40d6-ba2e-53c7ce226d0a"),
+                            GenreID = 2
+                        },
+                        new
+                        {
+                            GameID = new Guid("1f4b307b-7ca9-40d6-ba2e-53c7ce226d0a"),
+                            GenreID = 7
+                        },
+                        new
+                        {
+                            GameID = new Guid("6a1c7f48-d1c9-41d9-a638-2aa7fbb1db53"),
+                            GenreID = 1
+                        },
+                        new
+                        {
+                            GameID = new Guid("6a1c7f48-d1c9-41d9-a638-2aa7fbb1db53"),
+                            GenreID = 2
+                        },
+                        new
+                        {
+                            GameID = new Guid("6a1c7f48-d1c9-41d9-a638-2aa7fbb1db53"),
+                            GenreID = 6
+                        },
+                        new
+                        {
+                            GameID = new Guid("6a1c7f48-d1c9-41d9-a638-2aa7fbb1db53"),
+                            GenreID = 20
+                        },
+                        new
+                        {
+                            GameID = new Guid("6a1c7f48-d1c9-41d9-a638-2aa7fbb1db53"),
+                            GenreID = 24
+                        },
+                        new
+                        {
+                            GameID = new Guid("6a1c7f48-d1c9-41d9-a638-2aa7fbb1db53"),
+                            GenreID = 25
+                        },
+                        new
+                        {
+                            GameID = new Guid("6a1c7f48-d1c9-41d9-a638-2aa7fbb1db53"),
+                            GenreID = 26
+                        },
+                        new
+                        {
+                            GameID = new Guid("3c4ccb83-a315-4f04-b7c0-78f07450a20d"),
+                            GenreID = 1
+                        },
+                        new
+                        {
+                            GameID = new Guid("3c4ccb83-a315-4f04-b7c0-78f07450a20d"),
+                            GenreID = 2
+                        },
+                        new
+                        {
+                            GameID = new Guid("3c4ccb83-a315-4f04-b7c0-78f07450a20d"),
+                            GenreID = 8
+                        },
+                        new
+                        {
+                            GameID = new Guid("3c4ccb83-a315-4f04-b7c0-78f07450a20d"),
+                            GenreID = 18
+                        },
+                        new
+                        {
+                            GameID = new Guid("3c4ccb83-a315-4f04-b7c0-78f07450a20d"),
+                            GenreID = 20
+                        },
+                        new
+                        {
+                            GameID = new Guid("3c4ccb83-a315-4f04-b7c0-78f07450a20d"),
+                            GenreID = 26
+                        },
+                        new
+                        {
+                            GameID = new Guid("a47ab3e8-26f3-42eb-853c-c478896b80c4"),
+                            GenreID = 1
+                        },
+                        new
+                        {
+                            GameID = new Guid("a47ab3e8-26f3-42eb-853c-c478896b80c4"),
+                            GenreID = 2
+                        },
+                        new
+                        {
+                            GameID = new Guid("a47ab3e8-26f3-42eb-853c-c478896b80c4"),
+                            GenreID = 8
+                        },
+                        new
+                        {
+                            GameID = new Guid("a47ab3e8-26f3-42eb-853c-c478896b80c4"),
+                            GenreID = 18
+                        },
+                        new
+                        {
+                            GameID = new Guid("a47ab3e8-26f3-42eb-853c-c478896b80c4"),
+                            GenreID = 20
+                        },
+                        new
+                        {
+                            GameID = new Guid("a47ab3e8-26f3-42eb-853c-c478896b80c4"),
+                            GenreID = 26
+                        },
+                        new
+                        {
+                            GameID = new Guid("4455f3f9-6827-47f8-bd46-44018f3c61b9"),
+                            GenreID = 1
+                        },
+                        new
+                        {
+                            GameID = new Guid("4455f3f9-6827-47f8-bd46-44018f3c61b9"),
+                            GenreID = 2
+                        },
+                        new
+                        {
+                            GameID = new Guid("4455f3f9-6827-47f8-bd46-44018f3c61b9"),
+                            GenreID = 6
+                        },
+                        new
+                        {
+                            GameID = new Guid("4455f3f9-6827-47f8-bd46-44018f3c61b9"),
+                            GenreID = 20
+                        },
+                        new
+                        {
+                            GameID = new Guid("4455f3f9-6827-47f8-bd46-44018f3c61b9"),
+                            GenreID = 24
+                        },
+                        new
+                        {
+                            GameID = new Guid("4455f3f9-6827-47f8-bd46-44018f3c61b9"),
+                            GenreID = 25
+                        },
+                        new
+                        {
+                            GameID = new Guid("4455f3f9-6827-47f8-bd46-44018f3c61b9"),
+                            GenreID = 26
+                        },
+                        new
+                        {
+                            GameID = new Guid("3b1e7da9-595e-4613-ba01-2bc815388520"),
+                            GenreID = 1
+                        },
+                        new
+                        {
+                            GameID = new Guid("3b1e7da9-595e-4613-ba01-2bc815388520"),
+                            GenreID = 2
+                        },
+                        new
+                        {
+                            GameID = new Guid("3b1e7da9-595e-4613-ba01-2bc815388520"),
+                            GenreID = 6
+                        },
+                        new
+                        {
+                            GameID = new Guid("3b1e7da9-595e-4613-ba01-2bc815388520"),
+                            GenreID = 8
+                        },
+                        new
+                        {
+                            GameID = new Guid("3b1e7da9-595e-4613-ba01-2bc815388520"),
+                            GenreID = 20
+                        },
+                        new
+                        {
+                            GameID = new Guid("3b1e7da9-595e-4613-ba01-2bc815388520"),
+                            GenreID = 25
+                        },
+                        new
+                        {
+                            GameID = new Guid("3b1e7da9-595e-4613-ba01-2bc815388520"),
+                            GenreID = 26
+                        },
+                        new
+                        {
+                            GameID = new Guid("8e09ad4c-fa18-4c37-a13b-a1ee585b34bf"),
+                            GenreID = 1
+                        },
+                        new
+                        {
+                            GameID = new Guid("8e09ad4c-fa18-4c37-a13b-a1ee585b34bf"),
+                            GenreID = 2
+                        },
+                        new
+                        {
+                            GameID = new Guid("8e09ad4c-fa18-4c37-a13b-a1ee585b34bf"),
+                            GenreID = 6
+                        },
+                        new
+                        {
+                            GameID = new Guid("8e09ad4c-fa18-4c37-a13b-a1ee585b34bf"),
+                            GenreID = 20
+                        },
+                        new
+                        {
+                            GameID = new Guid("8e09ad4c-fa18-4c37-a13b-a1ee585b34bf"),
+                            GenreID = 24
+                        },
+                        new
+                        {
+                            GameID = new Guid("8e09ad4c-fa18-4c37-a13b-a1ee585b34bf"),
+                            GenreID = 25
+                        },
+                        new
+                        {
+                            GameID = new Guid("8e09ad4c-fa18-4c37-a13b-a1ee585b34bf"),
+                            GenreID = 26
+                        },
+                        new
+                        {
+                            GameID = new Guid("e7631ac4-0d71-4d77-b607-94b024bccdff"),
+                            GenreID = 1
+                        },
+                        new
+                        {
+                            GameID = new Guid("e7631ac4-0d71-4d77-b607-94b024bccdff"),
+                            GenreID = 2
+                        },
+                        new
+                        {
+                            GameID = new Guid("e7631ac4-0d71-4d77-b607-94b024bccdff"),
+                            GenreID = 6
+                        },
+                        new
+                        {
+                            GameID = new Guid("e7631ac4-0d71-4d77-b607-94b024bccdff"),
+                            GenreID = 20
+                        },
+                        new
+                        {
+                            GameID = new Guid("e7631ac4-0d71-4d77-b607-94b024bccdff"),
+                            GenreID = 24
+                        },
+                        new
+                        {
+                            GameID = new Guid("e7631ac4-0d71-4d77-b607-94b024bccdff"),
+                            GenreID = 25
+                        },
+                        new
+                        {
+                            GameID = new Guid("e7631ac4-0d71-4d77-b607-94b024bccdff"),
+                            GenreID = 26
+                        },
+                        new
+                        {
+                            GameID = new Guid("321dafc7-35e6-4542-9e43-40de53202a3e"),
+                            GenreID = 1
+                        },
+                        new
+                        {
+                            GameID = new Guid("321dafc7-35e6-4542-9e43-40de53202a3e"),
+                            GenreID = 2
+                        },
+                        new
+                        {
+                            GameID = new Guid("321dafc7-35e6-4542-9e43-40de53202a3e"),
+                            GenreID = 8
+                        },
+                        new
+                        {
+                            GameID = new Guid("321dafc7-35e6-4542-9e43-40de53202a3e"),
+                            GenreID = 18
+                        },
+                        new
+                        {
+                            GameID = new Guid("321dafc7-35e6-4542-9e43-40de53202a3e"),
+                            GenreID = 20
+                        },
+                        new
+                        {
+                            GameID = new Guid("321dafc7-35e6-4542-9e43-40de53202a3e"),
+                            GenreID = 26
+                        },
+                        new
+                        {
+                            GameID = new Guid("7bd08096-2bbe-4fe8-8f5d-a00d86e6c5fb"),
+                            GenreID = 1
+                        },
+                        new
+                        {
+                            GameID = new Guid("7bd08096-2bbe-4fe8-8f5d-a00d86e6c5fb"),
+                            GenreID = 2
+                        },
+                        new
+                        {
+                            GameID = new Guid("7bd08096-2bbe-4fe8-8f5d-a00d86e6c5fb"),
+                            GenreID = 8
+                        },
+                        new
+                        {
+                            GameID = new Guid("7bd08096-2bbe-4fe8-8f5d-a00d86e6c5fb"),
+                            GenreID = 18
+                        },
+                        new
+                        {
+                            GameID = new Guid("7bd08096-2bbe-4fe8-8f5d-a00d86e6c5fb"),
+                            GenreID = 20
+                        },
+                        new
+                        {
+                            GameID = new Guid("7bd08096-2bbe-4fe8-8f5d-a00d86e6c5fb"),
+                            GenreID = 26
+                        },
+                        new
+                        {
+                            GameID = new Guid("df0a4f3f-a6b7-497e-9fdb-7867720da203"),
+                            GenreID = 1
+                        },
+                        new
+                        {
+                            GameID = new Guid("df0a4f3f-a6b7-497e-9fdb-7867720da203"),
+                            GenreID = 2
+                        },
+                        new
+                        {
+                            GameID = new Guid("df0a4f3f-a6b7-497e-9fdb-7867720da203"),
+                            GenreID = 6
+                        },
+                        new
+                        {
+                            GameID = new Guid("df0a4f3f-a6b7-497e-9fdb-7867720da203"),
+                            GenreID = 8
+                        },
+                        new
+                        {
+                            GameID = new Guid("df0a4f3f-a6b7-497e-9fdb-7867720da203"),
+                            GenreID = 20
+                        },
+                        new
+                        {
+                            GameID = new Guid("df0a4f3f-a6b7-497e-9fdb-7867720da203"),
+                            GenreID = 25
+                        },
+                        new
+                        {
+                            GameID = new Guid("df0a4f3f-a6b7-497e-9fdb-7867720da203"),
+                            GenreID = 26
+                        },
+                        new
+                        {
+                            GameID = new Guid("049ac5fa-2dca-4a29-9012-b226b16e92c8"),
+                            GenreID = 1
+                        },
+                        new
+                        {
+                            GameID = new Guid("049ac5fa-2dca-4a29-9012-b226b16e92c8"),
+                            GenreID = 2
+                        },
+                        new
+                        {
+                            GameID = new Guid("049ac5fa-2dca-4a29-9012-b226b16e92c8"),
+                            GenreID = 7
+                        },
+                        new
+                        {
+                            GameID = new Guid("049ac5fa-2dca-4a29-9012-b226b16e92c8"),
+                            GenreID = 8
+                        },
+                        new
+                        {
+                            GameID = new Guid("049ac5fa-2dca-4a29-9012-b226b16e92c8"),
+                            GenreID = 20
+                        },
+                        new
+                        {
+                            GameID = new Guid("049ac5fa-2dca-4a29-9012-b226b16e92c8"),
+                            GenreID = 25
+                        },
+                        new
+                        {
+                            GameID = new Guid("0d390f11-1a4c-477f-b72d-dc7c0c15b3ed"),
+                            GenreID = 1
+                        },
+                        new
+                        {
+                            GameID = new Guid("0d390f11-1a4c-477f-b72d-dc7c0c15b3ed"),
+                            GenreID = 2
+                        },
+                        new
+                        {
+                            GameID = new Guid("0d390f11-1a4c-477f-b72d-dc7c0c15b3ed"),
+                            GenreID = 6
+                        },
+                        new
+                        {
+                            GameID = new Guid("0d390f11-1a4c-477f-b72d-dc7c0c15b3ed"),
+                            GenreID = 20
+                        },
+                        new
+                        {
+                            GameID = new Guid("0d390f11-1a4c-477f-b72d-dc7c0c15b3ed"),
+                            GenreID = 24
+                        },
+                        new
+                        {
+                            GameID = new Guid("0d390f11-1a4c-477f-b72d-dc7c0c15b3ed"),
+                            GenreID = 25
+                        },
+                        new
+                        {
+                            GameID = new Guid("0d390f11-1a4c-477f-b72d-dc7c0c15b3ed"),
+                            GenreID = 26
+                        },
+                        new
+                        {
+                            GameID = new Guid("8f6e6a53-b537-458d-8cbb-407fc01f7da9"),
+                            GenreID = 1
+                        },
+                        new
+                        {
+                            GameID = new Guid("8f6e6a53-b537-458d-8cbb-407fc01f7da9"),
+                            GenreID = 2
+                        },
+                        new
+                        {
+                            GameID = new Guid("8f6e6a53-b537-458d-8cbb-407fc01f7da9"),
+                            GenreID = 8
+                        },
+                        new
+                        {
+                            GameID = new Guid("8f6e6a53-b537-458d-8cbb-407fc01f7da9"),
+                            GenreID = 18
+                        },
+                        new
+                        {
+                            GameID = new Guid("8f6e6a53-b537-458d-8cbb-407fc01f7da9"),
+                            GenreID = 20
+                        },
+                        new
+                        {
+                            GameID = new Guid("8f6e6a53-b537-458d-8cbb-407fc01f7da9"),
+                            GenreID = 25
+                        },
+                        new
+                        {
+                            GameID = new Guid("8f6e6a53-b537-458d-8cbb-407fc01f7da9"),
+                            GenreID = 26
+                        });
                 });
 
             modelBuilder.Entity("MoonGameRev.Data.Models.Genre", b =>
@@ -747,27 +1249,27 @@ namespace MoonGameRev.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("ebdb9294-b154-4f87-9b0a-586ac3573e4d"),
+                            Id = new Guid("5801e53b-c1d6-4ec5-997c-de6783424fec"),
                             Article = " The highly anticipated sequel to Horizon Zero Dawn, titled Horizon Forbidden West, has just released new gameplay footage showcasing stunning visuals and thrilling action. Players can expect to explore a vast open world filled with diverse environments, encounter majestic robotic creatures, and uncover the mysteries of a post-apocalyptic landscape. With enhanced graphics and improved gameplay mechanics, Horizon Forbidden West promises to deliver an unforgettable gaming experience for fans of the series.",
-                            Date = new DateTime(2024, 4, 17, 18, 23, 35, 13, DateTimeKind.Local).AddTicks(589),
+                            Date = new DateTime(2024, 4, 23, 14, 8, 9, 800, DateTimeKind.Local).AddTicks(4375),
                             JournalistId = 77,
                             PictureUrl = "https://gaming-cdn.com/images/products/6202/616x353/horizon-zero-dawn-complete-edition-pc-game-steam-cover.jpg?v=1709121191",
                             Title = "Exciting New Gameplay Revealed for 'Horizon Forbidden West"
                         },
                         new
                         {
-                            Id = new Guid("8016d29c-de69-4ce8-8ed6-db3ff42a1f18"),
+                            Id = new Guid("2776fd0f-177c-4079-b9c6-24f8981accd0"),
                             Article = "CD Projekt Red has unveiled a new expansion for the critically acclaimed RPG, The Witcher 3: Wild Hunt. Titled Blood and Wine, this expansion introduces players to the vibrant region of Toussaint, known for its picturesque landscapes and rich culture. With new quests, characters, and monsters to encounter, Blood and Wine promises to expand upon the already immersive world of The Witcher 3 and provide players with hours of additional gameplay.",
-                            Date = new DateTime(2024, 4, 17, 18, 23, 35, 13, DateTimeKind.Local).AddTicks(620),
+                            Date = new DateTime(2024, 4, 23, 14, 8, 9, 800, DateTimeKind.Local).AddTicks(4402),
                             JournalistId = 77,
                             PictureUrl = "https://gaming-cdn.com/images/products/4608/616x353/the-witcher-3-wild-hunt-blood-and-wine-xbox-one-xbox-series-x-s-xbox-one-xbox-series-x-s-game-microsoft-store-europe-cover.jpg?v=1704208911",
                             Title = "New Expansion Announced for 'The Witcher 3: Wild Hunt"
                         },
                         new
                         {
-                            Id = new Guid("18f8b914-f7a8-4aef-9904-c1dd63b6ef30"),
+                            Id = new Guid("c5c50d0c-20a2-4939-ac3d-c96fc900d125"),
                             Article = " FromSoftware's highly anticipated action RPG, Elden Ring, finally has a confirmed launch date. Set to release on 06/21/2024, Elden Ring takes players on an epic journey through a vast and mysterious world created in collaboration with acclaimed author George R.R. Martin. With its challenging combat, intricate world-building, and dark fantasy setting, Elden Ring is shaping up to be one of the most anticipated releases of the year. Fans can't wait to dive into this immersive experience and uncover the secrets of the Elden Ring.",
-                            Date = new DateTime(2024, 4, 17, 18, 23, 35, 13, DateTimeKind.Local).AddTicks(623),
+                            Date = new DateTime(2024, 4, 23, 14, 8, 9, 800, DateTimeKind.Local).AddTicks(4411),
                             JournalistId = 77,
                             PictureUrl = "https://gaming-cdn.com/images/products/16007/616x353/elden-ring-shadow-of-the-erdtree-edition-shadow-of-the-erdtree-edition-pc-game-steam-europe-cover.jpg?v=1709224367",
                             Title = "Upcoming Release: 'Elden Ring' DLC Launch Date Confirmed"
@@ -828,24 +1330,24 @@ namespace MoonGameRev.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("662426a0-ea6f-4072-8c5b-3c279be92aae"),
+                            Id = new Guid("b689c4c6-3f88-414f-bb1d-fd6fad330a83"),
                             Comment = "I am absolutely thrilled with this game and can recommend it to every Souls fan. If you want to take on a new challenge and get involved in a huge world, Elden Ring is absolutely the right game for you.",
                             Cons = "Nothing",
                             GameID = new Guid("6a1c7f48-d1c9-41d9-a638-2aa7fbb1db53"),
                             Pros = "Hard game; Beautiful game; Addicting game",
                             Rating = 9.5,
-                            ReviewDate = new DateTime(2024, 4, 17, 18, 23, 35, 13, DateTimeKind.Local).AddTicks(711),
+                            ReviewDate = new DateTime(2024, 4, 23, 14, 8, 9, 800, DateTimeKind.Local).AddTicks(4498),
                             UserId = new Guid("e5c2f1f1-39bc-44a7-aa1a-f7ffa8d18c45")
                         },
                         new
                         {
-                            Id = new Guid("39428876-6464-429f-9d2c-062df8916e99"),
+                            Id = new Guid("5e8a1503-44f6-4373-a1cb-e3d557a61195"),
                             Comment = "Amazing game definitely buy it if you got the money its well worth it. The atmosphere the game has is truly amazing and it deserves all the love in the world, at first i didnt like it much but as story kept going i just fell in love with it.",
                             Cons = "Online part is kinda bad",
                             GameID = new Guid("8f6e6a53-b537-458d-8cbb-407fc01f7da9"),
                             Pros = "Amazing attention to detail; Beautiful graphics; Makes you feel like a real cowboy",
                             Rating = 9.0,
-                            ReviewDate = new DateTime(2024, 4, 17, 18, 23, 35, 13, DateTimeKind.Local).AddTicks(718),
+                            ReviewDate = new DateTime(2024, 4, 23, 14, 8, 9, 800, DateTimeKind.Local).AddTicks(4503),
                             UserId = new Guid("e5c2f1f1-39bc-44a7-aa1a-f7ffa8d18c45")
                         });
                 });
