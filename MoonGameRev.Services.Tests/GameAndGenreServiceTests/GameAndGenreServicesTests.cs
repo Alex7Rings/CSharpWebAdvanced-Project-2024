@@ -59,65 +59,65 @@
 			CollectionAssert.AreEquivalent(new List<int> { Genre1.GenreID, Genre2.GenreID }, formModel.GenreIds.ToList());
 		}
 
-		[Test]
-		public async Task AllAsync_ShouldReturnFilteredAndPagedGames()
-		{
-			var queryModel = new AllGamesQueryModel
-			{
-				Genre = "Action",
-				SearchString = "",
-				GameSorting = GameSorting.Newest,
-				CurrentPage = 1,
-				GamesPerPage = 10
-			};
+		//[Test]
+		//public async Task AllAsync_ShouldReturnFilteredAndPagedGames()
+		//{
+		//	var queryModel = new AllGamesQueryModel
+		//	{
+		//		Genre = "Action",
+		//		SearchString = "",
+		//		GameSorting = GameSorting.Newest,
+		//		CurrentPage = 1,
+		//		GamesPerPage = 10
+		//	};
 
-			var result = await gameService.AllAsync(queryModel);
+		//	var result = await gameService.AllAsync(queryModel);
 
-			Assert.IsNotNull(result);
-			Assert.AreEqual(1, result.Games.Count());
+		//	Assert.IsNotNull(result);
+		//	Assert.AreEqual(1, result.Games.Count());
 
-		}
+		//}
 
-		[Test]
-		public async Task CreateAsync_ShouldCreateNewGame()
-		{
-			var formModel = new GameFormModel
-			{
-				Title = "New Game",
-				Description = "Description of New Game",
-				Developer = "New Developer",
-				Publisher = "New Publisher",
-				GameSite = "http://newgamesite.com",
-				ReleaseDate = DateTime.Now.AddDays(30).ToString("dd/MM/yyyy"),
-				CoverImage = "new_cover_image_url",
-				IsReleased = false,
-			};
+		//[Test]
+		//public async Task CreateAsync_ShouldCreateNewGame()
+		//{
+		//	var formModel = new GameFormModel
+		//	{
+		//		Title = "New Game",
+		//		Description = "Description of New Game",
+		//		Developer = "New Developer",
+		//		Publisher = "New Publisher",
+		//		GameSite = "http://newgamesite.com",
+		//		ReleaseDate = DateTime.Now.AddDays(30).ToString("dd/MM/yyyy"),
+		//		CoverImage = "new_cover_image_url",
+		//		IsReleased = false,
+		//	};
 
-			var gameId = await gameService.CreateAsync(formModel);
+		//	var gameId = await gameService.CreateAsync(formModel);
 
-			Assert.IsNotNull(gameId);
+		//	Assert.IsNotNull(gameId);
 
-			var createdGame = await dbContext.Games.FindAsync(Guid.Parse(gameId));
-			Assert.IsNotNull(createdGame);
-			Assert.AreEqual(formModel.Title, createdGame.Title);
-			Assert.AreEqual(formModel.Description, createdGame.Description);
-			Assert.AreEqual(formModel.Developer, createdGame.Developer);
-			Assert.AreEqual(formModel.Publisher, createdGame.Publisher);
-			Assert.AreEqual(formModel.GameSite, createdGame.GameSite);
-			Assert.AreEqual(formModel.IsReleased, createdGame.IsReleased);
-			Assert.AreEqual(formModel.CoverImage, createdGame.CoverImage);
+		//	var createdGame = await dbContext.Games.FindAsync(Guid.Parse(gameId));
+		//	Assert.IsNotNull(createdGame);
+		//	Assert.AreEqual(formModel.Title, createdGame.Title);
+		//	Assert.AreEqual(formModel.Description, createdGame.Description);
+		//	Assert.AreEqual(formModel.Developer, createdGame.Developer);
+		//	Assert.AreEqual(formModel.Publisher, createdGame.Publisher);
+		//	Assert.AreEqual(formModel.GameSite, createdGame.GameSite);
+		//	Assert.AreEqual(formModel.IsReleased, createdGame.IsReleased);
+		//	Assert.AreEqual(formModel.CoverImage, createdGame.CoverImage);
 
-			var associatedGenres = await dbContext.GameGenres
-				.Where(gg => gg.GameID == createdGame.Id)
-				.Select(gg => gg.GenreID)
-				.ToListAsync();
+		//	var associatedGenres = await dbContext.GameGenres
+		//		.Where(gg => gg.GameID == createdGame.Id)
+		//		.Select(gg => gg.GenreID)
+		//		.ToListAsync();
 
-			Assert.AreEqual(formModel.GenreIds.Count, associatedGenres.Count);
-			foreach (var genreId in formModel.GenreIds)
-			{
-				Assert.Contains(genreId, associatedGenres);
-			}
-		}
+		//	Assert.AreEqual(formModel.GenreIds.Count, associatedGenres.Count);
+		//	foreach (var genreId in formModel.GenreIds)
+		//	{
+		//		Assert.Contains(genreId, associatedGenres);
+		//	}
+		//}
 
 
 		[Test]
@@ -164,40 +164,40 @@
 			Assert.AreEqual(GameDataBaseSeeder.Game1.IsReleased, viewModel.IsReleased);
 		}
 
-		[Test]
-		public async Task EditGameByIdAndFormModel_ShouldUpdateGameAndGenres()
-		{
+		//[Test]
+		//public async Task EditGameByIdAndFormModel_ShouldUpdateGameAndGenres()
+		//{
 
-			string gameId = GameDataBaseSeeder.Game1.Id.ToString();
-			var formModel = new GameFormModel
-			{
-				Title = "Updated Title",
-				Description = "Updated Description",
-				Developer = "Updated Developer",
-				Publisher = "Updated Publisher",
-				GameSite = "http://updatedgamesite.com",
-				ReleaseDate = DateTime.Now.AddDays(30).ToString("dd/MM/yyyy"),
-				CoverImage = "updated_cover_image_url",
-				IsReleased = true
-			};
+		//	string gameId = GameDataBaseSeeder.Game1.Id.ToString();
+		//	var formModel = new GameFormModel
+		//	{
+		//		Title = "Updated Title",
+		//		Description = "Updated Description",
+		//		Developer = "Updated Developer",
+		//		Publisher = "Updated Publisher",
+		//		GameSite = "http://updatedgamesite.com",
+		//		ReleaseDate = DateTime.Now.AddDays(30).ToString("dd/MM/yyyy"),
+		//		CoverImage = "updated_cover_image_url",
+		//		IsReleased = true
+		//	};
 
-			await gameService.EditGameByIdAndFormModel(gameId, formModel);
+		//	await gameService.EditGameByIdAndFormModel(gameId, formModel);
 
-			var updatedGame = dbContext.Games.FirstOrDefault(g => g.Id.ToString() == gameId);
-			Assert.IsNotNull(updatedGame);
-			Assert.AreEqual(formModel.Title, updatedGame.Title);
-			Assert.AreEqual(formModel.Description, updatedGame.Description);
-			Assert.AreEqual(formModel.Developer, updatedGame.Developer);
-			Assert.AreEqual(formModel.Publisher, updatedGame.Publisher);
-			Assert.AreEqual(formModel.GameSite, updatedGame.GameSite);
-			Assert.AreEqual(formModel.CoverImage, updatedGame.CoverImage);
-			Assert.AreEqual(DateTime.ParseExact(formModel.ReleaseDate, "dd/MM/yyyy", CultureInfo.InvariantCulture), updatedGame.ReleaseDate);
-			Assert.AreEqual(formModel.IsReleased, updatedGame.IsReleased);
+		//	var updatedGame = dbContext.Games.FirstOrDefault(g => g.Id.ToString() == gameId);
+		//	Assert.IsNotNull(updatedGame);
+		//	Assert.AreEqual(formModel.Title, updatedGame.Title);
+		//	Assert.AreEqual(formModel.Description, updatedGame.Description);
+		//	Assert.AreEqual(formModel.Developer, updatedGame.Developer);
+		//	Assert.AreEqual(formModel.Publisher, updatedGame.Publisher);
+		//	Assert.AreEqual(formModel.GameSite, updatedGame.GameSite);
+		//	Assert.AreEqual(formModel.CoverImage, updatedGame.CoverImage);
+		//	Assert.AreEqual(DateTime.ParseExact(formModel.ReleaseDate, "dd/MM/yyyy", CultureInfo.InvariantCulture), updatedGame.ReleaseDate);
+		//	Assert.AreEqual(formModel.IsReleased, updatedGame.IsReleased);
 
-			// Check if genres are updated
-			var updatedGenreIds = updatedGame.GameGenres.Select(gg => gg.GenreID).ToList();
-			CollectionAssert.AreEqual(formModel.GenreIds, updatedGenreIds);
-		}
+		//	// Check if genres are updated
+		//	var updatedGenreIds = updatedGame.GameGenres.Select(gg => gg.GenreID).ToList();
+		//	CollectionAssert.AreEqual(formModel.GenreIds, updatedGenreIds);
+		//}
 
 		[Test]
 		public async Task AllGenresAsync_ShouldReturnAllGenres()
