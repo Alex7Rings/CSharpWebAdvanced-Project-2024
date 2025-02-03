@@ -6,6 +6,8 @@ MoonGameRev is a web application for gaming enthusiasts to discover, review, and
 
 ![Screenshot 2025-02-03 115553](https://github.com/user-attachments/assets/b18f1f79-bc00-4358-8a88-55c627f712b2)
 
+![Screenshot 2025-02-03 115614](https://github.com/user-attachments/assets/5875737e-6190-4ab1-9b58-b7b81f8976fd)
+
 # 1. Features: 
 - Game Catalog: Browse a catalog of games, including upcoming releases and trending titles.
 - News Section: Stay up-to-date with the latest news and articles from the gaming industry.
